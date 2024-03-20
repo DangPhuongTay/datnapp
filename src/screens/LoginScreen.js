@@ -22,13 +22,13 @@ const LoginSreen = ({navigation}) => {
                        value={password}/>
             <TouchableOpacity onPress={() => {login( email, password);}}
                               style={styles.button}>
-                <Text>Login</Text>
+                <Text>Đăng nhập</Text>
             </TouchableOpacity>
             
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                                 
-                    <Text style={styles.link}>Register</Text>
+            <View style={styles.container1}>
+                <Text style={styles.link}>Lưu mật khẩu</Text> 
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>         
+                    <Text style={styles.link}>Tạo tài khoản</Text>  
                 </TouchableOpacity>
             </View>
             
@@ -44,22 +44,34 @@ const LoginSreen = ({navigation}) => {
             justifyContent: 'center',
             gap: 10,
         },
-        input:{
-            padding: 10,
+        container1: {
             width: 200,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+        },
+        input:{
+            
+            width: 300,
             backgroundColor: '#eee',
+            borderRadius:999,
+            borderColor:'#62C7F3',
+            borderWidth:1,
+            paddingHorizontal:20,
+            paddingVertical: 10,
         },
         button:{
-            padding: 10,
-            width: 200,
+            paddingVertical: 15,
+            width: 220,
             marginBottom: 5,
-            borderColor: '#000',
+            backgroundColor:'#62C7F3',
             display:'flex',
             alignItems: 'center',
-            borderWidth: 1,
+            borderRadius:999,
         },
         link: {
             color: 'blue',
+            
         },
     });
 export default LoginSreen;
