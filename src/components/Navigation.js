@@ -6,6 +6,7 @@ import LoginSreen from "../screens/LoginScreen";
 import RegisterSreen from "../screens/RegisterScreen";
 import MenuSreen from "../screens/MenuScreen";
 import {AuthContext} from '../context/AuthContext';
+import StartSreen from "../screens/StartScreen";
 import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,9 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
         ) : (
           <>
+            <Stack.Screen name="Start"
+                          component={StartSreen}
+                          options={{headerShown: false}}/>
             <Stack.Screen name="Login"
                           component={LoginSreen}
                           options={{headerShown: false}}/>
