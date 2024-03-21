@@ -16,7 +16,7 @@ const HomeSreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                     <Text>Profile</Text>
                 </TouchableOpacity>
             </View>
