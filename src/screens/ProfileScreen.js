@@ -36,14 +36,17 @@ const ProfileScreen = ({navigation}) =>{
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img4.png')}></Image>
                         </View>
-                        <Text style={styles.view_name}>Email</Text>
+                        <Text style={styles.view_name}>Long@gmail.com</Text>
                     </View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <View style={styles.view}>
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img5.png')}></Image>
                         </View>
-                        <Text style={styles.view_name}>Mật khẩu</Text>
+                        <Text style={styles.view_name}>Đổi mật khẩu</Text>
                     </View>
+                </TouchableOpacity>
+                    
                     <View style={styles.view}>
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img6.png')}></Image>
