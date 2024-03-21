@@ -17,10 +17,18 @@ const Navigation = () => {
     return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo ? (
+        {userInfo.name ? (
+           <>
             <Stack.Screen name="Home"
                           component={HomeSreen}
                           options={{headerShown: false}}/>
+            <Stack.Screen name="Menu"
+                          component={MenuSreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Profile"
+                          component={ProfileScreen}
+                          options={{headerShown: false}}/>
+          </>
         ) : (
           <>
             <Stack.Screen name="Start"
@@ -34,12 +42,7 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
           </>
         )}
-        <Stack.Screen name="Menu"
-                          component={MenuSreen}
-                          options={{headerShown: false}}/>
-        <Stack.Screen name="Profile"
-                          component={ProfileScreen}
-                          options={{headerShown: false}}/>
+
       </Stack.Navigator>
     </NavigationContainer>
     );
