@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, CheckBox } from "react-native";
+import {StyleSheet, Text, TextInput, View, TouchableOpacity, Image} from "react-native";
 import {AuthContext} from '../context/AuthContext';
 import Spinner from "react-native-loading-spinner-overlay";
+
+
 
 const LoginSreen = ({navigation}) => {
     const [email, setEmail ] = useState(null);
@@ -10,8 +12,9 @@ const LoginSreen = ({navigation}) => {
     
     return (
         <View style={styles.container}>
-            <Image style={styles.img} source={require('../../assets/images/Login_img2.png')} />
+            
             <Spinner visible={isLoading}/>
+            <Image source={require('../../assets/images/login_img2.png')} style={styles.img}></Image>
             <TextInput placeholder="Email"
                        style={styles.input}
                        onChangeText={text => setEmail(text)}

@@ -14,7 +14,7 @@ const RegisterSreen = ({navigation}) => {
         <View style={styles.container}>
              
             <Spinner visible={isLoading}/>
-            <Image style={styles.img} source={require('../../assets/images/Register_img1.png')} />
+            <Image source={require('../../assets/images/register_img.png')} style={styles.img}></Image>
             <TextInput placeholder="Tên"
                     onChangeText={text => setName(text)}
                     value={name}
