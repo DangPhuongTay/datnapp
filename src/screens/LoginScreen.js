@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button } from "react-native";
+import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, CheckBox } from "react-native";
 import {AuthContext} from '../context/AuthContext';
 import Spinner from "react-native-loading-spinner-overlay";
 
@@ -7,31 +7,33 @@ const LoginSreen = ({navigation}) => {
     const [email, setEmail ] = useState(null);
     const [password, setPassword ] = useState(null);
     const {isLoading, login} = useContext(AuthContext);
-  
+    
     return (
         <View style={styles.container}>
-            <Text></Text>
+            <Image style={styles.img} source={require('../../assets/images/Login_img2.png')} />
             <Spinner visible={isLoading}/>
-            <TextInput placeholder="Enter email"
+            <TextInput placeholder="Email"
                        style={styles.input}
                        onChangeText={text => setEmail(text)}
                        value={email}/>
-            <TextInput placeholder="Enter password"
+            <TextInput placeholder="Mật khẩu"
                        style={styles.input}
                        onChangeText={text => setPassword(text)}
                        value={password}/>
-            <TouchableOpacity onPress={() => {login( email, password);}}
-                              style={styles.button}>
-                <Text>Đăng nhập</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.container1}>
+              <View style={styles.container1}>
+               
                 <Text style={styles.link}>Lưu mật khẩu</Text> 
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>         
                     <Text style={styles.link}>Tạo tài khoản</Text>  
                 </TouchableOpacity>
             </View>
             
+            <TouchableOpacity onPress={() => {login( email, password);}}
+                              style={styles.button}>
+                <Text style={styles.btn}>Đăng nhập</Text>
+            </TouchableOpacity>
+            
+          
         </View>
 
     );
@@ -45,10 +47,12 @@ const LoginSreen = ({navigation}) => {
             gap: 10,
         },
         container1: {
-            width: 200,
+            width: 280,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
+            marginTop:10,
+            marginBottom:20
         },
         input:{
             
@@ -61,17 +65,33 @@ const LoginSreen = ({navigation}) => {
             paddingVertical: 10,
         },
         button:{
-            paddingVertical: 15,
+            paddingVertical: 10,
             width: 220,
             marginBottom: 5,
             backgroundColor:'#62C7F3',
             display:'flex',
             alignItems: 'center',
             borderRadius:999,
-        },
-        link: {
-            color: 'blue',
             
         },
+        link: {
+            color: '#000',
+            textDecorationLine:'underline',
+            
+            
+        },
+        btn:{
+            color:'#fff',
+            fontSize:24,
+            fontWeight:'bold'
+           
+        },
+        img:{
+            width:200,
+            height:200,
+            objectFit:'contain',
+            marginBottom:10
+        },
+        
     });
 export default LoginSreen;
