@@ -14,7 +14,7 @@ const LoginSreen = ({navigation}) => {
         <View style={styles.container}>
             
             <Spinner visible={isLoading}/>
-            <Image source={require('../../assets/images/login_img2.png')} style={styles.img}></Image>
+            <Image source={require('../../assets/images/login_img.png')} style={styles.img}></Image>
             <TextInput placeholder="Email"
                        style={styles.input}
                        onChangeText={text => setEmail(text)}
