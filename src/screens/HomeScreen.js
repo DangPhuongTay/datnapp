@@ -30,6 +30,11 @@ const HomeSreen = ({navigation}) => {
                     <Text>Rank</Text>
                 </TouchableOpacity>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
+                    <Text>Game 1</Text>
+                </TouchableOpacity>
+            </View>
             <Spinner visible={isLoading}/>
             <Text>{userInfo.name}</Text>
             <Text>{userInfo.email}</Text>
