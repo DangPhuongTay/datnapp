@@ -4,6 +4,7 @@ import {AuthContext} from '../context/AuthContext';
 
 
 const ProfileScreen = ({navigation}) =>{
+    const {isLoading, userInfo, logout} = useContext(AuthContext);
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -12,7 +13,7 @@ const ProfileScreen = ({navigation}) =>{
                 <Image style={styles.img_avatar} source={require('../../assets/images/profile_avatar.jpg')}></Image>
             <View style={styles.container1}>
                 
-                <Text style={styles.name}>Quyền Chí Long</Text>
+                <Text style={styles.name}>{userInfo.name}</Text>
                 <View style={styles.container2}>
                     <View style={styles.decription}>
                         <Image style={styles.img_dsc} source={require('../../assets/images/profile_img3.png')}></Image>
@@ -36,7 +37,7 @@ const ProfileScreen = ({navigation}) =>{
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img4.png')}></Image>
                         </View>
-                        <Text style={styles.view_name}>Long@gmail.com</Text>
+                        <Text style={styles.view_name}>{userInfo.email}</Text>
                     </View>
                     <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <View style={styles.view}>
@@ -46,13 +47,14 @@ const ProfileScreen = ({navigation}) =>{
                         <Text style={styles.view_name}>Đổi mật khẩu</Text>
                     </View>
                 </TouchableOpacity>
-                    
+              
                     <View style={styles.view}>
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img6.png')}></Image>
                         </View>
-                        <Text style={styles.view_name}>Đăng xuất</Text>
+                        <Text style={styles.view_name} >Đăng xuất</Text>
                     </View>
+                    <Button title="Logout" color="red" onPress={logout}/>
                 </View>
             </View>
             

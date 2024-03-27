@@ -17,7 +17,7 @@ const Navigation = () => {
     return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo.name ? (
+        {userInfo ? (
            <>
             <Stack.Screen name="Home"
                           component={HomeSreen}
@@ -40,6 +40,7 @@ const Navigation = () => {
             <Stack.Screen name="Register"
                           component={RegisterSreen}
                           options={{headerShown: false}}/>
+
           </>
         )}
 
