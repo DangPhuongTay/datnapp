@@ -18,9 +18,17 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {userInfo ? (
+           <>
             <Stack.Screen name="Home"
                           component={HomeSreen}
                           options={{headerShown: false}}/>
+            <Stack.Screen name="Menu"
+                          component={MenuSreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Profile"
+                          component={ProfileScreen}
+                          options={{headerShown: false}}/>
+          </>
         ) : (
           <>
             <Stack.Screen name="Start"
@@ -32,14 +40,10 @@ const Navigation = () => {
             <Stack.Screen name="Register"
                           component={RegisterSreen}
                           options={{headerShown: false}}/>
+
           </>
         )}
-        <Stack.Screen name="Menu"
-                          component={MenuSreen}
-                          options={{headerShown: false}}/>
-        <Stack.Screen name="Profile"
-                          component={ProfileScreen}
-                          options={{headerShown: false}}/>
+
       </Stack.Navigator>
     </NavigationContainer>
     );
