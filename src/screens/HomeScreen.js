@@ -16,8 +16,23 @@ const HomeSreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                     <Text>Profile</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
+                    <Text>Info</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Rank')}>
+                    <Text>Rank</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
+                    <Text>Game 1</Text>
                 </TouchableOpacity>
             </View>
             <Spinner visible={isLoading}/>
