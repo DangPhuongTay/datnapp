@@ -6,7 +6,7 @@ const StartScreen = ({navigation}) => {
   
     return (
         <View style={styles.container}>
-            <Image source={require('../../assets/images/login_img1.png')} 
+            <Image source={require('../../assets/images/login_img.png')} 
                     style={styles.img}></Image>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}

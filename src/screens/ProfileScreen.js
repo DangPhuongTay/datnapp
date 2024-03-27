@@ -39,12 +39,12 @@ const ProfileScreen = ({navigation}) =>{
                         </View>
                         <Text style={styles.view_name}>{userInfo.email}</Text>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Info')}>
                     <View style={styles.view}>
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img5.png')}></Image>
                         </View>
-                        <Text style={styles.view_name}>Đổi mật khẩu</Text>
+                        <Text style={styles.view_name}>Thay đổi thông tin</Text>
                     </View>
                 </TouchableOpacity>
               
