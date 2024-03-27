@@ -57,7 +57,6 @@ const ProfileScreen = ({navigation}) =>{
                     <Button title="Logout" color="red" onPress={logout}/>
                 </View>
             </View>
-            
         </View>
     );
 };

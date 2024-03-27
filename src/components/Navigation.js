@@ -8,6 +8,8 @@ import MenuSreen from "../screens/MenuScreen";
 import {AuthContext} from '../context/AuthContext';
 import StartSreen from "../screens/StartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import InfoScreen from "../screens/InfoScreen";
+import RankScreen from "../screens/RankScreen";
 import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +29,12 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
             <Stack.Screen name="Profile"
                           component={ProfileScreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Info"
+                          component={InfoScreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Rank"
+                          component={RankScreen}
                           options={{headerShown: false}}/>
           </>
         ) : (
