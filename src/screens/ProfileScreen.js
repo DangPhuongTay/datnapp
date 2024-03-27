@@ -7,8 +7,8 @@ const ProfileScreen = ({navigation}) =>{
     const {isLoading, userInfo, logout} = useContext(AuthContext);
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Text style={styles.back}>⬅️</Text>
+           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                   <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.img_avatar} source={require('../../assets/images/profile_avatar.jpg')}></Image>
             <View style={styles.container1}>
@@ -39,22 +39,31 @@ const ProfileScreen = ({navigation}) =>{
                         </View>
                         <Text style={styles.view_name}>{userInfo.email}</Text>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Info')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
                     <View style={styles.view}>
                         <View style={styles.icon_view}>
-                            <Image style={styles.img_icon} source={require('../../assets/images/profile_img5.png')}></Image>
+                            <Image style={styles.img_icon} source={require('../../assets/images/profile_img7.png')}></Image>
                         </View>
                         <Text style={styles.view_name}>Thay đổi thông tin</Text>
                     </View>
                 </TouchableOpacity>
-              
+
+                <TouchableOpacity onPress={() => navigation.navigate('Password')}>
                     <View style={styles.view}>
+                        <View style={styles.icon_view}>
+                            <Image style={styles.img_icon} source={require('../../assets/images/profile_img5.png')}></Image>
+                        </View>
+                        <Text style={styles.view_name}>Đổi mật khẩu</Text>
+                    </View>
+                </TouchableOpacity>
+              
+                    <TouchableOpacity style={styles.view} onPress={logout}>
                         <View style={styles.icon_view}>
                             <Image style={styles.img_icon} source={require('../../assets/images/profile_img6.png')}></Image>
                         </View>
                         <Text style={styles.view_name} >Đăng xuất</Text>
-                    </View>
-                    <Button title="Logout" color="red" onPress={logout}/>
+                    </TouchableOpacity>
+                    
                 </View>
             </View>
         </View>
@@ -71,7 +80,7 @@ const styles = StyleSheet.create({
         
     },
     container1:{
-        height:550,
+        height:600,
         width:'90%',
         backgroundColor:'#fff',
         borderRadius:20,
@@ -96,8 +105,10 @@ const styles = StyleSheet.create({
         marginTop:40
     },
     back:{
-        marginRight:'90%',
-        fontSize: 30, 
+        width:40,
+        height:40,
+        marginRight:'85%',
+        marginTop:50
        
     },
     name:{
