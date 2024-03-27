@@ -11,6 +11,8 @@ import ProfileScreen from "../screens/ProfileScreen";
 import InfoScreen from "../screens/InfoScreen";
 import RankScreen from "../screens/RankScreen";
 import { Button } from "react-native";
+import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,9 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
             <Stack.Screen name="Rank"
                           component={RankScreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="GameWordle"
+                          component={WordleScreen}
                           options={{headerShown: false}}/>
           </>
         ) : (
