@@ -20,6 +20,16 @@ const HomeSreen = ({navigation}) => {
                     <Text>Profile</Text>
                 </TouchableOpacity>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
+                    <Text>Info</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Rank')}>
+                    <Text>Rank</Text>
+                </TouchableOpacity>
+            </View>
             <Spinner visible={isLoading}/>
             <Text>{userInfo.name}</Text>
             <Text>{userInfo.email}</Text>
