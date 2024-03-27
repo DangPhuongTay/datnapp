@@ -1,32 +1,42 @@
 import React,{useContext, useState } from "react";
-import { Text, View, Button, TouchableOpacity, StyleSheet, TextInput, Image} from "react-native";
+import { Text, View, Button, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
 import {AuthContext} from '../context/AuthContext';
 
-const InfoScreen = ({navigation}) =>{
-    const [email, setEmail ] = useState(null);
+const PasswordScreen = ({navigation}) =>{
+    const {isLoading, userInfo, logout} = useContext(AuthContext);
+    const [password, setPassword ] = useState(null);
     return (
         <View style={styles.container}>
-             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            
+            
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
-                <Image style={styles.img_avatar} source={require('../../assets/images/register_img.png')}></Image>
-                <Text style={styles.title}>Thay đổi thông tin của bạn</Text>
-                <TextInput placeholder="Tên"
+           
+            <View>
+                <Text style={styles.title}>Đổi mật khẩu</Text>
+                <Text >Mật khẩu của bạn phải có tối thiểu 6 ký tự</Text>
+                <TextInput placeholder="Mật khẩu cũ"
                        style={styles.input}
-                       />
-
-            
-                <TextInput placeholder="Nhập email mới"
+                       onChangeText={text => setPassword(text)}
+                       value={password}/>
+                <TextInput placeholder="Nhập mật khẩu mới"
                        style={styles.input}
-                       onChangeText={text => setEmail(text)}
-                       value={email}/>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.button}>
+                       onChangeText={text => setPassword(text)}
+                       value={password}/>
+                <TextInput placeholder="Nhập lại mật khẩu mới"
+                       style={styles.input}
+                       onChangeText={text => setPassword(text)}
+                       value={password}/>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.button}>
                     <Text style={styles.save}>Lưu</Text>
                 </TouchableOpacity>
-                
+            
         </View>
     );
 };
+
 const styles=StyleSheet.create({
     container:{
         width:'100%',
@@ -40,7 +50,7 @@ const styles=StyleSheet.create({
         height:40,
         marginRight:'85%',
         marginTop:30
-    }, 
+    },
     input:{
             
         width: 380,
@@ -71,13 +81,7 @@ const styles=StyleSheet.create({
         fontSize:24,
         fontWeight:'bold',
         color:'#fff'
-    },
-    img_avatar:{
-        width:150,
-        height:150,
-        
-       
-        
-    },
+    }
 })
-export default InfoScreen;
+
+export default PasswordScreen;
