@@ -11,7 +11,7 @@ const MenuSreen = ({navigation}) =>{
             <View>
             
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Text>⬅️</Text>
+                <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
             </View>
             
@@ -46,7 +46,13 @@ const MenuSreen = ({navigation}) =>{
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
                 style={styles.button}>            
-                    <Text style={styles.btn}> Lịch sử</Text>
+                    <Text style={styles.btn}> Lịch sử </Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                style={styles.button}>            
+                    <Text style={styles.btn}> Thông báo </Text>
                 </TouchableOpacity>
             </View>
             {/* <Image source={require('../../assets/images/menu1.png')} 
@@ -65,32 +71,39 @@ const styles = StyleSheet.create({
             justifyContent: 'start',
             gap: 10,
         },
-        
-          color: {
+        back:{
+            width:40,
+            height:40,
+            marginRight:'85%',
+            marginTop:10,
+            marginLeft: 4
+           
+        },
+        color: {
             color: '#62C7F3',
             fontWeight: 'bold',
             fontSize: 50,
-          },
-    button:{
-        paddingVertical: 15,
-        width: 300,
-        marginBottom: 5,
-        backgroundColor:'#62C7F3',
-        display:'flex',
-        alignItems: 'center',
-        borderRadius:15,            
+        },
+        button:{
+            paddingVertical: 15,
+            width: 300,
+            marginBottom: 5,
+            backgroundColor:'#62C7F3',
+            display:'flex',
+            alignItems: 'center',
+            borderRadius:15,            
         
-    },
-    btn:{
-        color:'#fff',
-        fontSize:24,
-        fontWeight:'bold',
-    },
-    img:{
-        flex:1,
-        objectFit:'cover',
-        marginBottom:15
-    },
-    
+        },
+        btn:{
+            color:'#fff',
+            fontSize:24,
+            fontWeight:'bold',
+        },
+        img:{
+            flex:1,
+            objectFit:'cover',
+            marginBottom:15
+        },
+           
 });
 export default MenuSreen;
