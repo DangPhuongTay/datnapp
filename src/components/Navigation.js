@@ -10,6 +10,7 @@ import StartSreen from "../screens/StartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import InfoScreen from "../screens/InfoScreen";
 import RankScreen from "../screens/RankScreen";
+import QuizScreen from "../screens/QuizScreen";
 import { Button } from "react-native";
 import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
 
@@ -40,6 +41,9 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
             <Stack.Screen name="GameWordle"
                           component={WordleScreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Quiz"
+                          component={QuizScreen}
                           options={{headerShown: false}}/>
           </>
         ) : (

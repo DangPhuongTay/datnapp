@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated } from 'react-native'
-import { COLORS, SIZES } from '../constants';
+import { COLORS, SIZES } from '../components/constants';
 import data from '../data/QuizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -74,13 +74,13 @@ const Quiz = () => {
                     flexDirection: 'row',
                     alignItems: 'flex-end'
                 }}>
-                    <Text style={{color: COLORS.white, fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
-                    <Text style={{color: COLORS.white, fontSize: 18, opacity: 0.6}}>/ {allQuestions.length}</Text>
+                    <Text style={{color: '#fff', fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
+                    <Text style={{color: '#fff', fontSize: 18, opacity: 0.6}}>/ {allQuestions.length}</Text>
                 </View>
 
                 {/* Question */}
                 <Text style={{
-                    color: COLORS.white,
+                    color: '#fff',
                     fontSize: 30
                 }}>{allQuestions[currentQuestionIndex]?.question}</Text>
             </View>
@@ -98,15 +98,15 @@ const Quiz = () => {
                         style={{
                             borderWidth: 3, 
                             borderColor: option==correctOption 
-                            ? COLORS.success
+                            ? '#00C851'
                             : option==currentOptionSelected 
-                            ? COLORS.error 
-                            : COLORS.secondary+'40',
+                            ? '#ff4444' 
+                            : '#000'+'40',
                             backgroundColor: option==correctOption 
-                            ? COLORS.success +'20'
+                            ? '#00C851' +'20'
                             : option==currentOptionSelected 
-                            ? COLORS.error +'20'
-                            : COLORS.secondary+'20',
+                            ? '#ff4444' +'20'
+                            : '#000'+'20',
                             height: 60, borderRadius: 20,
                             flexDirection: 'row',
                             alignItems: 'center', justifyContent: 'space-between',
@@ -114,29 +114,29 @@ const Quiz = () => {
                             marginVertical: 10
                         }}
                         >
-                            <Text style={{fontSize: 20, color: COLORS.white}}>{option}</Text>
+                            <Text style={{fontSize: 20, color:'#fff'}}>{option}</Text>
 
                             {/* Show Check Or Cross Icon based on correct answer*/}
                             {
                                 option==correctOption ? (
                                     <View style={{
                                         width: 30, height: 30, borderRadius: 30/2,
-                                        backgroundColor: COLORS.success,
+                                        backgroundColor: '#00C851',
                                         justifyContent: 'center', alignItems: 'center'
                                     }}>
                                         <MaterialCommunityIcons name="check" style={{
-                                            color: COLORS.white,
+                                            color: '#fff',
                                             fontSize: 20
                                         }} />
                                     </View>
                                 ): option == currentOptionSelected ? (
                                     <View style={{
                                         width: 30, height: 30, borderRadius: 30/2,
-                                        backgroundColor: COLORS.error,
+                                        backgroundColor: '#ff4444',
                                         justifyContent: 'center', alignItems: 'center'
                                     }}>
                                         <MaterialCommunityIcons name="close" style={{
-                                            color: COLORS.white,
+                                            color: '#fff',
                                             fontSize: 20
                                         }} />
                                     </View>
@@ -155,9 +155,9 @@ const Quiz = () => {
                 <TouchableOpacity
                 onPress={handleNext}
                 style={{
-                    marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 5
+                    marginTop: 20, width: '100%', backgroundColor: '#3498db', padding: 20, borderRadius: 5
                 }}>
-                    <Text style={{fontSize: 20, color: COLORS.white, textAlign: 'center'}}>Next</Text>
+                    <Text style={{fontSize: 20, color: '#fff', textAlign: 'center'}}>Next</Text>
                 </TouchableOpacity>
             )
         }else{
@@ -183,9 +183,6 @@ const Quiz = () => {
                 <Animated.View style={[{
                     height: 20,
                     borderRadius: 20,
-                    backgroundColor: COLORS.accent
-                },{
-                    width: progressAnim
                 }]}>
 
                 </Animated.View>
@@ -199,12 +196,12 @@ const Quiz = () => {
        <SafeAreaView style={{
            flex: 1
        }}>
-           <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
+           <StatusBar barStyle="light-content"  />
            <View style={{
                flex: 1,
                paddingVertical: 40,
                paddingHorizontal: 16,
-               backgroundColor: COLORS.background,
+               backgroundColor: '#000',
                position:'relative'
            }}>
 
@@ -228,12 +225,11 @@ const Quiz = () => {
                >
                    <View style={{
                        flex: 1,
-                       backgroundColor: COLORS.primary,
                        alignItems: 'center',
                        justifyContent: 'center'
                    }}>
                        <View style={{
-                           backgroundColor: COLORS.white,
+                           backgroundColor: '#fff',
                            width: '90%',
                            borderRadius: 20,
                            padding: 20,
@@ -249,21 +245,21 @@ const Quiz = () => {
                            }}>
                                <Text style={{
                                    fontSize: 30,
-                                   color: score> (allQuestions.length/2) ? COLORS.success : COLORS.error
+                                   color: score> (allQuestions.length/2) ? '#00C851' : '#ff4444'
                                }}>{score}</Text>
                                 <Text style={{
-                                    fontSize: 20, color: COLORS.black
+                                    fontSize: 20, color: '#121214'
                                 }}>/ { allQuestions.length }</Text>
                            </View>
                            {/* Retry Quiz button */}
                            <TouchableOpacity
                            onPress={restartQuiz}
                            style={{
-                               backgroundColor: COLORS.accent,
+                               backgroundColor: '#3498db',
                                padding: 20, width: '100%', borderRadius: 20
                            }}>
                                <Text style={{
-                                   textAlign: 'center', color: COLORS.white, fontSize: 20
+                                   textAlign: 'center', color: '#fff', fontSize: 20
                                }}>Retry Quiz</Text>
                            </TouchableOpacity>
 
@@ -274,9 +270,9 @@ const Quiz = () => {
 
                {/* Background Image */}
                <Image
-                source={require('../assets/images/DottedBG.png')}
+                source={require('../../assets/images/DottedBG.png')}
                 style={{
-                    width: SIZES.width,
+                    width: 300,
                     height: 130,
                     zIndex: -1,
                     position: 'absolute',

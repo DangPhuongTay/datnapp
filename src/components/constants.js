@@ -5,12 +5,19 @@ export const colors = {
   lightgrey: "#D7DADC",
   primary: "#538D4E",
   secondary: "#B59F3B",
+  accent: '#3498db',
+  
+  success: '#00C851',
+  error: '#ff4444',
+
+  white: "#FFFFFF",
+  background: "#252C4A"
 };
 
 export const colorsToEmoji = {
   [colors.darkgrey]: "⬛",
   [colors.primary]: "🟩",
-  [colors.secondary]: "🟧",
+  ['#000']: "🟧",
 };
 
 export const ENTER = "ENTER";

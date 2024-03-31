@@ -13,55 +13,13 @@ import { colors, CLEAR, ENTER, colorsToEmoji } from "../../components/constants"
 import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
 
-const NUMBER_OF_TRIES = 6;
+const NUMBER_OF_TRIES = 4;
 
 const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
 };
 
 const words = [
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
   "world",
 ];
 const dayOfTheYear = Math.floor(Math.random() * words.length);
