@@ -1,3 +1,4 @@
+
 export default data = [
     {
         question: "What’s the biggest planet in our solar system?",

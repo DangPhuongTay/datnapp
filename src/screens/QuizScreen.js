@@ -201,7 +201,7 @@ const Quiz = () => {
                flex: 1,
                paddingVertical: 40,
                paddingHorizontal: 16,
-               backgroundColor: '#000',
+               backgroundColor: '#3A3A3D',
                position:'relative'
            }}>
 
