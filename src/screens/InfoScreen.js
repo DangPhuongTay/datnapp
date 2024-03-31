@@ -20,9 +20,9 @@ const InfoScreen = ({navigation}) =>{
                        style={styles.input}
                        onChangeText={text => setEmail(text)}
                        value={email}/>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.button}>
+                <Touchab leOpacity onPress={() => navigation.navigate('Profile')} style={styles.button}>
                     <Text style={styles.save}>Lưu</Text>
-                </TouchableOpacity>
+                </Touchab>
                 
         </View>
     );
