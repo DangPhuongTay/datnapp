@@ -36,12 +36,15 @@ const RankScreen = ({navigation}) =>{
         {isLoading ? (
           <ActivityIndicator />
         ) : (
+
           <FlatList
             data={data}
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
               <View style={styles.score}>
-              <Text style={styles.point}>
+              
+              
+              <Text style={styles.name}>
                 {item.name}
               </Text>
               <Text style={styles.point}>
@@ -108,7 +111,14 @@ score:{
   backgroundColor:'#AECCF2'
 },
 point:{
-
+fontSize:24,
+ color: '#4B4B4B',
+ fontWeight:'bold'
+},
+name:{
+  color:'#fff',
+  fontSize:24,
+  fontWeight:'bold'
 }
 })
 
