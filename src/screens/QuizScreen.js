@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ImageBackground } from 'react-native'
 import { COLORS, SIZES } from '../components/constants';
 import data from '../data/QuizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Quiz = () => {
+const Quiz = ({navigation}) => {
 
     const allQuestions = data;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -15,6 +15,11 @@ const Quiz = () => {
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
 
+   
+
+
+
+    
     const validateAnswer = (selectedOption) => {
         let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
         setCurrentOptionSelected(selectedOption);
@@ -62,59 +67,82 @@ const Quiz = () => {
         }).start();
     }
 
-
+ 
 
     const renderQuestion = () => {
         return (
+
             <View style={{
-                marginVertical: 40
-            }}>
+                
+                marginTop:250,
+                padding:10,
+                flexDirection:'row',
+                
+                justifyContent:'center'
+
+                }}>
+               
                 {/* Question Counter */}
                 <View style={{
                     flexDirection: 'row',
-                    alignItems: 'flex-end'
+                    alignItems: 'flex-end',
+                    width:40,
+                    height:40,
+                    backgroundColor:'#62C7F3',
+                    borderRadius:999,
+                    alignItems:'center',
+                    justifyContent:'center'
+                    
                 }}>
-                    <Text style={{color: '#fff', fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
-                    <Text style={{color: '#fff', fontSize: 18, opacity: 0.6}}>/ {allQuestions.length}</Text>
+                    <Text style={{color: '#fff', fontSize: 16,  marginRight: 2, fontWeight:'bold'}}>{currentQuestionIndex+1}</Text>
+                    <Text style={{color: '#fff', fontSize: 14}}>/ {allQuestions.length}</Text>
                 </View>
 
                 {/* Question */}
                 <Text style={{
-                    color: '#fff',
-                    fontSize: 30
+                    color: '#4B4B4B',
+                    fontSize: 20,
+                    fontWeight:'bold',
+                    width:250,
+                    marginLeft:20
                 }}>{allQuestions[currentQuestionIndex]?.question}</Text>
             </View>
         )
     }
     const renderOptions = () => {
         return (
-            <View>
-                {
+            <View style={{justifyContent:'center',alignItems:'center'}}>
+                { 
                     allQuestions[currentQuestionIndex]?.options.map(option => (
                         <TouchableOpacity 
                         onPress={()=> validateAnswer(option)}
                         disabled={isOptionsDisabled}
                         key={option}
                         style={{
-                            borderWidth: 3, 
+                            borderWidth: 1,
+                            
                             borderColor: option==correctOption 
                             ? '#00C851'
                             : option==currentOptionSelected 
                             ? '#ff4444' 
-                            : '#000'+'40',
+                            : '#818384',
                             backgroundColor: option==correctOption 
-                            ? '#00C851' +'20'
+                            ? '#00C851'+'40'
                             : option==currentOptionSelected 
-                            ? '#ff4444' +'20'
-                            : '#000'+'20',
-                            height: 60, borderRadius: 20,
+                            ? '#ff4444' +'40'
+                            : '#62C7F3',
+                            width:320,
+                            height: 40, borderRadius: 30,
                             flexDirection: 'row',
                             alignItems: 'center', justifyContent: 'space-between',
                             paddingHorizontal: 20,
-                            marginVertical: 10
+                            marginVertical: 5,
+                            
+                            
+                            
                         }}
                         >
-                            <Text style={{fontSize: 20, color:'#fff'}}>{option}</Text>
+                            <Text style={{fontSize: 20, color:'#fff',fontWeight:'bold'}}>{option}</Text>
 
                             {/* Show Check Or Cross Icon based on correct answer*/}
                             {
@@ -155,9 +183,9 @@ const Quiz = () => {
                 <TouchableOpacity
                 onPress={handleNext}
                 style={{
-                    marginTop: 20, width: '100%', backgroundColor: '#3498db', padding: 20, borderRadius: 5
+                    marginTop: 10, width: '85%', backgroundColor: '#3498db', padding: 10, borderRadius: 999, marginLeft:30
                 }}>
-                    <Text style={{fontSize: 20, color: '#fff', textAlign: 'center'}}>Next</Text>
+                    <Text style={{fontSize: 20, color: '#fff', textAlign: 'center', fontWeight:'bold'}}>Next</Text>
                 </TouchableOpacity>
             )
         }else{
@@ -178,13 +206,18 @@ const Quiz = () => {
                 height: 20,
                 borderRadius: 20,
                 backgroundColor: '#00000020',
+                borderWidth: 1,
+                borderColor:'#ddd'
 
             }}>
                 <Animated.View style={[{
-                    height: 20,
+                    height: 18,
                     borderRadius: 20,
+                    backgroundColor:'#3498db'
+                }
+                    ,{
+                    width: progressAnim
                 }]}>
-
                 </Animated.View>
 
             </View>
@@ -201,10 +234,20 @@ const Quiz = () => {
                flex: 1,
                paddingVertical: 40,
                paddingHorizontal: 16,
-               backgroundColor: '#3A3A3D',
-               position:'relative'
+               backgroundColor: '#fff',
+               position:'relative',
+             
+               
            }}>
-
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <Image source={require('../../assets/images/back.png')} 
+                    style={{width: 40,
+                            height: 40,
+                            marginTop:-20,
+                            marginBottom:20
+                            }}> 
+                     </Image>
+                </TouchableOpacity>
                {/* ProgressBar */}
                { renderProgressBar() }
 
@@ -225,15 +268,16 @@ const Quiz = () => {
                >
                    <View style={{
                        flex: 1,
+                       backgroundColor: '#AECCF2',
                        alignItems: 'center',
-                       justifyContent: 'center'
+                       justifyContent: 'center',
+                       
                    }}>
                        <View style={{
-                           backgroundColor: '#fff',
-                           width: '90%',
-                           borderRadius: 20,
                            padding: 20,
-                           alignItems: 'center'
+                           alignItems: 'center',
+                          
+                           
                        }}>
                            <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (allQuestions.length/2) ? 'Congratulations!' : 'Oops!' }</Text>
 
@@ -256,10 +300,10 @@ const Quiz = () => {
                            onPress={restartQuiz}
                            style={{
                                backgroundColor: '#3498db',
-                               padding: 20, width: '100%', borderRadius: 20
+                               padding: 20, width: '100%', borderRadius: 8
                            }}>
                                <Text style={{
-                                   textAlign: 'center', color: '#fff', fontSize: 20
+                                   textAlign: 'center', color: '#fff', fontSize: 20, fontWeight:'bold'
                                }}>Retry Quiz</Text>
                            </TouchableOpacity>
 
@@ -270,18 +314,19 @@ const Quiz = () => {
 
                {/* Background Image */}
                <Image
-                source={require('../../assets/images/DottedBG.png')}
+                source={require('../../assets/images/quiz_bg.jpg')}
                 style={{
-                    width: 300,
-                    height: 130,
-                    zIndex: -1,
+                    width:420,
+                    height:960,
+                    justifyContent: 'flex-start',
+                    alignItems:'center',
+                    zIndex:-1,
                     position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    opacity: 0.5
+                    objectFit:'fill',
+                    marginTop: -60
+                    
                 }}
-                resizeMode={'contain'}
+                
                 />
 
            </View>
