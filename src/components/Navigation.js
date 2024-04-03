@@ -13,6 +13,7 @@ import RankScreen from "../screens/RankScreen";
 import QuizScreen from "../screens/QuizScreen";
 import { Button } from "react-native";
 import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
+import ListgameScreen from "../../src/screens/ListgameScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,9 @@ const Navigation = () => {
                           options={{headerShown: false}}/>
             <Stack.Screen name="Quiz"
                           component={QuizScreen}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="Listgame"
+                          component={ListgameScreen}
                           options={{headerShown: false}}/>
           </>
         ) : (

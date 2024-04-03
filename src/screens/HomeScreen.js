@@ -34,6 +34,11 @@ const HomeSreen = ({navigation}) => {
                 <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
                     <Text>Game 1</Text>
                 </TouchableOpacity>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
+                    <Text>List Game</Text>
+                </TouchableOpacity>
+            </View>
             </View>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
