@@ -5,6 +5,8 @@ export const colors = {
   lightgrey: "#D7DADC",
   primary: "#538D4E",
   secondary: "#B59F3B",
+  blue: "#62C7F3",
+  while:"#FFFFFF"
 };
 
 export const colorsToEmoji = {

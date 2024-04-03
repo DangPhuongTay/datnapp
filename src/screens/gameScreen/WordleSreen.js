@@ -7,13 +7,15 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
-  TouchableOpacity
+  TouchableOpacity, 
+  Image
 } from "react-native";
 import { colors, CLEAR, ENTER, colorsToEmoji } from "../../components/constants";
 import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
 
-const NUMBER_OF_TRIES = 6;
+
+const NUMBER_OF_TRIES = 4;
 
 const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
@@ -181,13 +183,18 @@ const WordleSreen = ({navigation}) => {
   const greyCaps = getAllLettersWithColor(colors.darkgrey);
 
   return (
+  
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
 
-      <Text style={styles.title}>WORDLE</Text>
+            
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                     <Text>⬅️</Text>
-               </TouchableOpacity>
+                     <Text></Text>
+                     <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
+               </TouchableOpacity>      
+        
+      <Text style={styles.title}>WORDLE</Text>
+      
       <ScrollView style={styles.map}>
         {rows.map((row, i) => (
           <View key={`row-${i}`} style={styles.row}>
@@ -225,11 +232,11 @@ export default WordleSreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.black,
+    backgroundColor: colors.blue,
     alignItems: "center",
   },
   title: {
-    color: colors.lightgrey,
+    color: colors.while,
     fontSize: 32,
     fontWeight: "bold",
     letterSpacing: 7,
@@ -238,11 +245,13 @@ const styles = StyleSheet.create({
   map: {
     alignSelf: "stretch",
     marginVertical: 20,
+    
   },
   row: {
     alignSelf: "stretch",
     flexDirection: "row",
     justifyContent: "center",
+    
   },
   cell: {
     borderWidth: 3,
@@ -253,10 +262,21 @@ const styles = StyleSheet.create({
     margin: 3,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius:15,
+    
+    justifyContent: "space-evenly",
   },
   cellText: {
     color: colors.lightgrey,
     fontWeight: "bold",
     fontSize: 28,
   },
+  back:{
+    width:40,
+    height:40,
+    marginRight:'85%',
+    marginTop:10,
+    marginLeft: 4
+   
+},
 });
