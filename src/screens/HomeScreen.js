@@ -40,6 +40,11 @@ const HomeSreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
+                    <Text>Quiz</Text>
+                </TouchableOpacity>
+            </View>
             <Spinner visible={isLoading}/>
             <Text>{userInfo.name}</Text>
             <Text>{userInfo.email}</Text>

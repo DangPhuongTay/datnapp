@@ -10,6 +10,7 @@ import StartSreen from "../screens/StartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import InfoScreen from "../screens/InfoScreen";
 import RankScreen from "../screens/RankScreen";
+import QuizScreen from "../screens/QuizScreen";
 import { Button } from "react-native";
 import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
 import ListgameScreen from "../../src/screens/ListgameScreen";
