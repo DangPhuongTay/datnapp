@@ -119,7 +119,7 @@ const WordleSreen = ({navigation}) => {
     const letter = rows[row][col];
 
     if (row >= curRow) {
-      return colors.black;
+      return colors.grey;
     }
     if (letter === letters[col]) {
       return colors.primary;
@@ -163,7 +163,7 @@ const WordleSreen = ({navigation}) => {
                   styles.cell,
                   {
                     borderColor: isCellActive(i, j)
-                      ? colors.while
+                      ? colors.lightgrey
                       : colors.darkgrey,
                     backgroundColor: getCellBGColor(i, j),
                   },
