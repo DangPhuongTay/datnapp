@@ -14,7 +14,6 @@ import QuizScreen from "../screens/QuizScreen";
 import { Button } from "react-native";
 import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
 import ListgameScreen from "../../src/screens/ListgameScreen";
-import QuizScreen from "../../src/screens/QuizScreen";
 
 const Stack = createNativeStackNavigator();
 
