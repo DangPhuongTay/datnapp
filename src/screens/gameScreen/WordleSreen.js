@@ -163,7 +163,7 @@ const WordleSreen = ({navigation}) => {
                   styles.cell,
                   {
                     borderColor: isCellActive(i, j)
-                      ? colors.grey
+                      ? colors.while
                       : colors.darkgrey,
                     backgroundColor: getCellBGColor(i, j),
                   },
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
   cell: {
     borderWidth: 3,
     borderColor: colors.darkgrey,
+    backgroundColor: '#fff',
     flex: 1,
     maxWidth: 70,
     aspectRatio: 1,
@@ -221,7 +222,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius:15,
-    
     justifyContent: "space-evenly",
   },
   cellText: {
