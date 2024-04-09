@@ -1,11 +1,11 @@
-import React,{ useContext} from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeSreen from "../screens/HomeScreen";
 import LoginSreen from "../screens/LoginScreen";
 import RegisterSreen from "../screens/RegisterScreen";
 import MenuSreen from "../screens/MenuScreen";
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import StartSreen from "../screens/StartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import InfoScreen from "../screens/InfoScreen";
@@ -14,59 +14,64 @@ import QuizScreen from "../screens/QuizScreen";
 import { Button } from "react-native";
 import WordleScreen from "../../src/screens/gameScreen/WordleSreen";
 import ListgameScreen from "../../src/screens/ListgameScreen";
+import PasswordScreen from "../screens/PasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const {userInfo} = useContext(AuthContext);
-    return (
+  const { userInfo } = useContext(AuthContext);
+  return (
     <NavigationContainer>
       <Stack.Navigator>
         {userInfo ? (
-           <>
+          <>
             <Stack.Screen name="Home"
-                          component={HomeSreen}
-                          options={{headerShown: false}}/>
+              component={HomeSreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Menu"
-                          component={MenuSreen}
-                          options={{headerShown: false}}/>
+              component={MenuSreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Profile"
-                          component={ProfileScreen}
-                          options={{headerShown: false}}/>
+              component={ProfileScreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Info"
-                          component={InfoScreen}
-                          options={{headerShown: false}}/>
+              component={InfoScreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Rank"
-                          component={RankScreen}
-                          options={{headerShown: false}}/>
+              component={RankScreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="GameWordle"
-                          component={WordleScreen}
-                          options={{headerShown: false}}/>
+              component={WordleScreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Quiz"
-                          component={QuizScreen}
-                          options={{headerShown: false}}/>
+              component={QuizScreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Listgame"
-                          component={ListgameScreen}
-                          options={{headerShown: false}}/>
+              component={ListgameScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Password"
+              component={PasswordScreen}
+              options={{ headerShown: false }} />
+
           </>
         ) : (
           <>
             <Stack.Screen name="Start"
-                          component={StartSreen}
-                          options={{headerShown: false}}/>
+              component={StartSreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Login"
-                          component={LoginSreen}
-                          options={{headerShown: false}}/>
+              component={LoginSreen}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Register"
-                          component={RegisterSreen}
-                          options={{headerShown: false}}/>
+              component={RegisterSreen}
+              options={{ headerShown: false }} />
 
           </>
         )}
 
       </Stack.Navigator>
     </NavigationContainer>
-    );
+  );
 };
 
 export default Navigation;
