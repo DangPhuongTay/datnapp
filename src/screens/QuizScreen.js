@@ -14,7 +14,25 @@ const Quiz = ({navigation}) => {
     const [score, setScore] = useState(0)
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const getLession = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/question-by-lession/1`);
+          const json = await response.json();
+          setData(json.data);
+          console.error(json.data);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
+    
+        useEffect(() => {
+            getLession(); 
+        }, []);
    
 
 
@@ -250,7 +268,23 @@ const Quiz = ({navigation}) => {
                 </TouchableOpacity>
                {/* ProgressBar */}
                { renderProgressBar() }
-
+               <FlatList
+            data={data}
+            keyExtractor={({id}) => id}
+            renderItem={({item}) => (
+              <View style={styles.score}>
+              
+              
+              <Text style={styles.name}>
+                {item.name}
+              </Text>
+              <Text style={styles.point}>
+                 {item.score}
+              </Text>
+              </View>
+              
+            )}
+          />          
                {/* Question */}
                {renderQuestion()}
 
