@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ImageBackground } from 'react-native'
+import React, { useState,useEffect } from 'react'
+import { View, Text,FlatList, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ImageBackground } from 'react-native'
 import { COLORS, SIZES } from '../components/constants';
 import data from '../data/QuizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {BASE_URL} from '../config';
 const Quiz = ({navigation}) => {
 
-    const allQuestions = data;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
@@ -15,29 +14,41 @@ const Quiz = ({navigation}) => {
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const getLession = async () => {
-        try {
-          const response = await fetch(`${BASE_URL}/question-by-lession/1`);
-          const json = await response.json();
-          setData(json.data);
-          console.error(json.data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      };
 
     
-        useEffect(() => {
-            getLession(); 
-        }, []);
-   
-
-
-
+    const [datas, setData] = useState([]);
+        const getLession = async () => {
+            try {
+              const response = await fetch(`${BASE_URL}/question-by-lession/1`);
+              const json = await response.json();
+              setData(json.data);
+            } catch (error) {
+              console.error(error); 
+            } finally {
+              setLoading(false);
+            }
+          };
     
+        
+            useEffect(() => {
+                getLession(); 
+            }, []);
+    let datatest = datas;
+    let datetessst = []
+    for(const e of datatest){
+        let optiontest = [];
+        optiontest.push(e.answer_a);
+        optiontest.push(e.answer_b);
+        optiontest.push(e.answer_c);
+        optiontest.push(e.answer_d);
+        var item ={
+                question: e.question_text,
+                options: optiontest,
+                correct_option:  e.answer,
+            };
+        datetessst.push(item);
+    }        
+    const allQuestions = datetessst;
     const validateAnswer = (selectedOption) => {
         let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
         setCurrentOptionSelected(selectedOption);
@@ -268,23 +279,7 @@ const Quiz = ({navigation}) => {
                 </TouchableOpacity>
                {/* ProgressBar */}
                { renderProgressBar() }
-               <FlatList
-            data={data}
-            keyExtractor={({id}) => id}
-            renderItem={({item}) => (
-              <View style={styles.score}>
-              
-              
-              <Text style={styles.name}>
-                {item.name}
-              </Text>
-              <Text style={styles.point}>
-                 {item.score}
-              </Text>
-              </View>
-              
-            )}
-          />          
+                       
                {/* Question */}
                {renderQuestion()}
 
