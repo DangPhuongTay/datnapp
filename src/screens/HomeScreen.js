@@ -1,11 +1,11 @@
-import React,{useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, Button, TouchableOpacity } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
-const HomeSreen = ({navigation}) => {
-    
-    const {isLoading, userInfo, logout} = useContext(AuthContext);
+const HomeSreen = ({ navigation }) => {
+
+    const { isLoading, userInfo, logout } = useContext(AuthContext);
 
     return (
         <View>
@@ -34,21 +34,26 @@ const HomeSreen = ({navigation}) => {
                 <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
                     <Text>Game 1</Text>
                 </TouchableOpacity>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
-                    <Text>List Game</Text>
-                </TouchableOpacity>
-            </View>
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
+                        <Text>List Game</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
                     <Text>Quiz</Text>
                 </TouchableOpacity>
             </View>
-            <Spinner visible={isLoading}/>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Lesson')}>
+                    <Text>Lesson</Text>
+                </TouchableOpacity>
+            </View>
+            <Spinner visible={isLoading} />
             <Text>{userInfo.name}</Text>
             <Text>{userInfo.email}</Text>
-            <Button title="Logout" color="red" onPress={logout}/>
+            <Button title="Logout" color="red" onPress={logout} />
         </View>
     );
 };
