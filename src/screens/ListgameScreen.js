@@ -42,6 +42,7 @@ const ListgameScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       
+
       <View style={styles.title}>
         <Text style={styles.rank}> Trò chơi </Text>
       </View>
@@ -55,10 +56,22 @@ const ListgameScreen = ({ navigation }) => {
           data={data}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-            <View style={styles.score}>
+          <ImageBackground source={require("../../assets/images/listgame2.jpg")} 
+                            style={styles.score}>
+            {/* <View style={styles.score}> */}
+            
+            
               <Text style={styles.name}>{item.name}</Text>
+              
               <Text style={styles.nameGame}>{item.description}</Text>
+              <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                style={styles.button}>            
+                    <Text style={styles.btn}> Xem thêm </Text>
+                </TouchableOpacity>
             </View>
+            </ImageBackground>
+            // </View>
           )}
         />
       )}
@@ -85,14 +98,15 @@ const styles = StyleSheet.create({
   back: {
     width: 40,
     height: 40,
-    marginLeft: 10,
-    marginTop: 35,
+    marginLeft: -45,
+    marginTop: 25,
   },
+  
   title: {
     paddingHorizontal: 100,
     paddingVertical: 10,
     backgroundColor: "#fff",
-    marginTop: 180,
+    marginTop: 4,
     alignItems: "center",
     borderRadius: 12,
   },
@@ -105,20 +119,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: 170,
     paddingVertical: 10,
-    backgroundColor: "#fff",
+    //backgroundColor: "#fff",
     marginTop: 10,
     borderRadius: 12,
-    backgroundColor: "#AECCF2",
+    // backgroundColor: "#AECCF2",
   },
   nameGame: {
-    fontSize: 15,
+    fontSize: 20,
     color: "#4B4B4B",
     fontWeight: "bold",
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
   },
   name: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "bold",
   },
+  button:{
+    paddingVertical: 6,
+    width: 100,
+    backgroundColor:'#62C7F3', 
+    alignItems: 'center',
+    borderRadius:15,            
+},
+btn:{
+    color:'#fff',
+    fontSize:14,
+    fontWeight:'bold',
+},
 });
 export default ListgameScreen;
