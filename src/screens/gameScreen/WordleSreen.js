@@ -161,7 +161,7 @@ const WordleSreen = ({navigation}) => {
     const letter = rows[row][col];
 
     if (row >= curRow) {
-      return colors.black;
+      return colors.grey;
     }
     if (letter === letters[col]) {
       return colors.primary;
@@ -205,7 +205,7 @@ const WordleSreen = ({navigation}) => {
                   styles.cell,
                   {
                     borderColor: isCellActive(i, j)
-                      ? colors.grey
+                      ? colors.lightgrey
                       : colors.darkgrey,
                     backgroundColor: getCellBGColor(i, j),
                   },
@@ -256,6 +256,7 @@ const styles = StyleSheet.create({
   cell: {
     borderWidth: 3,
     borderColor: colors.darkgrey,
+    backgroundColor: '#fff',
     flex: 1,
     maxWidth: 70,
     aspectRatio: 1,
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius:15,
-    
+    justifyContent: "space-evenly",
   },
   cellText: {
     color: colors.lightgrey,
