@@ -1,25 +1,25 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import { View, Text,FlatList, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ImageBackground } from 'react-native'
 import { COLORS, SIZES } from '../components/constants';
 import data from '../data/QuizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LessonScreen } from '../screens/LessonScreen';
 import {BASE_URL} from '../config';
 const Quiz = ({navigation}) => {
-
+    const { idLesson } = useState(LessonScreen);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(0);
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
     const [isLoading, setLoading] = useState(true);
-
-    
+  
     const [datas, setData] = useState([]);
         const getLession = async () => {
             try {
-              const response = await fetch(`${BASE_URL}/question-by-lession/1`);
+              const response = await fetch(`${BASE_URL}/question-by-lession/`+{idLesson});
               const json = await response.json();
               setData(json.data);
             } catch (error) {
