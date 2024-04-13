@@ -22,15 +22,10 @@ const MenuSreen = ({navigation}) =>{
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
                 style={styles.button}>            
-                    <Text style={styles.btn}> 1 người chơi </Text>
+                    <Text style={styles.btn}> Chơi </Text>
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> 2 người chơi </Text>
-                </TouchableOpacity>
-            </View>
+
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
                 style={styles.button}>            
