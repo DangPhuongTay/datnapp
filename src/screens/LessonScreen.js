@@ -26,7 +26,14 @@ const LessonScreen = ({ navigation }) => {
             setLoading(false);
         }
     };
-
+    _handleSubmit = async (e) => 
+    {   
+        
+        navigation.navigate('Quiz', {
+            itemId: e,
+          }); 
+    };
+    
     useEffect(() => {
         getMovies();
     }, []);
@@ -51,6 +58,9 @@ const LessonScreen = ({ navigation }) => {
                             <View style={styles.score}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.nameGame}>{item.description}</Text>
+                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} >
+                                    <Text>Chọn</Text>
+                                </TouchableOpacity>
                             </View>
                         )}
                     />

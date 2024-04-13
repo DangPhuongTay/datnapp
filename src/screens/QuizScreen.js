@@ -1,25 +1,42 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import { View, Text,FlatList, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ImageBackground } from 'react-native'
 import { COLORS, SIZES } from '../components/constants';
 import data from '../data/QuizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LessonScreen } from '../screens/LessonScreen';
+import { AuthContext } from "../context/AuthContext";
 import {BASE_URL} from '../config';
-const Quiz = ({navigation}) => {
-
+const Quiz = ({ route, navigation }) => {
+    const { idLesson } = useState(LessonScreen);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+    const { isLoading, userInfo, logout } = useContext(AuthContext);
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(0);
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
-    const [isLoading, setLoading] = useState(true);
-
-    
+    const { itemId} = route.params;
+    let itemIdNet = itemId + 1;
     const [datas, setData] = useState([]);
+    const addScore = (score_add) => {
+        fetch(`${BASE_URL}/addscore/${userInfo.id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            score: score_add,
+        }),
+        
+    });
+    
+    navigation.navigate('Lesson')};
+   
         const getLession = async () => {
             try {
-              const response = await fetch(`${BASE_URL}/question-by-lession/1`);
+              const response = await fetch(`${BASE_URL}/question-by-lession/${itemId}`);
               const json = await response.json();
               setData(json.data);
             } catch (error) {
@@ -28,8 +45,6 @@ const Quiz = ({navigation}) => {
               setLoading(false);
             }
           };
-    
-        
             useEffect(() => {
                 getLession(); 
             }, []);
@@ -149,7 +164,6 @@ const Quiz = ({navigation}) => {
                         key={option}
                         style={{
                             borderWidth: 1,
-                            
                             borderColor: option==correctOption 
                             ? '#00C851'
                             : option==currentOptionSelected 
@@ -214,7 +228,7 @@ const Quiz = ({navigation}) => {
                 style={{
                     marginTop: 10, width: '85%', backgroundColor: '#3498db', padding: 10, borderRadius: 999, marginLeft:30
                 }}>
-                    <Text style={{fontSize: 20, color: '#fff', textAlign: 'center', fontWeight:'bold'}}>Next</Text>
+                    <Text style={{fontSize: 20, color: '#fff', textAlign: 'center', fontWeight:'bold'}}>Chọn</Text>
                 </TouchableOpacity>
             )
         }else{
@@ -268,15 +282,34 @@ const Quiz = ({navigation}) => {
              
                
            }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Image source={require('../../assets/images/back.png')} 
-                    style={{width: 40,
-                            height: 40,
-                            marginTop:-20,
-                            marginBottom:20
-                            }}> 
-                     </Image>
-                </TouchableOpacity>
+                <View style={{
+                    width: '100%',
+                    flexDirection:'row',
+                    justifyContent:'space-between'
+                }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <Image source={require('../../assets/images/back.png')} 
+                        style={{width: 40,
+                                height: 40,
+                                marginTop:-20,
+                                marginBottom:20
+                                }}> 
+                        </Image>
+                    </TouchableOpacity>
+                    <ImageBackground source={require('../../assets/images/score.png')} style={{
+                        width: 40,
+                        height:40,
+                        marginTop:-20,
+                        marginBottom:20,
+                        alignItems: 'center',
+                        justifyContent:'center'
+                    }}>
+                        <Text style={{
+                                    fontSize: 20,
+                                    color:  '#fff'
+                                }}>{score}</Text>
+                        </ImageBackground>
+                </View>
                {/* ProgressBar */}
                { renderProgressBar() }
                        
@@ -300,15 +333,12 @@ const Quiz = ({navigation}) => {
                        backgroundColor: '#AECCF2',
                        alignItems: 'center',
                        justifyContent: 'center',
-                       
                    }}>
                        <View style={{
                            padding: 20,
                            alignItems: 'center',
-                          
-                           
                        }}>
-                           <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (allQuestions.length/2) ? 'Congratulations!' : 'Oops!' }</Text>
+                           <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (allQuestions.length/2) ? 'Tốt!' : 'Bạn cần cố gắng hơn!' }</Text>
 
                            <View style={{
                                flexDirection: 'row',
@@ -326,14 +356,14 @@ const Quiz = ({navigation}) => {
                            </View>
                            {/* Retry Quiz button */}
                            <TouchableOpacity
-                           onPress={restartQuiz}
+                           onPress={() => addScore(score)}
                            style={{
                                backgroundColor: '#3498db',
                                padding: 20, width: '100%', borderRadius: 8
                            }}>
                                <Text style={{
                                    textAlign: 'center', color: '#fff', fontSize: 20, fontWeight:'bold'
-                               }}>Retry Quiz</Text>
+                               }}>Quay về</Text>
                            </TouchableOpacity>
 
                        </View>
