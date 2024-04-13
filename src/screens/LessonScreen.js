@@ -28,9 +28,10 @@ const LessonScreen = ({ navigation }) => {
     };
     _handleSubmit = async (e) => 
     {   
-        console.log(e);
-        console.log(id);
-        navigation.navigate('Quiz');  
+        
+        navigation.navigate('Quiz', {
+            itemId: e,
+          }); 
     };
     
     useEffect(() => {
