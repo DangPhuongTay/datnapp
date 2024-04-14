@@ -17,7 +17,7 @@ const LessonScreen = ({ navigation }) => {
     const [data, setData] = useState([]);
     const getMovies = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/allgame`);
+            const response = await fetch(`${BASE_URL}/lession/all`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
