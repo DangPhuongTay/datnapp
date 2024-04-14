@@ -22,55 +22,12 @@ const copyArray = (arr) => {
 };
 
 const words = [
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
-  "hello",
-  "world",
+  "worl","Từ"
 ];
-const dayOfTheYear = Math.floor(Math.random() * words.length);
 
 const WordleSreen = ({navigation}) => {
 
-  const word = words[dayOfTheYear];
+  const word = words[0];
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
   
   const [rows, setRows] = useState(
@@ -193,7 +150,7 @@ const WordleSreen = ({navigation}) => {
                      <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
                </TouchableOpacity>      
         
-      <Text style={styles.title}>WORDLE</Text>
+      <Text style={styles.title}>{words[1]}</Text>
       
       <ScrollView style={styles.map}>
         {rows.map((row, i) => (

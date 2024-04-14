@@ -7,7 +7,7 @@ const RankScreen = ({navigation}) =>{
     const [data, setData] = useState([]);
     const getMovies = async () => {
         try {
-          const response = await fetch(`${BASE_URL}/alluser`);
+          const response = await fetch(`${BASE_URL}/rank`);
           const json = await response.json();
           setData(json.data);
         } catch (error) {

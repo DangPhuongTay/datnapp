@@ -25,7 +25,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo ? (
+        {userInfo? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}
