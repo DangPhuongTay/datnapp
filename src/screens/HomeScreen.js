@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
+import { Text, View, Button, TouchableOpacity,StyleSheet } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
 
@@ -8,37 +8,15 @@ const HomeSreen = ({ navigation }) => {
     const { isLoading, userInfo, logout } = useContext(AuthContext);
 
     return (
-        <View>
-            <Text></Text>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
-                    <Text>Menu</Text>
-                </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Text>header</Text>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Text>Profile</Text>
-                </TouchableOpacity>
+            <View style={styles.banner}>
+                <Text>banner</Text>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
-                    <Text>Info</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Rank')}>
-                    <Text>Rank</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
-                    <Text>Game 1</Text>
-                </TouchableOpacity>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
-                        <Text>List Game</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={styles.context}>
+                <Text>context</Text>
             </View>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
@@ -50,17 +28,10 @@ const HomeSreen = ({ navigation }) => {
                     <Text>Lesson</Text>
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('System')}>
-                    <Text>System</Text>
-                </TouchableOpacity>
-            </View>
-            <Spinner visible={isLoading} />
-            <Text>{userInfo.name}</Text>
-            <Text>{userInfo.email}</Text>
-            <Button title="Logout" color="red" onPress={logout} />
         </View>
     );
 };
+const styles = StyleSheet.create({
 
+})
 export default HomeSreen;
