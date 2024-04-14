@@ -55,6 +55,11 @@ const HomeSreen = ({ navigation }) => {
                     <Text>System</Text>
                 </TouchableOpacity>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Category')}>
+                    <Text>Category</Text>
+                </TouchableOpacity>
+            </View>
             <Spinner visible={isLoading} />
             <Text>{userInfo.name}</Text>
             <Text>{userInfo.email}</Text>
