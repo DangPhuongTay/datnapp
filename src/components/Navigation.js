@@ -18,6 +18,7 @@ import PasswordScreen from "../screens/PasswordScreen";
 import LessonScreen from "../screens/LessonScreen";
 import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
+import CreateScreen from "../screens/TeacherScreen/CreateScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo? (
+        {userInfo ? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}
@@ -64,6 +65,10 @@ const Navigation = () => {
             <Stack.Screen name="Category"
               component={CategoryWord}
               options={{ headerShown: false }} />
+            <Stack.Screen name="Create"
+              component={CreateScreen}
+              options={{ headerShown: false }} />
+
 
           </>
         ) : (
