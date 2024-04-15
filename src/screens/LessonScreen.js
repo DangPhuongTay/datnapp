@@ -26,14 +26,13 @@ const LessonScreen = ({ navigation }) => {
             setLoading(false);
         }
     };
-    _handleSubmit = async (e) => 
-    {   
-        
+    _handleSubmit = async (e) => {
+
         navigation.navigate('Quiz', {
             itemId: e,
-          }); 
+        });
     };
-    
+
     useEffect(() => {
         getMovies();
     }, []);
