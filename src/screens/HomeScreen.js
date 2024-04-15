@@ -49,13 +49,13 @@ const HomeSreen = ({ navigation }) => {
                     <View style={styles.itembtn}>
                         <Text>Bài học</Text>
                     </View>
-                    <View style={styles.itembtn}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
+                    <View >
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Listgame')}>
                             <Text>Trò chơi</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.itembtn}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Rank')}>
+                    <View>
+                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
                             <Text>Xếp hạng</Text>
                         </TouchableOpacity>
                     </View>
