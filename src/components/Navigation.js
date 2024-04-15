@@ -18,6 +18,7 @@ import PasswordScreen from "../screens/PasswordScreen";
 import LessonScreen from "../screens/LessonScreen";
 import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
+import WordScreen from "../screens/WordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +65,9 @@ const Navigation = () => {
             <Stack.Screen name="Category"
               component={CategoryWord}
               options={{ headerShown: false }} />
-
+            <Stack.Screen name="Word"
+              component={WordScreen}
+              options={{ headerShown: false }} />
           </>
         ) : (
           <>

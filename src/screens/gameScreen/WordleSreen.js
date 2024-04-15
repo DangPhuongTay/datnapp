@@ -13,6 +13,7 @@ import {
 import { colors, CLEAR, ENTER, colorsToEmoji } from "../../components/constants";
 import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
+import { BASE_URL } from "../../config";
 
 
 const NUMBER_OF_TRIES = 4;
@@ -29,9 +30,22 @@ const words = {
   description: "a domestic, meat-eating animal related to the wolf and fox",
 };
 
-const WordleSreen = ({navigation}) => {
-
-  const word = words.english;
+const WordleSreen = ({route, navigation}) => {
+  const [data, setData] = useState({});
+  const { WordId} = route.params;
+  const getWord = async () => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/wordl/${WordId}`,
+      );
+      const json = await response.json();
+      setData(json.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(data.json());
+  const word = data.english;
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
   
   const [rows, setRows] = useState(
@@ -44,7 +58,9 @@ const WordleSreen = ({navigation}) => {
   useEffect(() => {
     if (curRow > 0) {
       checkGameState();
+     
     }
+    getWord();
   }, [curRow]);
 
   const checkGameState = () => {

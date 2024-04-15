@@ -22,7 +22,6 @@ const HomeSreen = ({ navigation }) => {
 
     _handleSubmit = async (e) => 
     {   
-        
         navigation.navigate('Quiz', {
             itemId: e,
           }); 

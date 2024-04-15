@@ -34,7 +34,7 @@ const ListgameScreen = ({ navigation }) => {
   return (
   <View style={styles.container}>
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => this._handleSubmit(item.id)} >
         <Image
           style={styles.back}
           source={require("../../assets/images/back.png")}
@@ -65,7 +65,7 @@ const ListgameScreen = ({ navigation }) => {
               
               <Text style={styles.nameGame}>{item.description}</Text>
               <View>
-            <TouchableOpacity onPress={() => navigation.navigate(`Game${item.description}`)}
+            <TouchableOpacity onPress={() => navigation.navigate('Category')}
                 style={styles.button}>            
                     <Text style={styles.btn}> Xem thêm </Text>
                 </TouchableOpacity>
