@@ -9,7 +9,7 @@ import {BASE_URL} from '../config';
 const Quiz = ({ route, navigation }) => {
     const { idLesson } = useState(LessonScreen);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
+    const {userInfo} = useContext(AuthContext);
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
