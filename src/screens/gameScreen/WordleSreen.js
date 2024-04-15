@@ -21,13 +21,17 @@ const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
 };
 
-const words = [
-  "worl","Từ"
-];
+const words = {
+  english: "dog",
+  vietnamese: "Chó",
+  type: "noun",
+  pronounce: "/doɡ/",
+  description: "a domestic, meat-eating animal related to the wolf and fox",
+};
 
 const WordleSreen = ({navigation}) => {
 
-  const word = words[0];
+  const word = words.english;
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
   
   const [rows, setRows] = useState(
@@ -45,26 +49,21 @@ const WordleSreen = ({navigation}) => {
 
   const checkGameState = () => {
     if (checkIfWon() && gameState !== "won") {
-      Alert.alert("Huraaay", "You won!", [
-        { text: "Share", onPress: shareScore },
+      Alert.alert("Đúng rồi, tốt lắm!", words.vietnamese+": "+words.english , [
+        { text: "Tiếp tục", onPress: shareScore },
       ]);
       setGameState("won");
     } else if (checkIfLost() && gameState !== "lost") {
-      Alert.alert("Meh", "Try again tomorrow!");
-      setGameState("lost");
+      Alert.alert("Ô không!", "Thử lại vào lần khác nhé!",[
+        { text: "Quay về", onPress: () => navigation.navigate('Listgame') },
+      ]);
     }
   };
 
   const shareScore = () => {
-    const textMap = rows
-      .map((row, i) =>
-        row.map((cell, j) => colorsToEmoji[getCellBGColor(i, j)]).join("")
-      )
-      .filter((row) => row)
-      .join("\n");
-    const textToShare = `Wordle \n${textMap}`;
-    Clipboard.setString(textToShare);
-    Alert.alert("Copied successfully", "Share your score on you social media");
+    Alert.alert("Bạn làm tốt lắm!", "Bạn được cộng 1 điểm" , [
+      { text: "Quay về", onPress: () => navigation.navigate('Listgame') },
+    ]);;
   };
 
   const checkIfWon = () => {
@@ -142,15 +141,13 @@ const WordleSreen = ({navigation}) => {
   return (
   
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
-
-            
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <StatusBar style="light"/>
+      <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
                      <Text></Text>
                      <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
                </TouchableOpacity>      
         
-      <Text style={styles.title}>{words[1]}</Text>
+      <Text style={styles.title}>{words.vietnamese}</Text>
       
       <ScrollView style={styles.map}>
         {rows.map((row, i) => (

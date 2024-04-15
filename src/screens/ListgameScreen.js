@@ -65,7 +65,7 @@ const ListgameScreen = ({ navigation }) => {
               
               <Text style={styles.nameGame}>{item.description}</Text>
               <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}
+            <TouchableOpacity onPress={() => navigation.navigate(`Game${item.description}`)}
                 style={styles.button}>            
                     <Text style={styles.btn}> Xem thêm </Text>
                 </TouchableOpacity>
