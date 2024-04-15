@@ -1,71 +1,172 @@
-import React, { useContext, useState } from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
+import React, { useContext, useState,useEffect } from "react";
+import { Text, View, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from "../config";
 
 const HomeSreen = ({ navigation }) => {
 
     const { isLoading, userInfo, logout } = useContext(AuthContext);
+    const [data, setData] = useState([]);
+    const getLessons = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/lession/all`);
+            const json = await response.json();
+            setData(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    _handleSubmit = async (e) => 
+    {   
+        
+        navigation.navigate('Quiz', {
+            itemId: e,
+          }); 
+    };
+
+    useEffect(() => {
+        getLessons();
+    }, []);
     return (
-        <View>
-            <Text></Text>
-            <View>
+        <View style={styles.container}>
+            <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
-                    <Text>Menu</Text>
+                    <Image style={styles.menu} source={require('../../assets/images/score.png')} />
                 </TouchableOpacity>
-            </View>
-            <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Text>Profile</Text>
+                    <Image style={styles.menu} source={require('../../assets/images/score.png')} />
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
-                    <Text>Info</Text>
-                </TouchableOpacity>
+            <View style={styles.banner}>
+                    <Image style={styles.imgbanner} source={require('../../assets/images/login_img.png')}/> 
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Rank')}>
-                    <Text>Rank</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('GameWordle')}>
-                    <Text>Game 1</Text>
-                </TouchableOpacity>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
-                        <Text>List Game</Text>
-                    </TouchableOpacity>
+            <View style={styles.context}>
+                <View style={styles.listbtn}>
+                    <View style={styles.itembtn}>
+                        <Text>Bài học</Text>
+                    </View>
+                    <View >
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Listgame')}>
+                            <Text>Trò chơi</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
+                            <Text>Xếp hạng</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.listlesstion}>
+                    <FlatList
+                        data={data}
+                        keyExtractor={({ id }) => id}
+                        renderItem={({ item }) => (
+                            <View style={styles.itemlesson}>
+                                <View>
+                                    <Text >{item.name}</Text>
+                                    <Text >{item.description}</Text>
+                                </View>
+                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} >
+                                    <Text>Chọn</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    />
                 </View>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
-                    <Text>Quiz</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Lesson')}>
-                    <Text>Lesson</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('System')}>
-                    <Text>System</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Category')}>
-                    <Text>Category</Text>
-                </TouchableOpacity>
-            </View>
-            <Spinner visible={isLoading} />
-            <Text>{userInfo.name}</Text>
-            <Text>{userInfo.email}</Text>
-            <Button title="Logout" color="red" onPress={logout} />
+        
+
         </View>
     );
 };
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#fff',
+        display: 'flex',
+        alignItems: 'center'
+    },
+    header: {
+        paddingTop: 30,
+        paddingLeft: 20,
+        paddingRight: 20,
+        width: '100%',
+        height: 60,
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'space-between'
+    },
+    banner: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: 'blue',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    context: {
+        width: '100%',
+        height: '55%',
+        backgroundColor: 'green',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'start'
+    },
+    menu: {
+        width: 30,
+        height: 30,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    imgbanner: {
+        width: 200,
+        height: 200,
+        objectFit: 'contain',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    listbtn: 
+    {
+        width: 400,
+        height: 50,
+        gap: 10,
+        flexDirection: 'row',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    itembtn: 
+    {
+        width: 100,
+        height: 50,
+        backgroundColor:'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    listlesstion:
+    {   
+        width: 320,
+        height: 300,
+    },
+    itemlesson:
+    {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        backgroundColor:'pink',
+        padding:10, 
+    }
+})
 export default HomeSreen;

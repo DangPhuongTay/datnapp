@@ -3,6 +3,8 @@ import { Text, View, Button, TouchableOpacity, StyleSheet, Image, ImageBackgroun
 import {AuthContext} from '../context/AuthContext';
 
 const MenuSreen = ({navigation}) =>{
+    const { isLoading, userInfo, logout } = useContext(AuthContext);
+
     return (
         <ImageBackground source={require('../../assets/images/bgmenu.png')} resizeMode="cover" style={styles.img}>
         <View>
@@ -20,20 +22,20 @@ const MenuSreen = ({navigation}) =>{
             
             <Text style={[styles.color]}> Menu </Text>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                <TouchableOpacity onPress={() => navigation.navigate('Listgame')}
                 style={styles.button}>            
                     <Text style={styles.btn}> Chơi </Text>
                 </TouchableOpacity>
             </View>
 
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                <TouchableOpacity onPress={() => navigation.navigate('Rank')}
                 style={styles.button}>            
                     <Text style={styles.btn}> Cấp độ </Text>
                 </TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}      
+                <TouchableOpacity onPress={() => navigation.navigate('Rank')}      
                 style={styles.button}>   
                     <Text style={styles.btn}> Xếp hạng </Text>
                 </TouchableOpacity>
@@ -50,9 +52,12 @@ const MenuSreen = ({navigation}) =>{
                     <Text style={styles.btn}> Thông báo </Text>
                 </TouchableOpacity>
             </View>
-            {/* <Image source={require('../../assets/images/menu1.png')} 
-                    style={styles.img}></Image> */}
-                
+            <View>
+            <TouchableOpacity onPress={logout}
+                style={styles.button}> 
+                <Text style={styles.btn}> Đăng xuất </Text>
+            </TouchableOpacity>
+            </View>
         </View>
         </View>
         </ImageBackground>
