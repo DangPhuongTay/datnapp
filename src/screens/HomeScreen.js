@@ -33,6 +33,7 @@ const HomeSreen = ({ navigation }) => {
     }, []);
     return (
         <View style={styles.container}>
+        
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
                     <Image style={styles.menu} source={require('../../assets/images/score.png')} />
@@ -59,7 +60,13 @@ const HomeSreen = ({ navigation }) => {
                             <Text>Xếp hạng</Text>
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
+                            <Text> Thi thử </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+                
                 <View style={styles.listlesstion}>
                     <FlatList
                         data={data}
