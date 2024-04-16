@@ -35,7 +35,7 @@ const CreateScreen = ({ navigation }) => {
 
                 />
 
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}
+                <TouchableOpacity onPress={() => navigation.navigate('Detail')}
                     style={styles.button}>
                     <Text style={styles.btn}>Tạo</Text>
                 </TouchableOpacity>
