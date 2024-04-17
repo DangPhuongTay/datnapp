@@ -19,7 +19,7 @@ import LessonScreen from "../screens/LessonScreen";
 import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
 import ListTestScreen from "../screens/ListTestScreen";
-
+import WordScreen from "../screens/WordScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -68,7 +68,9 @@ const Navigation = () => {
             <Stack.Screen name="ListTest"
               component={ListTestScreen}
               options={{ headerShown: false }} />
-
+            <Stack.Screen name="Word"
+              component={WordScreen}
+              options={{ headerShown: false }} />
           </>
         ) : (
           <>

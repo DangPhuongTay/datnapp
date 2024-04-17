@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import {
     Text,
     View,
@@ -9,16 +9,20 @@ import {
     StyleSheet,
     Image,
     ImageBackground,
+    Alert
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
-const CategoryWord = ({route , navigation }) => {
+
+
+const WordScreen = ({route, navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [wordle, setWordle] = useState([]);
-    const getCartegorys = async () => {
+    const [category, setCategory] = useState({});
+    const { WordleId } = route.params;
+    const getWords = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/wordle/all`);
+            const response = await fetch(`${BASE_URL}/wordl-by-wordle/${WordleId}`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
@@ -27,16 +31,42 @@ const CategoryWord = ({route , navigation }) => {
             setLoading(false);
         }
     };
-    _handleSubmit = async (e) => 
-    {   
-        navigation.navigate('Word', {
-            WordleId: e,
-          });
-        setWordle(e)
+    const getCartegory = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/wordle/${WordleId}`);
+            const json = await response.json();
+            setCategory(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
-    
+
+    _handleSubmits = async (e) => 
+      {  
+        try {
+            const response = await fetch(`${BASE_URL}/wordl/${e}`);
+            const json = await response.json();
+            await navigation.navigate('GameWordle', {
+                    WordleId: WordleId,
+                    english: json.data.english,
+                    vietnamese: json.data.vietnamese,
+                    type: json.data.type,
+                    pronounce: json.data.pronounce,
+                    description: json.data.description,
+                    });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+           
+      };
+     
     useEffect(() => {
-        getCartegorys();
+        getCartegory(); 
+        getWords();
     }, []);
 
 
@@ -45,11 +75,11 @@ const CategoryWord = ({route , navigation }) => {
         <ImageBackground style={styles.bg} source={require('../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Category')}>
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}> Chủ đề</Text></View>
+                <View style={styles.text}><Text style={styles.title}>{category.name}</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator />
@@ -60,9 +90,9 @@ const CategoryWord = ({route , navigation }) => {
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                             <View style={styles.score}>
-                                <Text style={styles.name}>{item.name}</Text>
+                                <Text style={styles.name}>{item.vietnamese}</Text>
                                 
-                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
+                                <TouchableOpacity onPress={() => _handleSubmits(item.id)} 
                                         style={styles.button}>            
                                     <Text style={styles.btn}> Chọn </Text>
                                 </TouchableOpacity>
@@ -113,15 +143,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#000",
         alignItems: "center",
-    //     paddingHorizontal: 100,
-    // paddingVertical: 10,
-    // backgroundColor: "#62C7F3",
-    // marginTop: 4,
-    // alignItems: "center",
-    // borderRadius: 12,
+ 
     },
     title: {
-        fontSize: 32,
+        fontSize: 25,
         color: "#fff",
         fontWeight: "bold",
 
@@ -169,4 +194,4 @@ const styles = StyleSheet.create({
 
 }
 );
-export default CategoryWord;
+export default WordScreen;
