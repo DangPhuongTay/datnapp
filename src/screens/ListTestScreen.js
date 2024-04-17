@@ -15,9 +15,9 @@ import { BASE_URL } from "../config";
 const ListTestScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const getListTest = async () => {
+    const getMovies = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/allgame`);
+            const response = await fetch(`${BASE_URL}/tests/all`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
@@ -35,7 +35,7 @@ const ListTestScreen = ({ navigation }) => {
     };
     
     useEffect(() => {
-        getListTest();
+        getMovies();
     }, []);
 
 
@@ -51,7 +51,7 @@ const ListTestScreen = ({ navigation }) => {
                 <View style={styles.text}><Text style={styles.title}> Thi thử </Text></View>
 
                 {isLoading ? (
-                    <ActivityIndicator />
+                    <ActivityIndicator/>
                 ) : (
                     <FlatList
                         
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#000",
         alignItems: "center",
-    //     paddingHorizontal: 100,
+    // paddingHorizontal: 100,
     // paddingVertical: 10,
     // backgroundColor: "#62C7F3",
     // marginTop: 4,
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     button:{
         paddingVertical: 6,
         width: 100,
+        height: 35  ,
         backgroundColor:'#62C7F3', 
         alignItems: 'center',
         borderRadius:15,          
