@@ -1,26 +1,58 @@
 import React, { useContext, useState } from "react";
+import axios from 'axios';
 import { Text, View, Button, TouchableOpacity, StyleSheet, Image, ImageBackground, TextInput } from "react-native";
 import { AuthContext } from '../../context/AuthContext';
+import Spinner from "react-native-loading-spinner-overlay";
+import {BASE_URL} from '../../config';
 
 const CreateScreen = ({ navigation }) => {
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
-    const [text, onChangeText] = React.useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const {userInfo} = useContext(AuthContext);
+    const [name, setName ] = useState('');
+    const [description, setDescription] = useState('');
+    const [time, setTime ] = useState('15');
+    const [type, setType ] = useState('Text');
+    const id_user = userInfo.id;
+    const createTest = (name,description,time,type) => {
+        setIsLoading(true);
+        axios
+        .post(`${BASE_URL}/test/create`,{
+            id_user,
+           name,
+           description,
+           time,
+           type,
+        }).then(res => {
+            console.log(res.data);
+            setIsLoading(false);
+            navigation.navigate('Detail', {
+                testId: id_user,
+                testName: name,
+                testDes: description,
+            });
+        }).catch(e => {
+           console.log(`register error: ${e}`);
+        //    console.log(idUser,name,description,type,time);
+           setIsLoading(false);
+        });
+     };
     return (
+        
         <ImageBackground source={require('../../../assets/images/bgcreate.jpg')} resizeMode="cover" style={styles.img}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container}>
+         
+            <Spinner visible={isLoading}/>
                 <View style={styles.title}>
                     <Text style={styles.topic}>Chủ đề </Text>
                     <Text style={styles.obligatory}> ( bắt buộc ) </Text>
-
                 </View>
-
                 <TextInput
                     style={styles.inputTitle}
-                    onChangeText={onChangeText}
-                    value={text}
+                    onChangeText={text => setName(text)}
+                    value={name}
                     placeholder="Thêm một chủ đề mô tả"
 
                 />
@@ -29,13 +61,13 @@ const CreateScreen = ({ navigation }) => {
                 <Text style={styles.des} >Mô tả </Text>
                 <TextInput
                     style={styles.inputDes}
-                    onChangeText={onChangeText}
-                    value={text}
+                    onChangeText={text => setDescription(text)}
+                    value={description}
                     placeholder="Cho người dùng biết về bộ câu hỏi của bạn"
 
                 />
 
-                <TouchableOpacity onPress={() => navigation.navigate('Detail')}
+                <TouchableOpacity onPress={() => {createTest(name,description,time,type)}}
                     style={styles.button}>
                     <Text style={styles.btn}>Tạo</Text>
                 </TouchableOpacity>

@@ -53,6 +53,12 @@ const MenuSreen = ({navigation}) =>{
                 </TouchableOpacity>
             </View>
             <View>
+            <TouchableOpacity onPress={() => navigation.navigate('System')}
+                style={styles.button}>            
+                    <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
+                </TouchableOpacity>
+            </View>
+            <View>
             <TouchableOpacity onPress={logout}
                 style={styles.button}> 
                 <Text style={styles.btn}> Đăng xuất </Text>

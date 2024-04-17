@@ -3,11 +3,58 @@ import { Text, View, Button, TouchableOpacity, StyleSheet, Image, ImageBackgroun
 import { AuthContext } from '../../context/AuthContext';
 import Checkbox from 'expo-checkbox';
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SelectList } from 'react-native-dropdown-select-list';
+import axios from 'axios';
+import {BASE_URL} from '../../config';
 
-const DetailScreen = ({ navigation }) => {
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
-    const [text, onChangeText] = React.useState('');
-    const [isChecked, setChecked] = useState(false);
+const DetailScreen = ({route, navigation }) => {
+    const {userInfo} = useContext(AuthContext);
+    const id_user = userInfo.id;
+
+    const [question_text, setQuestion_text] = useState('');
+    const [answer_a, setAnswer_a] = useState('');
+    const [answer_b, setAnswer_b] = useState('');
+    const [answer_c, setAnswer_c] = useState('');
+    const [answer_d, setAnswer_d] = useState('');
+    const data = [
+        {key:'1', value: answer_a, title:'a'},
+        {key:'2', value: answer_b, title:'b'},
+        {key:'3', value: answer_c, title:'c'},
+        {key:'4', value: answer_d, title:'d'},
+    ]
+    const [answer, setAnswer] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const {
+        testId,
+        testName,
+        testDes,
+      } = route.params;
+    const id_test = testId;
+    const createQuestion = (question_text,answer_a,answer_b,answer_c,answer_d,answer) => {
+        setIsLoading(true);
+        axios
+        .post(`${BASE_URL}/questiontest/create`,{
+            id_test,
+            question_text,
+            answer_a,
+            answer_b,
+            answer_c,
+            answer_d,
+            answer,
+        }).then(res => {
+            console.log(res.data);
+            setIsLoading(false);
+            navigation.navigate('Create', {
+                testUser: id_user,
+            });
+        }).catch(e => {
+           console.log(`create question error: ${e}`);
+           setIsLoading(false);
+        });
+     };
+
+
+
     return (
         <ImageBackground source={require('../../../assets/images/bgcreate.jpg')} resizeMode="cover" style={styles.img}>
             <TouchableOpacity onPress={() => navigation.navigate('Create')}>
@@ -33,8 +80,8 @@ const DetailScreen = ({ navigation }) => {
                                 <Text style={styles.edit}>Edit</Text>
                             </TouchableOpacity>
                             <View style={styles.titleQuestion}>
-                                <Text style={styles.numberQuestion}>Question 1</Text>
-                                <Text style={styles.title}>Title</Text>
+                                <Text style={styles.numberQuestion}>{testName}</Text>
+                                <Text style={styles.title}>{testDes}</Text>
                             </View>
                         </View>
 
@@ -55,8 +102,8 @@ const DetailScreen = ({ navigation }) => {
                         <View style={styles.formQuestion}>
                             <TextInput
                                 style={styles.inputQuestion}
-                                onChangeText={onChangeText}
-                                value={text}
+                                onChangeText={text => setQuestion_text(text)}
+                                value={question_text}
                                 placeholder="Nhập câu hỏi"
 
                             />
@@ -67,8 +114,8 @@ const DetailScreen = ({ navigation }) => {
 
                                     <TextInput
                                         style={styles.inputAnswer}
-                                        onChangeText={onChangeText}
-                                        value={text}
+                                        onChangeText={text => setAnswer_a(text)}
+                                        value={answer_a}
                                         placeholder="Nhập câu trả lời"
 
                                     />
@@ -78,8 +125,8 @@ const DetailScreen = ({ navigation }) => {
 
                                     <TextInput
                                         style={styles.inputAnswer}
-                                        onChangeText={onChangeText}
-                                        value={text}
+                                        onChangeText={text => setAnswer_b(text)}
+                                        value={answer_b}
                                         placeholder="Nhập câu trả lời"
 
                                     />
@@ -91,8 +138,8 @@ const DetailScreen = ({ navigation }) => {
 
                                     <TextInput
                                         style={styles.inputAnswer}
-                                        onChangeText={onChangeText}
-                                        value={text}
+                                        onChangeText={text => setAnswer_c(text)}
+                                        value={answer_c}
                                         placeholder="Nhập câu trả lời"
 
                                     />
@@ -102,22 +149,31 @@ const DetailScreen = ({ navigation }) => {
 
                                     <TextInput
                                         style={styles.inputAnswer}
-                                        onChangeText={onChangeText}
-                                        value={text}
+                                        onChangeText={text => setAnswer_d(text)}
+                                        value={answer_d}
                                         placeholder="Nhập câu trả lời"
 
                                     />
 
                                 </View>
-                            </View>
 
+                            </View>
+  
                         </View>
                     </View>
 
+                    <View style={styles.select}>
+                                <SelectList
+                                    placeholder="Chọn đáp án đúng"
+                                    setSelected={text => setAnswer(text)}
+                                    data={data}
+                                    search={false}
+                                    maxHeight={300}
+                                    save="value"
+                                />
+                                 </View>
 
-
-
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}
+                    <TouchableOpacity onPress={() => {createQuestion(question_text,answer_a,answer_b,answer_c,answer_d,answer)}}
                         style={styles.button}>
                         <Text style={styles.btn}>Tạo</Text>
                     </TouchableOpacity>
@@ -148,12 +204,16 @@ const styles = StyleSheet.create({
         marginLeft: 4
 
     },
+    select: {
+        marginTop: 10,
+        width: 210,
+        height: 140,
+    },
     container: {
         width: 350,
         height: 400,
         backgroundColor: '#fff',
         borderRadius: 20,
-
         padding: 20
     },
     scrollView: {

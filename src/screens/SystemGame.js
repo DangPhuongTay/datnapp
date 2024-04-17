@@ -19,20 +19,13 @@ const SystemGame = ({navigation}) => {
         
         <View style={styles.container}>
         
-        <Text style={[styles.color]}> Bạn là? </Text>
+        <Text style={[styles.color]}> Bạn muốn đăng ký tài khoản giáo viên </Text>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
                 style={styles.button}>         
-                    <Text style={styles.btn}> Giáo viên </Text>
+                    <Text style={styles.btn}> Xác nhập </Text>
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
-                style={styles.button}>         
-                    <Text style={styles.btn}> Học sinh </Text>
-                </TouchableOpacity>
-            </View>
-            
         </View>
         </View>
 </ImageBackground>
@@ -58,7 +51,7 @@ const styles = StyleSheet.create({
   color: {
       color: '#62C7F3',
       fontWeight: 'bold',
-      fontSize: 40,
+      fontSize: 20,
   },
   button:{
       paddingVertical: 15,
