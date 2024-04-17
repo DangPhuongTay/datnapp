@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Text, View, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
@@ -20,11 +20,12 @@ const HomeSreen = ({ navigation }) => {
         }
     };
 
-    _handleSubmit = async (e) => 
-    {   
+
+    _handleSubmit = async (e) => {
+
         navigation.navigate('Quiz', {
             itemId: e,
-          }); 
+        });
     };
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const HomeSreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.banner}>
-                    <Image style={styles.imgbanner} source={require('../../assets/images/login_img.png')}/> 
+                <Image style={styles.imgbanner} source={require('../../assets/images/login_img.png')} />
             </View>
             <View style={styles.context}>
                 <View style={styles.listbtn}>
@@ -55,8 +56,11 @@ const HomeSreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
                             <Text>Xếp hạng</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Create')}>
+                            <Text>Tạo bài</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
@@ -84,7 +88,7 @@ const HomeSreen = ({ navigation }) => {
                     />
                 </View>
             </View>
-        
+
 
         </View>
     );
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'space-between'
+        justifyContent: 'space-between'
     },
     banner: {
         width: '100%',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'blue',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     context: {
         width: '100%',
@@ -124,14 +128,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'start'
+        justifyContent: 'start'
     },
     menu: {
         width: 30,
         height: 30,
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     imgbanner: {
         width: 200,
@@ -139,9 +143,9 @@ const styles = StyleSheet.create({
         objectFit: 'contain',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
-    listbtn: 
+    listbtn:
     {
         width: 400,
         height: 50,
@@ -149,19 +153,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
-    itembtn: 
+    itembtn:
     {
         width: 100,
         height: 50,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     listlesstion:
-    {   
+    {
         width: 320,
         height: 300,
     },
@@ -171,8 +175,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         marginTop: 10,
-        backgroundColor:'pink',
-        padding:10, 
+        backgroundColor: 'pink',
+        padding: 10,
     }
 })
 export default HomeSreen;

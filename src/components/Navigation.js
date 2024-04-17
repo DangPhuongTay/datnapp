@@ -20,6 +20,8 @@ import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
 import ListTestScreen from "../screens/ListTestScreen";
 import WordScreen from "../screens/WordScreen";
+import CreateScreen from "../screens/TeacherScreen/CreateScreen";
+import DetailScreen from "../screens/TeacherScreen/DetailScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -27,7 +29,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo? (
+        {userInfo ? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}
@@ -71,6 +73,13 @@ const Navigation = () => {
             <Stack.Screen name="Word"
               component={WordScreen}
               options={{ headerShown: false }} />
+            <Stack.Screen name="Create"
+              component={CreateScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Detail"
+              component={DetailScreen}
+              options={{ headerShown: false }} />
+
           </>
         ) : (
           <>
