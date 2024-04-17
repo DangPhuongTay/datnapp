@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import {
     Text,
     View,
@@ -9,14 +9,17 @@ import {
     StyleSheet,
     Image,
     ImageBackground,
+    Alert
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
+
+
 const WordScreen = ({route, navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [category, setCategory] = useState({});
-    const { WordleId} = route.params;
+    const { WordleId } = route.params;
     const getWords = async () => {
         try {
             const response = await fetch(`${BASE_URL}/wordl-by-wordle/${WordleId}`);
@@ -39,15 +42,28 @@ const WordScreen = ({route, navigation }) => {
             setLoading(false);
         }
     };
+
     _handleSubmits = async (e) => 
-    {   
-        navigation.navigate('GameWordle', {
-            WordId: e,
-            
-          }); 
-          console.log(WordId);
-    };
-    
+      {  
+        try {
+            const response = await fetch(`${BASE_URL}/wordl/${e}`);
+            const json = await response.json();
+            await navigation.navigate('GameWordle', {
+                    WordleId: WordleId,
+                    english: json.data.english,
+                    vietnamese: json.data.vietnamese,
+                    type: json.data.type,
+                    pronounce: json.data.pronounce,
+                    description: json.data.description,
+                    });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+           
+      };
+     
     useEffect(() => {
         getCartegory(); 
         getWords();
@@ -76,7 +92,7 @@ const WordScreen = ({route, navigation }) => {
                             <View style={styles.score}>
                                 <Text style={styles.name}>{item.vietnamese}</Text>
                                 
-                                <TouchableOpacity onPress={() => this._handleSubmits(item.id)} 
+                                <TouchableOpacity onPress={() => _handleSubmits(item.id)} 
                                         style={styles.button}>            
                                     <Text style={styles.btn}> Chọn </Text>
                                 </TouchableOpacity>

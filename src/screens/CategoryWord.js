@@ -15,6 +15,7 @@ import { BASE_URL } from "../config";
 const CategoryWord = ({route , navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [wordle, setWordle] = useState([]);
     const getCartegorys = async () => {
         try {
             const response = await fetch(`${BASE_URL}/wordle/all`);
@@ -30,7 +31,8 @@ const CategoryWord = ({route , navigation }) => {
     {   
         navigation.navigate('Word', {
             WordleId: e,
-          }); 
+          });
+        setWordle(e)
     };
     
     useEffect(() => {

@@ -34,7 +34,7 @@ const ListgameScreen = ({ navigation }) => {
   return (
   <View style={styles.container}>
     <View>
-      <TouchableOpacity onPress={() => this._handleSubmit(item.id)} >
+      <TouchableOpacity onPress={() => navigation.navigate('Menu')} >
         <Image
           style={styles.back}
           source={require("../../assets/images/back.png")}

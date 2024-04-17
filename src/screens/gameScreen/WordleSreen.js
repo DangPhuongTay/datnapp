@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
-  TouchableOpacity, 
+  ActivityIndicator,
+  TouchableOpacity,
   Image
 } from "react-native";
 import { colors, CLEAR, ENTER, colorsToEmoji } from "../../components/constants";
@@ -15,39 +16,39 @@ import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
 import { BASE_URL } from "../../config";
 
-
-const NUMBER_OF_TRIES = 4;
+const NUMBER_OF_TRIES = 6;
 
 const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
 };
 
-const words = {
-  english: "dog",
-  vietnamese: "Chó",
-  type: "noun",
-  pronounce: "/doɡ/",
-  description: "a domestic, meat-eating animal related to the wolf and fox",
-};
 
-const WordleSreen = ({route, navigation}) => {
-  const [data, setData] = useState({});
-  const { WordId} = route.params;
-  const getWord = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/wordl/${WordId}`,
-      );
-      const json = await response.json();
-      setData(json.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  console.log(data.json());
-  const word = data.english;
+const words =  {
+    english: "dog",
+    vietnamese:"heod",
+  }
+;
+
+const WordleScreen = ({route, navigation }) => {
+  const {
+      WordleId,
+      english,
+      vietnamese, 
+      type, 
+      pronounce, 
+      description,
+    } = route.params;
+  console.log(english,vietnamese,type,pronounce,description)
+  const [data, setData] = useState({
+    english: "false",
+    vietnamese: "nullsads",
+  });
+
+
+
+  const word = english;
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
-  
+
   const [rows, setRows] = useState(
     new Array(NUMBER_OF_TRIES).fill(new Array(letters.length).fill(""))
   );
@@ -58,28 +59,32 @@ const WordleSreen = ({route, navigation}) => {
   useEffect(() => {
     if (curRow > 0) {
       checkGameState();
-     
-    }
-    getWord();
+    };
   }, [curRow]);
+
 
   const checkGameState = () => {
     if (checkIfWon() && gameState !== "won") {
-      Alert.alert("Đúng rồi, tốt lắm!", words.vietnamese+": "+words.english , [
-        { text: "Tiếp tục", onPress: shareScore },
+      Alert.alert("Huraaay", "You won!", [
+        { text: "Share", onPress: shareScore },
       ]);
       setGameState("won");
     } else if (checkIfLost() && gameState !== "lost") {
-      Alert.alert("Ô không!", "Thử lại vào lần khác nhé!",[
-        { text: "Quay về", onPress: () => navigation.navigate('Listgame') },
-      ]);
+      Alert.alert("Meh", "Try again tomorrow!");
+      setGameState("lost");
     }
   };
 
   const shareScore = () => {
-    Alert.alert("Bạn làm tốt lắm!", "Bạn được cộng 1 điểm" , [
-      { text: "Quay về", onPress: () => navigation.navigate('Listgame') },
-    ]);;
+    const textMap = rows
+      .map((row, i) =>
+        row.map((cell, j) => colorsToEmoji[getCellBGColor(i, j)]).join("")
+      )
+      .filter((row) => row)
+      .join("\n");
+    const textToShare = `Wordle \n${textMap}`;
+    Clipboard.setString(textToShare);
+    Alert.alert("Copied successfully", "Share your score on you social media");
   };
 
   const checkIfWon = () => {
@@ -133,7 +138,7 @@ const WordleSreen = ({route, navigation}) => {
     const letter = rows[row][col];
 
     if (row >= curRow) {
-      return colors.grey;
+      return colors.black;
     }
     if (letter === letters[col]) {
       return colors.primary;
@@ -155,16 +160,15 @@ const WordleSreen = ({route, navigation}) => {
   const greyCaps = getAllLettersWithColor(colors.darkgrey);
 
   return (
-  
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light"/>
-      <TouchableOpacity onPress={() => navigation.navigate('Listgame')}>
-                     <Text></Text>
-                     <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
-               </TouchableOpacity>      
-        
-      <Text style={styles.title}>{words.vietnamese}</Text>
-      
+      <StatusBar style="light" />
+      <TouchableOpacity onPress={() => navigation.navigate('Word', {
+            WordleId: WordleId,
+            })}>
+                <Image source={require('../../../assets/images/back.png')}></Image>
+            </TouchableOpacity>
+      <Text style={styles.title}>WORDLE</Text>
+
       <ScrollView style={styles.map}>
         {rows.map((row, i) => (
           <View key={`row-${i}`} style={styles.row}>
@@ -175,7 +179,7 @@ const WordleSreen = ({route, navigation}) => {
                   styles.cell,
                   {
                     borderColor: isCellActive(i, j)
-                      ? colors.lightgrey
+                      ? colors.grey
                       : colors.darkgrey,
                     backgroundColor: getCellBGColor(i, j),
                   },
@@ -197,16 +201,15 @@ const WordleSreen = ({route, navigation}) => {
     </SafeAreaView>
   );
 }
-export default WordleSreen;
-
+export default WordleScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.blue,
+    backgroundColor: colors.black,
     alignItems: "center",
   },
   title: {
-    color: colors.while,
+    color: colors.lightgrey,
     fontSize: 32,
     fontWeight: "bold",
     letterSpacing: 7,
@@ -215,38 +218,25 @@ const styles = StyleSheet.create({
   map: {
     alignSelf: "stretch",
     marginVertical: 20,
-    
   },
   row: {
     alignSelf: "stretch",
     flexDirection: "row",
     justifyContent: "center",
-    
   },
   cell: {
     borderWidth: 3,
     borderColor: colors.darkgrey,
-    backgroundColor: '#fff',
     flex: 1,
     maxWidth: 70,
     aspectRatio: 1,
     margin: 3,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius:15,
-    justifyContent: "space-evenly",
   },
   cellText: {
     color: colors.lightgrey,
     fontWeight: "bold",
     fontSize: 28,
   },
-  back:{
-    width:40,
-    height:40,
-    marginRight:'85%',
-    marginTop:10,
-    marginLeft: 4
-   
-},
 });

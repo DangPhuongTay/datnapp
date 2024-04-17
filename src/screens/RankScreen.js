@@ -24,7 +24,7 @@ const RankScreen = ({navigation}) =>{
 
     return (
       <ImageBackground style={styles.bg} source={require('../../assets/images/rank_img.jpg')}>
-         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+         <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
         <View style={styles.container} >
