@@ -33,7 +33,7 @@ const HomeSreen = ({ navigation }) => {
     }, []);
     return (
         <View style={styles.container}>
-        
+
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
                     <Image style={styles.menu} source={require('../../assets/images/score.png')} />
@@ -63,11 +63,16 @@ const HomeSreen = ({ navigation }) => {
                             <Text>Tạo bài</Text>
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('MenuTeacher')}>
+                            <Text> Menu giáo viên</Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <View>
-                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
                             <Text> Thi thử </Text>
-</TouchableOpacity>
+                        </TouchableOpacity>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Level')}>
@@ -76,14 +81,14 @@ const HomeSreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('History')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('History')}>
                             <Text> Lịch sử </Text>
                         </TouchableOpacity>
                     </View>
-                    
-                    
+
+
                 </View>
-                
+
                 <View style={styles.listlesstion}>
                     <FlatList
                         data={data}

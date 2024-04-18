@@ -29,6 +29,7 @@ import ListTestTeacher from "../screens/TeacherScreen/ListTestTeacherScreen";
 import LevelScreen from "../screens/LevelScreen";
 
 import HistorySreen from "../screens/HistorySreen";
+import MenuTeacherScreen from "../screens/TeacherScreen/MenuTeacherScreen";
 
 
 
@@ -39,7 +40,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo.name? (
+        {userInfo.name ? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}
@@ -102,6 +103,10 @@ const Navigation = () => {
 
             <Stack.Screen name="History"
               component={HistorySreen}
+              options={{ headerShown: false }} />
+
+            <Stack.Screen name="MenuTeacher"
+              component={MenuTeacherScreen}
               options={{ headerShown: false }} />
 
 
