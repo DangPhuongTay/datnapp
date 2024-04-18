@@ -75,6 +75,13 @@ const HomeSreen = ({ navigation }) => {
 
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('History')}>
+                            <Text> Lịch sử </Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    
                 </View>
                 
                 <View style={styles.listlesstion}>

@@ -19,6 +19,7 @@ import LessonScreen from "../screens/LessonScreen";
 import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
 import ListTestScreen from "../screens/ListTestScreen";
+
 import WordScreen from "../screens/WordScreen";
 import CreateScreen from "../screens/TeacherScreen/CreateScreen";
 import DetailScreen from "../screens/TeacherScreen/DetailScreen";
@@ -26,6 +27,9 @@ import DetailScreen from "../screens/TeacherScreen/DetailScreen";
 import ListTestTeacher from "../screens/TeacherScreen/ListTestTeacherScreen";
 
 import LevelScreen from "../screens/LevelScreen";
+
+import HistorySreen from "../screens/HistorySreen";
+
 
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +80,7 @@ const Navigation = () => {
             <Stack.Screen name="ListTest"
               component={ListTestScreen}
               options={{ headerShown: false }} />
+
             <Stack.Screen name="Word"
               component={WordScreen}
               options={{ headerShown: false }} />
@@ -92,6 +97,11 @@ const Navigation = () => {
 
             <Stack.Screen name="Level"
               component={LevelScreen}
+              options={{ headerShown: false }} />
+
+
+            <Stack.Screen name="History"
+              component={HistorySreen}
               options={{ headerShown: false }} />
 
 
