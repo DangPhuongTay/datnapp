@@ -1,0 +1,185 @@
+import React, { useContext, useState, useEffect } from "react";
+import {
+    Text,
+    View,
+    ActivityIndicator,
+    FlatList,
+    Button,
+    TouchableOpacity,
+    StyleSheet,
+    Image,
+    ImageBackground,
+} from "react-native";
+import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../config";
+const HistorySreen = ({ navigation }) => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const getMovies = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/allgame`);
+            const json = await response.json();
+            setData(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    _handleSubmit = async (e) => 
+    {   
+        
+        navigation.navigate('Quiz', {
+            itemId: e,
+          }); 
+    };
+    
+    useEffect(() => {
+        getMovies();
+    }, []);
+
+
+    return (
+        
+        <ImageBackground style={styles.bg} source={require('../../assets/images/bghistory.jpg')}>
+         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
+            </TouchableOpacity>    
+        <View style={styles.container}>
+           
+                <View style={styles.text}><Text style={styles.title}> Lịch sử chơi </Text></View>
+
+                {isLoading ? (
+                    <ActivityIndicator />
+                ) : (
+                    <FlatList
+                        
+                        data={data}
+                        keyExtractor={({ id }) => id}
+                        renderItem={({ item }) => (
+                            <View style={styles.score}>
+                           <View> 
+                           <View style={styles.score2}>
+                            
+                            <View style={styles.text}><Text style={styles.title1}> English App </Text></View>
+                            <View style={styles.container1}>
+                                <Text style={styles.name}>{item.name}</Text>
+                                <Text style={styles.nameGame}>{item.description}</Text>
+                            </View>
+                            </View>
+                            </View>
+                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
+                                        style={styles.button}>            
+                                    <Text style={styles.btn}> Xem thêm </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    />
+                )}
+
+            </View>
+            
+        </ImageBackground>
+
+    );
+};
+
+ const styles=StyleSheet.create({
+        bg:{
+          width:'100%',
+          display:'flex',
+          gap:10,
+        },
+        
+        container: {
+          height: '100%',
+          display: 'flex',
+          gap:10,
+          justifyContent:'center',
+          alignItems:'center',
+          marginTop: 50
+          
+      },
+      back:{
+        width:40,
+        height:40,
+        marginLeft:5,
+        marginTop:20,
+        marginRight: "85%",
+      
+       
+      },
+      title:{
+        paddingHorizontal:100,
+        paddingVertical:10,
+        backgroundColor:'#fff',
+        marginTop:170,
+        alignItems:'center',
+        borderRadius:12,
+        fontSize: 30,
+        color: "#62C7F3",
+        fontWeight: "bold",
+        
+      },
+      title1:{
+        paddingHorizontal:10,
+        paddingVertical:10,
+        backgroundColor:"#62C7F3",
+        alignItems:'center',
+        borderRadius:12,
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold",
+        
+        
+      },
+      rank:{
+        fontSize:24,
+        fontWeight:'bold',
+        color:'#62C7F3'
+      },
+      score:{
+        paddingHorizontal:20,
+        width:390,
+        paddingVertical:10,
+        backgroundColor:'#fff',
+        marginTop:10,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderRadius:12,
+        backgroundColor:'#fff'
+      },
+      score2:{
+        flex: 1,
+        flexDirection:'row',
+        borderRadius:12,
+        alignSelf: 'flex-start',
+      },
+       point:{
+       fontSize:24,
+       color: '#4B4B4B',
+        fontWeight:'bold'
+       },
+      name:{
+        color:'#1E1E1E',
+        fontSize:24,
+        fontWeight:'bold'
+      },
+      button:{
+        paddingVertical: 6,
+        width: 100,
+        height: 35  ,
+        backgroundColor:'#62C7F3', 
+        alignItems: 'center',
+        borderRadius:15,          
+    },
+    btn:{
+        color:'#fff',
+        fontSize:14,
+        fontWeight:'bold',
+        
+    },
+});
+      
+export default HistorySreen;
