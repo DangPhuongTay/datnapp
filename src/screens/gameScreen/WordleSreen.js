@@ -65,8 +65,15 @@ const WordleScreen = ({route, navigation }) => {
 
   const checkGameState = () => {
     if (checkIfWon() && gameState !== "won") {
-      Alert.alert("Huraaay", "You won!", [
-        { text: "Share", onPress: shareScore },
+      Alert.alert("Bạn đoán đúng rồi", 
+`${english}: ${vietnamese}
+${type}
+${pronounce}
+${description}`
+      , [
+        { text: "Quay về", onPress: () => navigation.navigate('Word', {
+          WordleId: WordleId,
+          })},
       ]);
       setGameState("won");
     } else if (checkIfLost() && gameState !== "lost") {
@@ -75,17 +82,7 @@ const WordleScreen = ({route, navigation }) => {
     }
   };
 
-  const shareScore = () => {
-    const textMap = rows
-      .map((row, i) =>
-        row.map((cell, j) => colorsToEmoji[getCellBGColor(i, j)]).join("")
-      )
-      .filter((row) => row)
-      .join("\n");
-    const textToShare = `Wordle \n${textMap}`;
-    Clipboard.setString(textToShare);
-    Alert.alert("Copied successfully", "Share your score on you social media");
-  };
+
 
   const checkIfWon = () => {
     const row = rows[curRow - 1];
@@ -167,7 +164,7 @@ const WordleScreen = ({route, navigation }) => {
             })}>
                 <Image source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
-      <Text style={styles.title}>WORDLE</Text>
+      <Text style={styles.title}>{vietnamese}</Text>
 
       <ScrollView style={styles.map}>
         {rows.map((row, i) => (

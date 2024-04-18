@@ -25,11 +25,7 @@ const CreateScreen = ({ navigation }) => {
         }).then(res => {
             console.log(res.data);
             setIsLoading(false);
-            navigation.navigate('Detail', {
-                testId: id_user,
-                testName: name,
-                testDes: description,
-            });
+            navigation.navigate('ListTestTeacher');
         }).catch(e => {
            console.log(`register error: ${e}`);
         //    console.log(idUser,name,description,type,time);

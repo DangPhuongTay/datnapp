@@ -17,7 +17,7 @@ const ListTestScreen = ({ navigation }) => {
     const [data, setData] = useState([]);
     const getMovies = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/tests/all`);
+            const response = await fetch(`${BASE_URL}/test/all`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
@@ -28,7 +28,6 @@ const ListTestScreen = ({ navigation }) => {
     };
     _handleSubmit = async (e) => 
     {   
-        
         navigation.navigate('Quiz', {
             itemId: e,
           }); 
@@ -58,7 +57,6 @@ const ListTestScreen = ({ navigation }) => {
                         data={data}
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
-                            <View style={styles.container1}>
             
             <View style={styles.score}>
                                 <Text style={styles.name}>{item.name}</Text>
@@ -68,7 +66,7 @@ const ListTestScreen = ({ navigation }) => {
                                     <Text style={styles.btn}> Chọn </Text>
                                 </TouchableOpacity>
                             </View>
-            </View>
+          
                         )}
                     />
                 )}

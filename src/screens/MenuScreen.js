@@ -53,6 +53,12 @@ const MenuSreen = ({navigation}) =>{
                 </TouchableOpacity>
             </View>
             <View>
+            <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
+                style={styles.button}>            
+                    <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
+                </TouchableOpacity>
+            </View>
+            <View>
             <TouchableOpacity onPress={() => navigation.navigate('System')}
                 style={styles.button}>            
                     <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
         },
         btn:{
             color:'#fff',
-            fontSize:24,
+            fontSize:16,
             fontWeight:'bold',
         },
         img:{

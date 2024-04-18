@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from '../../context/AuthContext';
 import {
     Text,
     View,
@@ -10,17 +11,17 @@ import {
     Image,
     ImageBackground,
 } from "react-native";
-import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../config";
-const CategoryWord = ({route , navigation }) => {
+const ListTestTeacher = ({navigation }) => {
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const [wordle, setWordle] = useState([]);
-    const getCartegorys = async () => {
+    const {userInfo} = useContext(AuthContext);
+    const id_user = userInfo.id;
+    const [tests, setTests] = useState();
+    const getTest = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/wordle/all`);
+            const response = await fetch(`${BASE_URL}/test-by-user/${id_user}`);
             const json = await response.json();
-            setData(json.data);
+            setTests(json.data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -29,24 +30,23 @@ const CategoryWord = ({route , navigation }) => {
     };
     _handleSubmit = async (e) => 
     {   
-        navigation.navigate('Word', {
-            WordleId: e,
+        navigation.navigate('Detail', {
+            testId: e,
           });
-        setWordle(e)
     };
     
     useEffect(() => {
-        getCartegorys();
+        getTest();
     }, []);
 
 
     return (
         
-        <ImageBackground style={styles.bg} source={require('../../assets/images/bgcate.png')}>
+        <ImageBackground style={styles.bg} source={require('../../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
+                <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
                 <View style={styles.text}><Text style={styles.title}> Chủ đề</Text></View>
@@ -56,13 +56,14 @@ const CategoryWord = ({route , navigation }) => {
                 ) : (
                     <FlatList
                         
-                        data={data}
+                        data={tests}
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                             <View style={styles.score}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 
-                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
+                                <TouchableOpacity 
+                                onPress={() => this._handleSubmit(item.id)} 
                                         style={styles.button}>            
                                     <Text style={styles.btn}> Chọn </Text>
                                 </TouchableOpacity>
@@ -77,7 +78,7 @@ const CategoryWord = ({route , navigation }) => {
 
     );
 };
-
+export default ListTestTeacher;
 const styles = StyleSheet.create({
     
     container: {
@@ -169,4 +170,3 @@ const styles = StyleSheet.create({
 
 }
 );
-export default CategoryWord;

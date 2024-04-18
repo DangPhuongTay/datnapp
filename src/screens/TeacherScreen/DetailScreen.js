@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Text, View, Button, TouchableOpacity, StyleSheet, Image, ImageBackground, TextInput, ScrollView } from "react-native";
+import React, {useEffect, useContext, useState } from "react";
+import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, ImageBackground, TextInput, ScrollView } from "react-native";
 import { AuthContext } from '../../context/AuthContext';
 import Checkbox from 'expo-checkbox';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +11,8 @@ const DetailScreen = ({route, navigation }) => {
     const {userInfo} = useContext(AuthContext);
     const id_user = userInfo.id;
 
+    const [questions, setQuestions] = useState();
+    const [test, setTest] = useState();
     const [question_text, setQuestion_text] = useState('');
     const [answer_a, setAnswer_a] = useState('');
     const [answer_b, setAnswer_b] = useState('');
@@ -30,6 +32,33 @@ const DetailScreen = ({route, navigation }) => {
         testDes,
       } = route.params;
     const id_test = testId;
+
+    const getQuestions = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/question-by-test/${id_test}`);
+            const json = await response.json();
+            setQuestions(json.data);
+            console.log(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(true);
+        }
+    };
+
+    const getTest = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/test/${id_test}`);
+            const json = await response.json();
+            setTest(json.data);
+            console.log(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(true);
+        }
+    };
+
     const createQuestion = (question_text,answer_a,answer_b,answer_c,answer_d,answer) => {
         setIsLoading(true);
         axios
@@ -42,7 +71,8 @@ const DetailScreen = ({route, navigation }) => {
             answer_d,
             answer,
         }).then(res => {
-            console.log(res.data);
+            
+            // console.log(res.data);
             setIsLoading(false);
             navigation.navigate('Create', {
                 testUser: id_user,
@@ -53,18 +83,24 @@ const DetailScreen = ({route, navigation }) => {
         });
      };
 
-
+     useEffect(() => {
+        getQuestions();
+        getTest();
+    }, []);
 
     return (
         <ImageBackground source={require('../../../assets/images/bgcreate.jpg')} resizeMode="cover" style={styles.img}>
-            <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
+            {isLoading == false ? (
+                    <ActivityIndicator />
+                ) : (
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}>
                     <View style={styles.question}>
                         <View style={styles.number}>
-                            <Text style={styles.numberText}>0 Question </Text>
+                            <Text style={styles.numberText}>{questions?.length} Question </Text>
                         </View>
 
                         <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Create')}>
@@ -80,8 +116,8 @@ const DetailScreen = ({route, navigation }) => {
                                 <Text style={styles.edit}>Edit</Text>
                             </TouchableOpacity>
                             <View style={styles.titleQuestion}>
-                                <Text style={styles.numberQuestion}>{testName}</Text>
-                                <Text style={styles.title}>{testDes}</Text>
+                                <Text style={styles.numberQuestion}>{test?.name}</Text>
+                                <Text style={styles.title}>{test?.description}</Text>
                             </View>
                         </View>
 
@@ -179,6 +215,7 @@ const DetailScreen = ({route, navigation }) => {
                     </TouchableOpacity>
                 </ScrollView>
             </SafeAreaView>
+               )}
         </ImageBackground >
     );
 };
