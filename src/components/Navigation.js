@@ -20,6 +20,7 @@ import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
 import CreateScreen from "../screens/TeacherScreen/CreateScreen";
 import DetailScreen from "../screens/TeacherScreen/DetailScreen";
+import LevelScreen from "../screens/LevelScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -71,6 +72,9 @@ const Navigation = () => {
               options={{ headerShown: false }} />
             <Stack.Screen name="Detail"
               component={DetailScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Level"
+              component={LevelScreen}
               options={{ headerShown: false }} />
 
 
