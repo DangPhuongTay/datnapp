@@ -26,7 +26,7 @@ const MenuTeacherScreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}
                             style={styles.button}>
-                            <Text style={styles.btn}> Danh sách bài làm </Text>
+                            <Text style={styles.btn}> Thống kê </Text>
                         </TouchableOpacity>
                     </View>
                     <View>
