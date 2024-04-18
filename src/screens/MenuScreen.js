@@ -41,7 +41,7 @@ const MenuSreen = ({navigation}) =>{
                 </TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                <TouchableOpacity onPress={() => navigation.navigate('History')}
                 style={styles.button}>            
                     <Text style={styles.btn}> Lịch sử </Text>
                 </TouchableOpacity>

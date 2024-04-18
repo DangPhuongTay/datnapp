@@ -28,7 +28,7 @@ import ListTestTeacher from "../screens/TeacherScreen/ListTestTeacherScreen";
 
 import LevelScreen from "../screens/LevelScreen";
 
-import HistorySreen from "../screens/HistorySreen";
+import HistoryScreen from "../screens/HistoryScreen";
 
 
 
@@ -101,7 +101,7 @@ const Navigation = () => {
 
 
             <Stack.Screen name="History"
-              component={HistorySreen}
+              component={HistoryScreen}
               options={{ headerShown: false }} />
 
 

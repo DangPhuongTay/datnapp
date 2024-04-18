@@ -12,12 +12,15 @@ import {
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
-const HistorySreen = ({ navigation }) => {
+const HistoryScreen = ({ navigation }) => {
+    const { userInfo } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
+    const [lesson, setLesson] = useState([]);
     const [data, setData] = useState([]);
-    const getMovies = async () => {
+    const id_user = userInfo.id;
+    const getHistories = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/allgame`);
+            const response = await fetch(`${BASE_URL}/history/lesson-history-user/${id_user}`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
@@ -26,16 +29,16 @@ const HistorySreen = ({ navigation }) => {
             setLoading(false);
         }
     };
+
     _handleSubmit = async (e) => 
     {   
-        
         navigation.navigate('Quiz', {
             itemId: e,
           }); 
     };
     
     useEffect(() => {
-        getMovies();
+        getHistories();
     }, []);
 
 
@@ -60,11 +63,10 @@ const HistorySreen = ({ navigation }) => {
                             <View style={styles.score}>
                            <View> 
                            <View style={styles.score2}>
-                            
-                            <View style={styles.text}><Text style={styles.title1}> English App </Text></View>
+                            <View style={styles.text}><Text style={styles.title1}> {item.id_lesson_test}</Text></View>
                             <View style={styles.container1}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.nameGame}>{item.description}</Text>
+                                <Text style={styles.name}>điểm số: {item.score}</Text>
+                                <Text style={styles.nameGame}>{item.created_at}</Text>
                             </View>
                             </View>
                             </View>
@@ -182,4 +184,4 @@ const HistorySreen = ({ navigation }) => {
     },
 });
       
-export default HistorySreen;
+export default HistoryScreen;
