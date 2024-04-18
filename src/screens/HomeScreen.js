@@ -63,9 +63,16 @@ const HomeSreen = ({ navigation }) => {
                             <Text>Tạo bài</Text>
                         </TouchableOpacity>
                     </View>
+
                     <View>
                         <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
                             <Text> Thi thử </Text>
+</TouchableOpacity>
+                    </View>
+                    <View >
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Level')}>
+                            <Text>Cấp độ</Text>
+
                         </TouchableOpacity>
                     </View>
                 </View>

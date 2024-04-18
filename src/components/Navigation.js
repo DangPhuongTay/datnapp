@@ -22,7 +22,12 @@ import ListTestScreen from "../screens/ListTestScreen";
 import WordScreen from "../screens/WordScreen";
 import CreateScreen from "../screens/TeacherScreen/CreateScreen";
 import DetailScreen from "../screens/TeacherScreen/DetailScreen";
+
 import ListTestTeacher from "../screens/TeacherScreen/ListTestTeacherScreen";
+
+import LevelScreen from "../screens/LevelScreen";
+
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -80,9 +85,16 @@ const Navigation = () => {
             <Stack.Screen name="Detail"
               component={DetailScreen}
               options={{ headerShown: false }} />
+
             <Stack.Screen name="ListTestTeacher"
               component={ListTestTeacher}
               options={{ headerShown: false }} />
+
+            <Stack.Screen name="Level"
+              component={LevelScreen}
+              options={{ headerShown: false }} />
+
+
           </>
         ) : (
           <>
