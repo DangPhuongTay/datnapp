@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
+import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
 
 const HomeSreen = ({ navigation }) => {
-
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
+    const [isLoading, setLoading] = useState(true);
+    const {userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
     const getLessons = async () => {
         try {
@@ -33,7 +33,6 @@ const HomeSreen = ({ navigation }) => {
     }, []);
     return (
         <View style={styles.container}>
-        
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
                     <Image style={styles.menu} source={require('../../assets/images/score.png')} />
@@ -63,11 +62,16 @@ const HomeSreen = ({ navigation }) => {
                             <Text>Tạo bài</Text>
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('MenuTeacher')}>
+                            <Text> Menu giáo viên</Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <View>
-                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
                             <Text> Thi thử </Text>
-</TouchableOpacity>
+                        </TouchableOpacity>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Level')}>
@@ -76,14 +80,18 @@ const HomeSreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity  style={styles.itembtn} onPress={() => navigation.navigate('History')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('History')}>
                             <Text> Lịch sử </Text>
                         </TouchableOpacity>
                     </View>
-                    
-                    
+
+
                 </View>
-                
+
+                {isLoading ? (
+                    <ActivityIndicator />
+                ) : (
+
                 <View style={styles.listlesstion}>
                     <FlatList
                         data={data}
@@ -100,13 +108,13 @@ const HomeSreen = ({ navigation }) => {
                             </View>
                         )}
                     />
+                    
                 </View>
-            </View>
-
-
+            )}
+           </View>
         </View>
-    );
-};
+)};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

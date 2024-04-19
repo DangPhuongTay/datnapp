@@ -30,11 +30,25 @@ const Quiz = ({ route, navigation }) => {
             score: score_add,
         }),
         
-    });
-    
-    navigation.navigate('Lesson')};
+    });navigation.navigate('Lesson');restartQuiz()};
+
+    const addHistory = (score) => {
+        fetch(`${BASE_URL}/history/create`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id_user: userInfo.id,
+            id_create: '0',
+            type: 'lesson_type',
+            id_lesson_test: itemId,
+            score: score,
+        }),
+    });console.log(userInfo.id, '0','lesson_type',itemId,score)};
    
-        const getLession = async () => {
+    const getLession = async () => {
             try {
               const response = await fetch(`${BASE_URL}/question-by-lession/${itemId}`);
               const json = await response.json();
@@ -356,7 +370,7 @@ const Quiz = ({ route, navigation }) => {
                            </View>
                            {/* Retry Quiz button */}
                            <TouchableOpacity
-                           onPress={() => addScore(score)}
+                           onPress={() => {addScore(score);addHistory(score)}}
                            style={{
                                backgroundColor: '#3498db',
                                padding: 20, width: '100%', borderRadius: 8
@@ -391,6 +405,7 @@ const Quiz = ({ route, navigation }) => {
            </View>
        </SafeAreaView>
     )
-}
 
-export default Quiz
+};
+
+export default Quiz;
