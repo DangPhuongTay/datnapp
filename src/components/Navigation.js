@@ -19,18 +19,14 @@ import LessonScreen from "../screens/LessonScreen";
 import SystemGame from "../screens/SystemGame";
 import CategoryWord from "../screens/CategoryWord";
 import ListTestScreen from "../screens/ListTestScreen";
-
 import WordScreen from "../screens/WordScreen";
 import CreateScreen from "../screens/TeacherScreen/CreateScreen";
 import DetailScreen from "../screens/TeacherScreen/DetailScreen";
-
 import ListTestTeacher from "../screens/TeacherScreen/ListTestTeacherScreen";
-
 import LevelScreen from "../screens/LevelScreen";
-
 import HistoryScreen from "../screens/HistoryScreen";
-
-
+import HistoryTeacherScreen from "../screens/TeacherScreen/HistoryTeacherScreen";
+import HistoryListUserScreen from "../screens/TeacherScreen/HistoryListUserScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -90,21 +86,21 @@ const Navigation = () => {
             <Stack.Screen name="Detail"
               component={DetailScreen}
               options={{ headerShown: false }} />
-
             <Stack.Screen name="ListTestTeacher"
               component={ListTestTeacher}
               options={{ headerShown: false }} />
-
             <Stack.Screen name="Level"
               component={LevelScreen}
               options={{ headerShown: false }} />
-
-
             <Stack.Screen name="History"
               component={HistoryScreen}
               options={{ headerShown: false }} />
-
-
+            <Stack.Screen name="HistoryTeacher"
+              component={HistoryTeacherScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="HistoryListUser"
+              component={HistoryListUserScreen}
+              options={{ headerShown: false }} />
           </>
         ) : (
           <>

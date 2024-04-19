@@ -30,12 +30,7 @@ const HistoryScreen = ({ navigation }) => {
         }
     };
 
-    _handleSubmit = async (e) => 
-    {   
-        navigation.navigate('Quiz', {
-            itemId: e,
-          }); 
-    };
+
     
     useEffect(() => {
         getHistories();
@@ -70,10 +65,6 @@ const HistoryScreen = ({ navigation }) => {
                             </View>
                             </View>
                             </View>
-                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
-                                        style={styles.button}>            
-                                    <Text style={styles.btn}> Xem thêm </Text>
-                                </TouchableOpacity>
                             </View>
                         )}
                     />

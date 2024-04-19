@@ -58,9 +58,7 @@ const ListgameScreen = ({ navigation }) => {
           renderItem={({ item }) => (
           <ImageBackground source={require("../../assets/images/listgame2.jpg")} 
                             style={styles.score}>
-            {/* <View style={styles.score}> */}
-            
-            
+
               <Text style={styles.name}>{item.name}</Text>
               
               <Text style={styles.nameGame}>{item.description}</Text>

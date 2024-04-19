@@ -65,6 +65,12 @@ const MenuSreen = ({navigation}) =>{
                 </TouchableOpacity>
             </View>
             <View>
+            <TouchableOpacity onPress={() => navigation.navigate('HistoryTeacher')}
+                style={styles.button}>            
+                    <Text style={styles.btn}> Lịch sử Giáo Viên </Text>
+                </TouchableOpacity>
+            </View>
+            <View>
             <TouchableOpacity onPress={logout}
                 style={styles.button}> 
                 <Text style={styles.btn}> Đăng xuất </Text>
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'start',
-            gap: 10,
+            gap: 5,
         },
         back:{
             width:40,
@@ -97,9 +103,9 @@ const styles = StyleSheet.create({
             fontSize: 50,
         },
         button:{
-            paddingVertical: 15,
+            paddingVertical: 10,
             width: 300,
-            marginBottom: 5,
+            marginBottom: 1,
             backgroundColor:'#62C7F3',
             display:'flex',
             alignItems: 'center',
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
         },
         btn:{
             color:'#fff',
-            fontSize:16,
+            fontSize:14,
             fontWeight:'bold',
         },
         img:{

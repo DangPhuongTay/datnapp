@@ -1,3 +1,4 @@
+import moment from 'moment'
 export const colors = {
   black: "#121214",
   darkgrey: "#3A3A3D",
@@ -21,3 +22,6 @@ export const keys = [
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
   [ENTER, "z", "x", "c", "v", "b", "n", "m", CLEAR],
 ];
+export function formatTime(params) {
+  return moment(params).utc().format('MM/DD/YYYY');
+} 

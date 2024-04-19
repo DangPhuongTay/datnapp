@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
+import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
 
 const HomeSreen = ({ navigation }) => {
-
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
+    const [isLoading, setLoading] = useState(true);
+    const {userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
     const getLessons = async () => {
         try {
@@ -83,7 +83,9 @@ const HomeSreen = ({ navigation }) => {
                     
                     
                 </View>
-                
+                {isLoading ? (
+                    <ActivityIndicator />
+                ) : (
                 <View style={styles.listlesstion}>
                     <FlatList
                         data={data}
@@ -100,7 +102,9 @@ const HomeSreen = ({ navigation }) => {
                             </View>
                         )}
                     />
+                    
                 </View>
+            )}
             </View>
 
 
