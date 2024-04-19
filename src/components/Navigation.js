@@ -27,6 +27,7 @@ import LevelScreen from "../screens/LevelScreen";
 import HistoryScreen from "../screens/HistoryScreen";
 import HistoryTeacherScreen from "../screens/TeacherScreen/HistoryTeacherScreen";
 import HistoryListUserScreen from "../screens/TeacherScreen/HistoryListUserScreen";
+import MenuTeacherScreen from "../screens/TeacherScreen/MenuTeacherScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +36,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo.name? (
+        {userInfo.name ? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}
@@ -101,6 +102,10 @@ const Navigation = () => {
             <Stack.Screen name="HistoryListUser"
               component={HistoryListUserScreen}
               options={{ headerShown: false }} />
+            <Stack.Screen name="MenuTeacher"
+              component={MenuTeacherScreen}
+              options={{ headerShown: false }} />
+
           </>
         ) : (
           <>
