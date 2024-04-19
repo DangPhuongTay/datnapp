@@ -40,11 +40,8 @@ const ListgameScreen = ({ navigation }) => {
           source={require("../../assets/images/back.png")}
         ></Image>
       </TouchableOpacity>
-
-      
-
       <View style={styles.title}>
-        <Text style={styles.rank}> Trò chơi </Text>
+        <Text style={styles.rank}>Danh sách Trò chơi </Text>
       </View>
       </View>
 
@@ -56,19 +53,19 @@ const ListgameScreen = ({ navigation }) => {
           data={data}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-          <ImageBackground source={require("../../assets/images/listgame2.jpg")} 
-                            style={styles.score}>
-
+          <View style={styles.score}>
+            <View>
               <Text style={styles.name}>{item.name}</Text>
               
-              <Text style={styles.nameGame}>{item.description}</Text>
+              <Text style={styles.description}>{item.description}</Text>
+              </View>
               <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Category')}
+              <TouchableOpacity onPress={() => navigation.navigate('Category')}
                 style={styles.button}>            
-                    <Text style={styles.btn}> Xem thêm </Text>
+                  <Text style={styles.btn}> Chơi ngay </Text>
                 </TouchableOpacity>
             </View>
-            </ImageBackground>
+            </View>
             // </View>
           )}
         />
@@ -101,10 +98,10 @@ const styles = StyleSheet.create({
   },
   
   title: {
-    paddingHorizontal: 100,
-    paddingVertical: 10,
+    paddingHorizontal: 40,
+    paddingVertical: 20,
     backgroundColor: "#fff",
-    marginTop: 4,
+    marginTop: 10,
     alignItems: "center",
     borderRadius: 12,
   },
@@ -116,23 +113,26 @@ const styles = StyleSheet.create({
   score: {
     paddingHorizontal: 20,
     width: 170,
-    paddingVertical: 10,
-    //backgroundColor: "#fff",
+    paddingVertical: 15,
+    backgroundColor: "#fff",
     marginTop: 10,
-    borderRadius: 12,
-    // backgroundColor: "#AECCF2",
+    borderRadius: 15,
+    height: 250,
+    justifyContent: 'space-between'
   },
-  nameGame: {
-    fontSize: 20,
+  description: {
+    marginTop: 5,
+    fontSize: 14,
     color: "#4B4B4B",
     fontWeight: "bold",
     width: 150,
-    height: 150,
     resizeMode: 'contain',
+    width: 140,
+    lineHeight: 22
   },
   name: {
-    color: "#fff",
-    fontSize: 24,
+    color: "#4B4B4B",
+    fontSize: 20,
     fontWeight: "bold",
   },
   button:{

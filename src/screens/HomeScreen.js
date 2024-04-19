@@ -35,7 +35,7 @@ const HomeSreen = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
-                    <Image style={styles.menu} source={require('../../assets/images/score.png')} />
+                    <Image style={styles.menu} source={require('../../assets/images/menu.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                     <Image style={styles.menu} source={require('../../assets/images/score.png')} />
@@ -47,45 +47,19 @@ const HomeSreen = ({ navigation }) => {
             <View style={styles.context}>
                 <View style={styles.listbtn}>
                     <View style={styles.itembtn}>
-                        <Text>Bài học</Text>
+                        <Text style={styles.itemtext} >Bài học</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Listgame')}>
-                            <Text>Trò chơi</Text>
+                            <Text style={styles.itemtext} >Trò chơi</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
-                            <Text>Xếp hạng</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Create')}>
-                            <Text>Tạo bài</Text>
+                            <Text style={styles.itemtext} >Xếp hạng</Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('MenuTeacher')}>
-                            <Text> Menu giáo viên</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('ListTest')}>
-                            <Text> Thi thử </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View >
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Level')}>
-                            <Text>Cấp độ</Text>
-
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('History')}>
-                            <Text> Lịch sử </Text>
-                        </TouchableOpacity>
-                    </View>
-
-
+                
                 </View>
 
                 {isLoading ? (
@@ -98,12 +72,12 @@ const HomeSreen = ({ navigation }) => {
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                             <View style={styles.itemlesson}>
-                                <View>
-                                    <Text >{item.name}</Text>
-                                    <Text >{item.description}</Text>
+                                <View style={styles.content}>
+                                    <Text style={styles.name}>{item.name}</Text>
+                                    <Text style={styles.description}>{item.description}</Text>
                                 </View>
-                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} >
-                                    <Text>Chọn</Text>
+                                <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
+                                    <Text style={styles.textbtn}>Chọn</Text>
                                 </TouchableOpacity>
                             </View>
                         )}
@@ -116,6 +90,25 @@ const HomeSreen = ({ navigation }) => {
 )};
 
 const styles = StyleSheet.create({
+    btn:{
+      backgroundColor:'white',
+      width: 70,
+      height: 40,
+      alignItems: 'center',
+      justifyContent:'center',
+      borderRadius: 12,
+      marginTop: 25,
+      marginRight: -5
+    },
+    name:{
+        color:"#fff",
+        fontWeight:"bold",
+        fontSize: 18
+    },
+    description:{
+        fontSize: 16,
+        color: 'white'
+    },
     container: {
         flex: 1,
         width: '100%',
@@ -125,12 +118,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        paddingTop: 30,
+        marginTop:10,
         paddingLeft: 20,
         paddingRight: 20,
         width: '100%',
-        height: 60,
-        backgroundColor: 'red',
+        height: 70,
         flexDirection: 'row',
         display: 'flex',
         alignItems: 'center',
@@ -139,7 +131,6 @@ const styles = StyleSheet.create({
     banner: {
         width: '100%',
         height: '40%',
-        backgroundColor: 'blue',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -147,14 +138,13 @@ const styles = StyleSheet.create({
     context: {
         width: '100%',
         height: '55%',
-        backgroundColor: 'green',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'start'
     },
     menu: {
-        width: 30,
-        height: 30,
+        width: 40,
+        height: 40,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -169,7 +159,7 @@ const styles = StyleSheet.create({
     },
     listbtn:
     {
-        width: 400,
+        width: 450,
         height: 50,
         gap: 10,
         flexDirection: 'row',
@@ -179,12 +169,15 @@ const styles = StyleSheet.create({
     },
     itembtn:
     {
-        width: 100,
+        width: 115,
         height: 50,
         backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    itemtext:{
+        fontSize: 18,
     },
     listlesstion:
     {
@@ -194,11 +187,16 @@ const styles = StyleSheet.create({
     itemlesson:
     {
         flexDirection: 'row',
+        borderRadius: 20,
+        height:100,
         width: '100%',
         justifyContent: 'space-between',
         marginTop: 10,
-        backgroundColor: 'pink',
-        padding: 10,
+        backgroundColor: '#62C7F3',
+        padding: 20,
+    },
+    content:{
+        gap:5,
     }
 })
 export default HomeSreen;

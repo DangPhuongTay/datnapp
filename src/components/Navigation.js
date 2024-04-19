@@ -36,7 +36,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo.name ? (
+        {userInfo.role ? (
           <>
             <Stack.Screen name="Home"
               component={HomeSreen}

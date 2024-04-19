@@ -4,7 +4,10 @@ import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
 const RankScreen = ({navigation}) =>{
     const [isLoading, setLoading] = useState(true);
+
     const [data, setData] = useState([]);
+    let rank = 0;
+    let icon = 0;
     const getMovies = async () => {
         try {
           const response = await fetch(`${BASE_URL}/rank`);
@@ -28,11 +31,8 @@ const RankScreen = ({navigation}) =>{
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
         <View style={styles.container} >
-          
-               
                 <View style={styles.title}><Text style={styles.rank}>Bảng xếp hạng</Text></View>
-       
-   
+
         {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -42,14 +42,13 @@ const RankScreen = ({navigation}) =>{
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
               <View style={styles.score}>
-              
-              
               <Text style={styles.name}>
-                {item.name}
+                {rank = rank+ 1}  {item.name}
               </Text>
               <Text style={styles.point}>
                  {item.score}
               </Text>
+              <Image style={styles.img} source={icons.icon1} />
               </View>
               
             )}
@@ -81,14 +80,12 @@ back:{
   height:40,
   marginLeft:10,
   marginTop:35
-
- 
 },
 title:{
   paddingHorizontal:100,
-  paddingVertical:10,
+  paddingVertical:20,
   backgroundColor:'#fff',
-  marginTop:180,
+  marginTop:160,
   alignItems:'center',
   borderRadius:12
   

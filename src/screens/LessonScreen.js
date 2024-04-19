@@ -43,7 +43,7 @@ const LessonScreen = ({ navigation }) => {
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container}>
-                <View style={styles.text}><Text style={styles.title}>Bài học</Text></View>
+                <View style={styles.text}><Text style={styles.title}>Danh sách Bài học</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator />
