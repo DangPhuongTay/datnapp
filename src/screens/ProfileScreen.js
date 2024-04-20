@@ -2,12 +2,11 @@ import React,{useContext, useState } from "react";
 import { Text, View, Button, TouchableOpacity, StyleSheet, Image } from "react-native";
 import {AuthContext} from '../context/AuthContext';
 
-
 const ProfileScreen = ({navigation}) =>{
     const {isLoading, userInfo, logout} = useContext(AuthContext);
     return (
         <View style={styles.container}>
-           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+           <TouchableOpacity onPress={() => navigation.navigate('Home'?'Home':'HomeTeacher')}>
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.img_avatar} source={require('../../assets/images/profile_avatar.jpg')}></Image>

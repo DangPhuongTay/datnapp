@@ -8,9 +8,10 @@ const HomeTeacherScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const {userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
+    const id_user = userInfo.id;
     const getLessons = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/lession/all`);
+            const response = await fetch(`${BASE_URL}/test-by-user/${id_user}`);
             const json = await response.json();
             setData(json.data);
         } catch (error) {
@@ -23,8 +24,8 @@ const HomeTeacherScreen = ({ navigation }) => {
 
     _handleSubmit = async (e) => {
 
-        navigation.navigate('Quiz', {
-            itemId: e,
+        navigation.navigate('Detail', {
+            testId1: e,
         });
     };
 
@@ -38,7 +39,7 @@ const HomeTeacherScreen = ({ navigation }) => {
                     <Image style={styles.menu} source={require('../../../assets/images/menu.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Image style={styles.menu} source={require('../../../assets/images/score.png')} />
+                    <Image style={styles.menu} source={require('../../../assets/images/info.png')} />
                 </TouchableOpacity>
             </View>
             <View style={styles.banner}>
@@ -47,15 +48,15 @@ const HomeTeacherScreen = ({ navigation }) => {
             <View style={styles.context}>
                 <View style={styles.listbtn}>
                     <View style={styles.itembtn}>
-                        <Text style={styles.itemtext} >Bộ đề</Text>
+                        <Text style={styles.itemtext}>Bộ đề</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Listgame')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('HistoryTeacher')}>
                             <Text style={styles.itemtext} >Lịch sử</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
+                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Create')}>
                             <Text style={styles.itemtext} >Tạo đề</Text>
                         </TouchableOpacity>
                     </View>
@@ -77,7 +78,7 @@ const HomeTeacherScreen = ({ navigation }) => {
                                     <Text style={styles.description}>{item.description}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
-                                    <Text style={styles.textbtn}>Chọn</Text>
+                                    <Text style={styles.textbtn}>✏️</Text>
                                 </TouchableOpacity>
                             </View>
                         )}
@@ -90,14 +91,17 @@ const HomeTeacherScreen = ({ navigation }) => {
 )};
 
 const styles = StyleSheet.create({
+    textbtn:{
+        fontSize: 20,
+    },
     btn:{
       backgroundColor:'white',
-      width: 70,
+      width: 40,
       height: 40,
       alignItems: 'center',
       justifyContent:'center',
       borderRadius: 12,
-      marginTop: 25,
+      marginTop: -4,
       marginRight: -5
     },
     name:{
@@ -106,6 +110,8 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     description:{
+        width: 220,
+        height: 94,
         fontSize: 16,
         color: 'white'
     },
@@ -170,7 +176,7 @@ const styles = StyleSheet.create({
     itembtn:
     {
         width: 115,
-        height: 50,
+        height: 90,
         backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
@@ -188,12 +194,12 @@ const styles = StyleSheet.create({
     {
         flexDirection: 'row',
         borderRadius: 20,
-        height:100,
+        height:150,
         width: '100%',
         justifyContent: 'space-between',
         marginTop: 10,
         backgroundColor: '#62C7F3',
-        padding: 20,
+        padding: 15,
     },
     content:{
         gap:5,
