@@ -62,6 +62,7 @@ const HistoryScreen = ({ navigation }) => {
                                   <Text style={styles.name}>điểm số: {item.score}</Text>
                                   <Text style={styles.nameGame}>{formatTime(item.created_at)}</Text>
                               </View>
+
                             </View>
                         )}
                     />
