@@ -52,57 +52,15 @@ const MenuSreen = ({ navigation }) => {
                             <Text style={styles.btn}> Bài học </Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
-                            style={styles.button}>
-                            <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
-                        </TouchableOpacity>
-                    </View>
+
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('System')}
                             style={styles.button}>
                             <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
-                        <TouchableOpacity onPress={logout}
-                            style={styles.button}>
-                            <Text style={styles.btn}> Đăng xuất </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Rank')}      
-                style={styles.button}>   
-                    <Text style={styles.btn}> Xếp hạng </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('History')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Lịch sử </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Lesson')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Bài học </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('System')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
-                </TouchableOpacity>
-            </View>
+    
+   
             <View>
             <TouchableOpacity onPress={() => navigation.navigate('HistoryTeacher')}
                 style={styles.button}>            
@@ -115,7 +73,8 @@ const MenuSreen = ({ navigation }) => {
                 <Text style={styles.btn}> Đăng xuất </Text>
             </TouchableOpacity>
             </View>
-      
+            </View>
+            </View>
 
         </ImageBackground>
     );
@@ -127,7 +86,7 @@ const styles = StyleSheet.create({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'start',
-            gap: 5,
+            gap: 10,
         },
         back:{
             width:40,
@@ -143,9 +102,9 @@ const styles = StyleSheet.create({
             fontSize: 50,
         },
         button:{
-            paddingVertical: 10,
+            paddingVertical: 15,
             width: 300,
-            marginBottom: 1,
+            marginBottom: 10,
             backgroundColor:'#62C7F3',
             display:'flex',
             alignItems: 'center',
@@ -154,7 +113,7 @@ const styles = StyleSheet.create({
         },
         btn:{
             color:'#fff',
-            fontSize:14,
+            fontSize:20,
             fontWeight:'bold',
         },
         img:{
@@ -184,18 +143,18 @@ const styles = StyleSheet.create({
         fontSize: 50,
     },
     button: {
-        paddingVertical: 15,
+        paddingVertical: 12,
         width: 300,
-        marginBottom: 5,
+        marginBottom: 1,
         backgroundColor: '#62C7F3',
         display: 'flex',
         alignItems: 'center',
-        borderRadius: 15,
+        borderRadius: 10,
 
     },
     btn: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
     },
     img: {

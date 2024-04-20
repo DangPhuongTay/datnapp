@@ -2,12 +2,15 @@ import React,{useContext, useState, useEffect } from "react";
 import { Text, View,ActivityIndicator, FlatList, Button, TouchableOpacity, StyleSheet, Image, ImageBackground } from "react-native";
 import {AuthContext} from '../context/AuthContext';
 import {BASE_URL} from '../config';
+import medal1 from '../../assets/images/medal1.png';
+import medal2 from '../../assets/images/medal2.png';
+import medal3 from '../../assets/images/medal3.png';
 const RankScreen = ({navigation}) =>{
     const [isLoading, setLoading] = useState(true);
-
+    const imgs = [medal1, medal2, medal3];
     const [data, setData] = useState([]);
     let rank = 0;
-    let icon = 0;
+    let nubicon = -1;
     const getMovies = async () => {
         try {
           const response = await fetch(`${BASE_URL}/rank`);
@@ -31,28 +34,31 @@ const RankScreen = ({navigation}) =>{
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
         <View style={styles.container} >
-                <View style={styles.title}><Text style={styles.rank}>Bảng xếp hạng</Text></View>
+                <View style={styles.title}><Text style={styles.rank}>🏆 Bảng xếp hạng trò chơi</Text></View>
 
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-
+          <View style={styles.list} >
           <FlatList
             data={data}
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
               <View style={styles.score}>
-              <Text style={styles.name}>
-                {rank = rank+ 1}  {item.name}
-              </Text>
+              <View style={styles.name}>
+                <Text style={styles.name1}> {rank = rank+ 1}</Text>
+                <Text style={styles.name2}>{item.name}</Text>
+              </View>
+              <View style={styles.right}>
               <Text style={styles.point}>
                  {item.score}
               </Text>
-              <Image style={styles.img} source={icons.icon1} />
+              <Image style={styles.img} source={imgs[nubicon = nubicon+1]} />
               </View>
-              
+              </View>
             )}
           />
+           </View>
         )}
       </View>
 
@@ -60,6 +66,22 @@ const RankScreen = ({navigation}) =>{
     );
 };
 const styles=StyleSheet.create({
+  list:{
+    width: 400,
+    paddingStart: 20,
+    height: 340,
+  },
+  right:{
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  img:{
+    position:'absolute',
+    right: -40,
+    top:-25, 
+    width:50,
+    height:50
+  },
   bg:{
     width:'100%',
     display:'flex',
@@ -67,13 +89,13 @@ const styles=StyleSheet.create({
   },
   
   container: {
-    height: '100%',
+    height: 549,
     display: 'flex',
     gap:10,
-    justifyContent:'center',
+    justifyContent:'flex-start',
     alignItems:'center',
-    marginTop: 50
-    
+    marginTop: 50,
+   
 },
 back:{
   width:40,
@@ -82,25 +104,25 @@ back:{
   marginTop:35
 },
 title:{
-  paddingHorizontal:100,
+  paddingHorizontal:50,
   paddingVertical:20,
   backgroundColor:'#fff',
-  marginTop:160,
+  marginTop:110,
   alignItems:'center',
   borderRadius:12
-  
 },
 rank:{
-  fontSize:24,
+  fontSize:22,
   fontWeight:'bold',
   color:'#62C7F3'
 },
 score:{
-  paddingHorizontal:20,
-  width:320,
-  paddingVertical:10,
+  position: 'relative',
+  paddingHorizontal:15,
+  width:350,
+  paddingVertical:15,
   backgroundColor:'#fff',
-  marginTop:10,
+  marginTop:15,
   flexDirection:'row',
   justifyContent:'space-between',
   alignItems:'center',
@@ -108,13 +130,24 @@ score:{
   backgroundColor:'#AECCF2'
 },
 point:{
-fontSize:24,
+  fontSize:20,
+  marginEnd: 10,
  color: '#4B4B4B',
  fontWeight:'bold'
 },
 name:{
-  color:'#fff',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 10,
+},
+name1:{
+  color:'#4B4B4B',
   fontSize:24,
+  fontWeight:'bold'
+},
+name2:{
+  color:'#fff',
+  fontSize:22,
   fontWeight:'bold'
 }
 })

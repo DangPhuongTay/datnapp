@@ -1,4 +1,5 @@
-import moment from 'moment'
+import moment from 'moment';
+
 export const colors = {
   black: "#121214",
   darkgrey: "#3A3A3D",

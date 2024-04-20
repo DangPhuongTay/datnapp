@@ -12,7 +12,7 @@ const MenuTeacherScreen = ({ navigation }) => {
                 <Text></Text>
                 <View>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home'?'HomeTeacher':'HomeTeacher')}>
                         <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
                     </TouchableOpacity>
                 </View>
@@ -41,7 +41,12 @@ const MenuTeacherScreen = ({ navigation }) => {
                             <Text style={styles.btn}> Trang cá nhân </Text>
                         </TouchableOpacity>
                     </View>
-
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
+                        </TouchableOpacity>
+                    </View> 
                     <View>
                         <TouchableOpacity onPress={logout}
                             style={styles.button}>

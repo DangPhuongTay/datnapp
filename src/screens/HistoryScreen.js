@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
+import { formatTime } from "../components/constants";
 const HistoryScreen = ({ navigation }) => {
     const { userInfo } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
@@ -45,29 +46,26 @@ const HistoryScreen = ({ navigation }) => {
             </TouchableOpacity>    
         <View style={styles.container}>
            
-                <View style={styles.text}><Text style={styles.title}> Lịch sử chơi </Text></View>
+                <View style={styles.text}><Text style={styles.title}>📝 Lịch sử làm bài </Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (
+                  <View style={styles.container1}>
                     <FlatList
-                        
                         data={data}
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
-                            <View style={styles.score}>
-                           <View> 
                            <View style={styles.score2}>
-                            <View style={styles.text}><Text style={styles.title1}> {item.id_lesson_test}</Text></View>
-                            <View style={styles.container1}>
-                                <Text style={styles.name}>điểm số: {item.score}</Text>
-                                <Text style={styles.nameGame}>{item.created_at}</Text>
-                            </View>
-                            </View>
-                            </View>
+                                <Text style={styles.title1}> {item.id_lesson_test}</Text>
+                              <View style={styles.itemright}>
+                                  <Text style={styles.name}>điểm số: {item.score}</Text>
+                                  <Text style={styles.nameGame}>{formatTime(item.created_at)}</Text>
+                              </View>
                             </View>
                         )}
                     />
+                    </View>
                 )}
 
             </View>
@@ -78,20 +76,27 @@ const HistoryScreen = ({ navigation }) => {
 };
 
  const styles=StyleSheet.create({
+  itemright:{
+    alignItems: 'flex-end',
+    height:80,
+    justifyContent:'space-between'
+  },
+        container1:{
+          width: 380,
+          height: 330,
+          backgroundColor: 'none'
+        },
         bg:{
           width:'100%',
           display:'flex',
-          gap:10,
+         
         },
-        
         container: {
-          height: '100%',
-          display: 'flex',
+          height: 580,
           gap:10,
-          justifyContent:'center',
+          justifyContent:'flex-start',
           alignItems:'center',
-          marginTop: 50
-          
+          marginTop: 20,
       },
       back:{
         width:40,
@@ -99,8 +104,7 @@ const HistoryScreen = ({ navigation }) => {
         marginLeft:5,
         marginTop:20,
         marginRight: "85%",
-      
-       
+    
       },
       title:{
         paddingHorizontal:100,
@@ -109,7 +113,7 @@ const HistoryScreen = ({ navigation }) => {
         marginTop:170,
         alignItems:'center',
         borderRadius:12,
-        fontSize: 30,
+        fontSize: 24,
         color: "#62C7F3",
         fontWeight: "bold",
         
@@ -123,31 +127,23 @@ const HistoryScreen = ({ navigation }) => {
         fontSize: 18,
         color: "#fff",
         fontWeight: "bold",
-        
-        
+        width: 120,
       },
       rank:{
         fontSize:24,
         fontWeight:'bold',
         color:'#62C7F3'
       },
-      score:{
-        paddingHorizontal:20,
-        width:390,
-        paddingVertical:10,
-        backgroundColor:'#fff',
-        marginTop:10,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        borderRadius:12,
-        backgroundColor:'#fff'
-      },
+
       score2:{
-        flex: 1,
+        width: 380,
+        height: 100,
         flexDirection:'row',
-        borderRadius:12,
-        alignSelf: 'flex-start',
+        borderRadius: 15,
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
+        padding: 10,
+        marginBottom: 10
       },
        point:{
        fontSize:24,
@@ -156,7 +152,7 @@ const HistoryScreen = ({ navigation }) => {
        },
       name:{
         color:'#1E1E1E',
-        fontSize:24,
+        fontSize:20,
         fontWeight:'bold'
       },
       button:{

@@ -12,6 +12,7 @@ import {
     ImageBackground,
 } from "react-native";
 import { BASE_URL } from "../../config";
+import { formatTime } from "../../components/constants";
 const ListTestTeacher = ({navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const {userInfo} = useContext(AuthContext);
@@ -49,24 +50,27 @@ const ListTestTeacher = ({navigation }) => {
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}> Chủ đề</Text></View>
+                <View style={styles.text}><Text style={styles.title}>🧾 Bộ đề kiểm tra của {userInfo.name}</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (
                     <FlatList
-                        
                         data={tests}
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                             <View style={styles.score}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                
+                                <View style={styles.left}>
+                                <Text style={styles.name}>📋 {item.name}</Text>
+                                </View>
+                                <View style={styles.rigth}>
                                 <TouchableOpacity 
                                 onPress={() => this._handleSubmit(item.id)} 
                                         style={styles.button}>            
-                                    <Text style={styles.btn}> Chọn </Text>
+                                    <Text style={styles.btn}>✏️</Text>
                                 </TouchableOpacity>
+                                <Text style={styles.time}>{formatTime(item.created_at)}</Text>
+                                </View>
                             </View>
                         )}
                     />
@@ -80,7 +84,21 @@ const ListTestTeacher = ({navigation }) => {
 };
 export default ListTestTeacher;
 const styles = StyleSheet.create({
-    
+    left:{
+        width: 220,
+        height: 110
+    },
+
+    time:{
+        color:'gray',
+        marginEnd: -5,
+        fontSize: 13    
+    },
+    rigth:{
+        height: 100,
+        justifyContent:'space-between',
+        alignItems:'flex-end'
+    },
     container: {
         height: '100%',
         display: 'flex',
@@ -90,7 +108,7 @@ const styles = StyleSheet.create({
     },
   
     container1:{
-        height:550,
+        height:590,
         width:'90%',
         backgroundColor:'#fff',
         borderRadius:20,
@@ -106,23 +124,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     text: {
+        width: 300,
         paddingVertical: 10,
-        paddingHorizontal: 65,
+        paddingHorizontal: 15,
         backgroundColor: "#0280BD",
-        borderRadius: 20,
+        borderRadius: 15,
         marginTop: -25,
-        borderWidth: 1,
-        borderColor: "#000",
         alignItems: "center",
-    //     paddingHorizontal: 100,
-    // paddingVertical: 10,
-    // backgroundColor: "#62C7F3",
-    // marginTop: 4,
-    // alignItems: "center",
-    // borderRadius: 12,
+
     },
     title: {
-        fontSize: 32,
+        fontSize: 22,
         color: "#fff",
         fontWeight: "bold",
 
@@ -138,34 +150,32 @@ const styles = StyleSheet.create({
 
     score: {
         paddingHorizontal: 20,
-        width: 300,
+        width: 335,
+        height: 120,
         paddingVertical: 10,
         backgroundColor: "#fff",
         marginTop: 10,
-        borderRadius: 12,
+        borderRadius: 15,
         backgroundColor: "#AECCF2",
         flexDirection:'row',
         justifyContent:'space-between',
-     
     },
     
     name: {
         color: "#fff",
         fontSize: 24,
-        fontWeight: "bold",
     },
     button:{
-        paddingVertical: 6,
-        width: 100,
-        backgroundColor:'#62C7F3', 
+        height:40,
+        width: 40,
+        justifyContent: 'center',
+        backgroundColor:'#fff',
+        marginEnd:-10,
         alignItems: 'center',
-        borderRadius:15,          
+        borderRadius:10,          
     },
     btn:{
-        color:'#fff',
-        fontSize:14,
-        fontWeight:'bold',
-        
+        fontSize:25,
     },
 
 }

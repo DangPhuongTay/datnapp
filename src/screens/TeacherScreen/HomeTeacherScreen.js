@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { AuthContext } from '../context/AuthContext';
-import { BASE_URL } from "../config";
+import { AuthContext } from '../../context/AuthContext';
+import { BASE_URL } from "../../config";
 
-const HomeSreen = ({ navigation }) => {
+const HomeTeacherScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const {userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
@@ -34,29 +34,29 @@ const HomeSreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
-                    <Image style={styles.menu} source={require('../../assets/images/menu.png')} />
+                <TouchableOpacity onPress={() => navigation.navigate('MenuTeacher')}>
+                    <Image style={styles.menu} source={require('../../../assets/images/menu.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Image style={styles.menu} source={require('../../assets/images/score.png')} />
+                    <Image style={styles.menu} source={require('../../../assets/images/score.png')} />
                 </TouchableOpacity>
             </View>
             <View style={styles.banner}>
-                <Image style={styles.imgbanner} source={require('../../assets/images/login_img.png')} />
+                <Image style={styles.imgbanner} source={require('../../../assets/images/login_img.png')} />
             </View>
             <View style={styles.context}>
                 <View style={styles.listbtn}>
                     <View style={styles.itembtn}>
-                        <Text style={styles.itemtext} >Bài học</Text>
+                        <Text style={styles.itemtext} >Bộ đề</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Listgame')}>
-                            <Text style={styles.itemtext} >Trò chơi</Text>
+                            <Text style={styles.itemtext} >Lịch sử</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Rank')}>
-                            <Text style={styles.itemtext} >Xếp hạng</Text>
+                            <Text style={styles.itemtext} >Tạo đề</Text>
                         </TouchableOpacity>
                     </View>
                 
@@ -199,4 +199,4 @@ const styles = StyleSheet.create({
         gap:5,
     }
 })
-export default HomeSreen;
+export default HomeTeacherScreen;
