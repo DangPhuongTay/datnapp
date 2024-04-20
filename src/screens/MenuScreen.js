@@ -78,10 +78,12 @@ const MenuSreen = ({ navigation }) => {
                 style={styles.button}> 
                 <Text style={styles.btn}> Đăng xuất </Text>
             </TouchableOpacity>
+
             </View>
             </View>
 
-</View>
+        </View>
+
         </ImageBackground>
     );
 };
@@ -123,6 +125,7 @@ const styles = StyleSheet.create({
             fontSize:20,
             fontWeight:'bold',
         },
+
         img:{
             flex:1,
             objectFit:'cover',
@@ -162,7 +165,6 @@ const styles = StyleSheet.create({
     btn: {
         color: '#fff',
         fontSize: 18,
-
         fontWeight: 'bold',
     },
 
