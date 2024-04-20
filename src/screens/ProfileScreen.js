@@ -2,7 +2,6 @@ import React,{useContext, useState } from "react";
 import { Text, View, Button, TouchableOpacity, StyleSheet, Image } from "react-native";
 import {AuthContext} from '../context/AuthContext';
 
-
 const ProfileScreen = ({navigation}) =>{
     const {isLoading, userInfo, logout} = useContext(AuthContext);
     return (
