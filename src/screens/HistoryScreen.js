@@ -57,11 +57,13 @@ const HistoryScreen = ({ navigation }) => {
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                            <View style={styles.score2}>
+
                                 <Text style={styles.title1}> {item.id_lesson_test}</Text>
                               <View style={styles.itemright}>
                                   <Text style={styles.name}>điểm số: {item.score}</Text>
                                   <Text style={styles.nameGame}>{formatTime(item.created_at)}</Text>
                               </View>
+
                             </View>
                         )}
                     />
