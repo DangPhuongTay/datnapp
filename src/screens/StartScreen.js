@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 10,
+        marginTop: 20
     },
     input: {
 
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     button: {
         paddingVertical: 10,
         width: 220,
-        marginBottom: 50,
+        marginTop: '-70%',
         backgroundColor: '#62C7F3',
         display: 'flex',
         alignItems: 'center',
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         objectFit: 'contain',
-        marginTop: 50
+        marginBottom: 200
+
     },
     link: {
         color: 'blue',
