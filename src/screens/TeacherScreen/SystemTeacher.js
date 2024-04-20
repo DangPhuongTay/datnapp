@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import axios from 'axios';
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
-import {AuthContext} from '../context/AuthContext';
-import { BASE_URL } from "../config";
-const SystemGame = ({navigation}) => {
+import {AuthContext} from '../../context/AuthContext';
+import { BASE_URL } from "../../config";
+const SystemTeacher = ({navigation}) => {
     const [isLoading, setIsLoading] = useState(false);
     const {userInfo, logout } = useContext(AuthContext);
     const id_user = userInfo.id;
-    const role = "1";
+    const role = "0";
     console.log(id_user,role);
     const updateRole = (id_user) => {
         setIsLoading(true);
@@ -21,16 +21,13 @@ const SystemGame = ({navigation}) => {
            setIsLoading(false);
         });logout();
      };
-
-
-   
     return (
       
-      <ImageBackground source={require('../../assets/images/bgsystem.jpg')} resizeMode="cover" style={styles.img}>
+      <ImageBackground source={require('../../../assets/images/bgsystem.jpg')} resizeMode="cover" style={styles.img}>
         <View>
             
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
+            <TouchableOpacity onPress={() => navigation.navigate('HomeTeacher')}>
+            <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
         </View>
         <View style={styles.container}>
@@ -39,7 +36,7 @@ const SystemGame = ({navigation}) => {
         
         <View style={styles.container}>
         
-        <Text style={[styles.color]}> Bạn muốn đăng ký tài khoản giáo viên </Text>
+        <Text style={[styles.color]}> Chuyển về vai trò học sinh</Text>
             <View>
                 <TouchableOpacity onPress={() => updateRole(id_user)}
                 style={styles.button}>         
@@ -95,4 +92,4 @@ const styles = StyleSheet.create({
   },
      
     });
-export default SystemGame;
+export default SystemTeacher;

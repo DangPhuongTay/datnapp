@@ -29,6 +29,7 @@ import HistoryTeacherScreen from "../screens/TeacherScreen/HistoryTeacherScreen"
 import HistoryListUserScreen from "../screens/TeacherScreen/HistoryListUserScreen";
 import MenuTeacherScreen from "../screens/TeacherScreen/MenuTeacherScreen";
 import HomeTeacherScreen from "../screens/TeacherScreen/HomeTeacherScreen";
+import SystemTeacher from "../screens/TeacherScreen/SystemTeacher";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,11 +54,7 @@ const Navigation = () => {
                   component={MenuSreen}
                   options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                  name="Info"
-                  component={InfoScreen}
-                  options={{ headerShown: false }}
-                />
+
                 <Stack.Screen
                   name="Rank"
                   component={RankScreen}
@@ -76,11 +73,6 @@ const Navigation = () => {
                 <Stack.Screen
                   name="Listgame"
                   component={ListgameScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Password"
-                  component={PasswordScreen}
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
@@ -154,6 +146,11 @@ const Navigation = () => {
             <Stack.Screen
               name="HistoryListUser"
               component={HistoryListUserScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SystemTeacher"
+              component={SystemTeacher}
               options={{ headerShown: false }}
             />
               </>

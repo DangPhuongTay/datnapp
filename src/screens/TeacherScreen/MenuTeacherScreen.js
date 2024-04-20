@@ -24,7 +24,7 @@ const MenuTeacherScreen = ({ navigation }) => {
 
 
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                        <TouchableOpacity onPress={() => navigation.navigate('HistoryTeacher')}
                             style={styles.button}>
                             <Text style={styles.btn}> Thống kê </Text>
                         </TouchableOpacity>
@@ -44,9 +44,15 @@ const MenuTeacherScreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
                             style={styles.button}>
-                            <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
+                            <Text style={styles.btn}> Danh sách bộ đề </Text>
                         </TouchableOpacity>
-                    </View> 
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('SystemTeacher')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Chuyển vai trò </Text>
+                        </TouchableOpacity>
+                    </View>  
                     <View>
                         <TouchableOpacity onPress={logout}
                             style={styles.button}>

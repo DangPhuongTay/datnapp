@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -15,21 +15,15 @@ import { colors, CLEAR, ENTER, colorsToEmoji } from "../../components/constants"
 import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
 import { BASE_URL } from "../../config";
-
-const NUMBER_OF_TRIES = 6;
+import { AuthContext } from "../../context/AuthContext";
+const NUMBER_OF_TRIES = 3;
 
 const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
 };
 
-
-const words =  {
-    english: "dog",
-    vietnamese:"heod",
-  }
-;
-
 const WordleScreen = ({route, navigation }) => {
+  const {userInfo} = useContext(AuthContext);
   const {
       WordleId,
       english,
@@ -38,13 +32,8 @@ const WordleScreen = ({route, navigation }) => {
       pronounce, 
       description,
     } = route.params;
+
   console.log(english,vietnamese,type,pronounce,description)
-  const [data, setData] = useState({
-    english: "false",
-    vietnamese: "nullsads",
-  });
-
-
 
   const word = english;
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
@@ -52,6 +41,21 @@ const WordleScreen = ({route, navigation }) => {
   const [rows, setRows] = useState(
     new Array(NUMBER_OF_TRIES).fill(new Array(letters.length).fill(""))
   );
+  const addScore = () => {
+    fetch(`${BASE_URL}/addrank/${userInfo.id}`, {
+    method: 'PUT',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        rank: "1",
+    }),
+    
+});navigation.navigate('Word', {
+  WordleId: WordleId,
+  })};
+
   const [curRow, setCurRow] = useState(0);
   const [curCol, setCurCol] = useState(0);
   const [gameState, setGameState] = useState("playing"); // won, lost, playing
@@ -65,15 +69,13 @@ const WordleScreen = ({route, navigation }) => {
 
   const checkGameState = () => {
     if (checkIfWon() && gameState !== "won") {
-      Alert.alert("Bạn đoán đúng rồi", 
+      Alert.alert("Bạn đoán đúng rồi bạn được cộng 1 điểm", 
 `${english}: ${vietnamese}
 ${type}
 ${pronounce}
 ${description}`
       , [
-        { text: "Quay về", onPress: () => navigation.navigate('Word', {
-          WordleId: WordleId,
-          })},
+        { text: "Quay về", onPress: () =>addScore() },
       ]);
       setGameState("won");
     } else if (checkIfLost() && gameState !== "lost") {
