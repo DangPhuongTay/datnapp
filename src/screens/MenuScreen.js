@@ -70,39 +70,6 @@ const MenuSreen = ({ navigation }) => {
                             <Text style={styles.btn}> Đăng xuất </Text>
                         </TouchableOpacity>
                     </View>
-                </View>
-            </View>
-
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Rank')}      
-                style={styles.button}>   
-                    <Text style={styles.btn}> Xếp hạng </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('History')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Lịch sử </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Lesson')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Bài học </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Danh sách bài kiểm tra của giáo viên đang đăng nhập </Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate('System')}
-                style={styles.button}>            
-                    <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
-                </TouchableOpacity>
-            </View>
             <View>
             <TouchableOpacity onPress={() => navigation.navigate('HistoryTeacher')}
                 style={styles.button}>            
@@ -115,15 +82,15 @@ const MenuSreen = ({ navigation }) => {
                 <Text style={styles.btn}> Đăng xuất </Text>
             </TouchableOpacity>
             </View>
-      
-
+            </View>
+</View>
         </ImageBackground>
     );
 };
 const styles = StyleSheet.create({
 
         container: {
-            height: '100%',
+            //height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'start',
@@ -152,57 +119,18 @@ const styles = StyleSheet.create({
             borderRadius:15,            
         
         },
-        btn:{
-            color:'#fff',
-            fontSize:14,
-            fontWeight:'bold',
-        },
+
         img:{
             flex:1,
             objectFit:'cover',
             marginBottom:15
         },
-           
-    container: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'start',
-        gap: 10,
-    },
-    back: {
-        width: 40,
-        height: 40,
-        marginRight: '85%',
-        marginTop: 10,
-        marginLeft: 4
-
-    },
-    color: {
-        color: '#62C7F3',
-        fontWeight: 'bold',
-        fontSize: 50,
-    },
-    button: {
-        paddingVertical: 15,
-        width: 300,
-        marginBottom: 5,
-        backgroundColor: '#62C7F3',
-        display: 'flex',
-        alignItems: 'center',
-        borderRadius: 15,
-
-    },
     btn: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
     },
-    img: {
-        flex: 1,
-        objectFit: 'cover',
-        marginBottom: 15
-    },
+
 
 });
 export default MenuSreen;

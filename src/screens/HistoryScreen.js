@@ -60,7 +60,7 @@ const HistoryScreen = ({ navigation }) => {
                            <View style={styles.score2}>
                             <View style={styles.text}><Text style={styles.title1}> {item.id_lesson_test}</Text></View>
                             <View style={styles.container1}>
-                                <Text style={styles.name}>điểm số: {item.score}</Text>
+                                <Text style={styles.name}> Điểm số: {item.score}</Text>
                                 <Text style={styles.nameGame}>{item.created_at}</Text>
                             </View>
                             </View>
