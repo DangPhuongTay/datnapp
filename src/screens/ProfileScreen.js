@@ -4,9 +4,15 @@ import {AuthContext} from '../context/AuthContext';
 
 const ProfileScreen = ({navigation}) =>{
     const {isLoading, userInfo, logout} = useContext(AuthContext);
+    let role;
+    if(userInfo.role == 1){
+        role = "HomeTeacher";
+    }else{
+        role = "Home";
+    }
     return (
         <View style={styles.container}>
-           <TouchableOpacity onPress={() => navigation.navigate('Home'?'Home':'HomeTeacher')}>
+           <TouchableOpacity onPress={() => navigation.navigate(`${role}`)}>
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.img_avatar} source={require('../../assets/images/profile_avatar.jpg')}></Image>

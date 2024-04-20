@@ -46,7 +46,13 @@ const MenuTeacherScreen = ({ navigation }) => {
                             style={styles.button}>
                             <Text style={styles.btn}> Danh sách bộ đề </Text>
                         </TouchableOpacity>
-                    </View> 
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('SystemTeacher')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Chuyển vai trò </Text>
+                        </TouchableOpacity>
+                    </View>  
                     <View>
                         <TouchableOpacity onPress={logout}
                             style={styles.button}>
