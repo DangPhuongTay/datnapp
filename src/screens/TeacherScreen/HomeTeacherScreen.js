@@ -25,7 +25,7 @@ const HomeTeacherScreen = ({ navigation }) => {
     _handleSubmit = async (e) => {
 
         navigation.navigate('Detail', {
-            testId: e,
+            testId1: e,
         });
     };
 
@@ -39,7 +39,7 @@ const HomeTeacherScreen = ({ navigation }) => {
                     <Image style={styles.menu} source={require('../../../assets/images/menu.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Image style={styles.menu} source={require('../../../assets/images/score.png')} />
+                    <Image style={styles.menu} source={require('../../../assets/images/info.png')} />
                 </TouchableOpacity>
             </View>
             <View style={styles.banner}>

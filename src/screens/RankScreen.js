@@ -51,7 +51,7 @@ const RankScreen = ({navigation}) =>{
               </View>
               <View style={styles.right}>
               <Text style={styles.point}>
-                 {item.score}
+                 {item.rank}
               </Text>
               <Image style={styles.img} source={imgs[nubicon = nubicon+1]} />
               </View>

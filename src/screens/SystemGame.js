@@ -1,9 +1,29 @@
 import React, { useContext, useState } from "react";
+import axios from 'axios';
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import {AuthContext} from '../context/AuthContext';
-
+import { BASE_URL } from "../config";
 const SystemGame = ({navigation}) => {
-  
+    const [isLoading, setIsLoading] = useState(false);
+    const {userInfo, logout } = useContext(AuthContext);
+    const id_user = userInfo.id;
+    const role = "1";
+    console.log(id_user,role);
+    const updateRole = (id_user) => {
+        setIsLoading(true);
+        axios
+        .patch(`${BASE_URL}/user/update-role/${id_user}`,{
+            role
+        }).then(res => {
+            console.log(res.data);
+        }).catch(e => {
+           console.log(`register error: ${e}`);
+           setIsLoading(false);
+        });logout();
+     };
+
+
+   
     return (
       
       <ImageBackground source={require('../../assets/images/bgsystem.jpg')} resizeMode="cover" style={styles.img}>
@@ -21,7 +41,7 @@ const SystemGame = ({navigation}) => {
         
         <Text style={[styles.color]}> Bạn muốn đăng ký tài khoản giáo viên </Text>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}
+                <TouchableOpacity onPress={() => updateRole(id_user)}
                 style={styles.button}>         
                     <Text style={styles.btn}> Xác nhập </Text>
                 </TouchableOpacity>

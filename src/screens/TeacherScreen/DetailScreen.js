@@ -27,11 +27,11 @@ const DetailScreen = ({route, navigation }) => {
     const [answer, setAnswer] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const {
-        testId,
+        testId1,
         testName,
         testDes,
       } = route.params;
-    const id_test = testId;
+    const id_test = testId1;
 
     const getQuestions = async () => {
         try {

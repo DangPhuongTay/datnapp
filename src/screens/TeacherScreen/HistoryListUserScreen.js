@@ -12,9 +12,11 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../config";
+import { formatTime } from "../../components/constants";
 const HistoryListUserScreen = ({route, navigation }) => {
     const {testId,testName} = route.params;
     const [isLoading, setLoading] = useState(true);
+    let nub = 1;
     const [data, setData] = useState([]);
     const getMovies = async () => {
         try {
@@ -43,7 +45,7 @@ const HistoryListUserScreen = ({route, navigation }) => {
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}>Danh sách học sinh kiểm tra bài: {testName}</Text></View>
+                <View style={styles.text}><Text style={styles.title}>Danh sách thực hiện bài kiểm tra: {testName}</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator/>
@@ -54,10 +56,25 @@ const HistoryListUserScreen = ({route, navigation }) => {
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
             
-            <View style={styles.score}>
-                                <Text style={styles.name}>{item.id_user}</Text>
-                                <Text style={styles.name}>{item.score}</Text>
-                            </View>
+                        <View style={styles.score}>
+                                <View style={styles.left}>
+                                    <Text style={styles.name}>
+                                       Người thực hiện: {item.id_user}
+                                    </Text>
+                                    <Text style={styles.nub}>
+                                        {nub++}
+                                    </Text>
+                                </View>
+                                <View style={styles.right}>
+                                <Text style={styles.time}>
+                                        {formatTime(item.created_at)}
+                                    </Text>
+                                    <Text style={styles.nubcore}>
+                                       điểm số: {item.score}
+                                    </Text>
+
+                                </View>
+                        </View>
           
                         )}
                     />
@@ -71,7 +88,26 @@ const HistoryListUserScreen = ({route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    
+    nubcore: {
+        marginEnd: -5,
+        fontSize: 16,
+        color: 'red'
+    },
+    time:{
+        color:'gray',
+        marginEnd: -5,
+        fontSize: 13   
+    },
+    nub: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color:'gray',
+    },
+    left:{
+        alignItems: 'flex-start',
+        gap: 5,
+        justifyContent: 'flex-start'
+    },
     container: {
         height: '100%',
         display: 'flex',
@@ -79,7 +115,10 @@ const styles = StyleSheet.create({
         justifyContent: 'start',
         gap: 10,
     },
-  
+    right:{
+       alignItems: 'flex-end',
+       justifyContent: 'space-between'
+    },
     container1:{
         height:550,
         width:'90%',
@@ -97,23 +136,16 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     text: {
+        width: 330,
         paddingVertical: 10,
-        paddingHorizontal: 65,
+        paddingHorizontal: 20,
         backgroundColor: "#0280BD",
         borderRadius: 20,
         marginTop: -25,
-        borderWidth: 1,
-        borderColor: "#000",
         alignItems: "center",
-    // paddingHorizontal: 100,
-    // paddingVertical: 10,
-    // backgroundColor: "#62C7F3",
-    // marginTop: 4,
-    // alignItems: "center",
-    // borderRadius: 12,
     },
     title: {
-        fontSize: 22,
+        fontSize: 20,
         color: "#fff",
         fontWeight: "bold",
 
@@ -128,8 +160,8 @@ const styles = StyleSheet.create({
     },
 
     score: {
-        paddingHorizontal: 20,
-        width: 300,
+        paddingHorizontal: 15,
+        width: 330,
         paddingVertical: 10,
         backgroundColor: "#fff",
         marginTop: 10,
@@ -142,7 +174,7 @@ const styles = StyleSheet.create({
     
     name: {
         color: "#fff",
-        fontSize: 24,
+        fontSize: 16,
         fontWeight: "bold",
     },
     button:{
