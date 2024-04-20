@@ -1,66 +1,71 @@
 import React, { useContext, useState } from "react";
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image } from "react-native";
-import {AuthContext} from '../context/AuthContext';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { AuthContext } from '../context/AuthContext';
 
-const StartScreen = ({navigation}) => {
-  
+const StartScreen = ({ navigation }) => {
+
     return (
-        <View style={styles.container}>
-            <Image source={require('../../assets/images/login_img.png')} 
-                    style={styles.img}></Image>
+        <ImageBackground style={styles.container}>
+            <Image style={styles.img} source={require('../../assets/images/item_start.png')} >
+
+            </Image>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
-                style={styles.button}>         
+                    style={styles.button}>
                     <Text style={styles.btn}>Bắt đầu</Text>
                 </TouchableOpacity>
             </View>
-            
-        </View>
+        </ImageBackground>
+
+
+
+
 
     );
 };
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#C0EDFC',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 10,
     },
-    input:{
-        
+    input: {
+
         width: 300,
         backgroundColor: '#eee',
-        borderRadius:999,
-        borderColor:'#62C7F3',
-        borderWidth:1,
-        paddingHorizontal:20,
+        borderRadius: 999,
+        borderColor: '#62C7F3',
+        borderWidth: 1,
+        paddingHorizontal: 20,
         paddingVertical: 10,
     },
-    button:{
+    button: {
         paddingVertical: 10,
         width: 220,
-        marginBottom: 5,
-        backgroundColor:'#62C7F3',
-        display:'flex',
+        marginBottom: 50,
+        backgroundColor: '#62C7F3',
+        display: 'flex',
         alignItems: 'center',
-        borderRadius:999,            
-        
+        borderRadius: 999,
+
     },
-    btn:{
-        color:'#fff',
-        fontSize:24,
-        fontWeight:'bold'
-       
+    btn: {
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: 'bold'
+
     },
-    img:{
-        width:200,
-        height:200,
-        objectFit:'contain',
-        marginBottom:10
+    img: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain',
+        marginTop: 50
     },
-        link: {
-            color: 'blue',
-        },
-    });
+    link: {
+        color: 'blue',
+    },
+});
 export default StartScreen;
