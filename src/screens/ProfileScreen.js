@@ -7,7 +7,7 @@ const ProfileScreen = ({navigation}) =>{
     const {isLoading, userInfo, logout} = useContext(AuthContext);
     return (
         <View style={styles.container}>
-           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+           <TouchableOpacity onPress={() => navigation.navigate('Home'?'HomeTeacher':'HomeTeacher')}>
                    <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.img_avatar} source={require('../../assets/images/profile_avatar.jpg')}></Image>

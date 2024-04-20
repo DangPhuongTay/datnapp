@@ -46,7 +46,7 @@ const ListTestTeacher = ({navigation }) => {
         <ImageBackground style={styles.bg} source={require('../../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuTeacher')}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>

@@ -13,7 +13,7 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../config";
 const HistoryListUserScreen = ({route, navigation }) => {
-    const {testId} = route.params;
+    const {testId,testName} = route.params;
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const getMovies = async () => {
@@ -39,11 +39,11 @@ const HistoryListUserScreen = ({route, navigation }) => {
         <ImageBackground style={styles.bg} source={require('../../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('HistoryTeacher')}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}> Thi thử </Text></View>
+                <View style={styles.text}><Text style={styles.title}>Danh sách học sinh kiểm tra bài: {testName}</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator/>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     // borderRadius: 12,
     },
     title: {
-        fontSize: 32,
+        fontSize: 22,
         color: "#fff",
         fontWeight: "bold",
 

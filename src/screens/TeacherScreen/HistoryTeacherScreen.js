@@ -30,10 +30,11 @@ const HistoryTeacherScreen = ({ navigation }) => {
             setLoading(false);
         }
     };
-    _handleSubmit = async (e) => 
+    _handleSubmit = async (e,n) => 
     {   
         navigation.navigate('HistoryListUser', {
             testId: e,
+            testName: n
           }); 
     };
     
@@ -47,7 +48,7 @@ const HistoryTeacherScreen = ({ navigation }) => {
         <ImageBackground style={styles.bg} source={require('../../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuTeacher')}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             <View style={styles.container1}>
@@ -67,7 +68,7 @@ const HistoryTeacherScreen = ({ navigation }) => {
                                 </View>
                                 <View style={styles.rigth}>
                                 <TouchableOpacity 
-                                onPress={() => this._handleSubmit(item.id)} 
+                                onPress={() => this._handleSubmit(item.id, item.name)} 
                                         style={styles.button}>            
                                     <Text style={styles.btn}>👁️</Text>
                                 </TouchableOpacity>
