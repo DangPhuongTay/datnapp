@@ -29,9 +29,10 @@ const HomeSreen = ({ navigation }) => {
     };
 
 
-    _handleSubmit = async (e) => {
+    _handleSubmit = async (e, n) => {
         navigation.navigate('Quiz', {
             itemId: e,
+            itemname: n
         });
     };
 
@@ -93,7 +94,7 @@ const HomeSreen = ({ navigation }) => {
                                         {/* <Text style={styles.description}>{item.description}</Text> */}
                                     </View>
                                     <View style={styles.btn_bottom}>
-                                        <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
+                                        <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id, item.name)} >
                                             <Text style={styles.textbtn}>Chọn</Text>
                                         </TouchableOpacity>
                                         <Image style={styles.item_img} source={imgs[nubicon++]}></Image>
@@ -272,7 +273,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         height: 250,
         justifyContent: 'space-between',
-     
+
 
     },
 
@@ -310,12 +311,12 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginTop: -10,
         height: 65
-      
+
     },
     description: {
         color: '#000',
-        backgroundColor:'red',
-        height:40
+        backgroundColor: 'red',
+        height: 40
     },
     btn_bottom: {
         display: 'flex',
