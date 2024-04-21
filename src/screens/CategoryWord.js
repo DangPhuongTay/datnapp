@@ -42,14 +42,20 @@ const CategoryWord = ({route , navigation }) => {
 
     return (
         
-        <ImageBackground style={styles.bg} source={require('../../assets/images/bgcate.png')}>
-            
+        
+         <View style={{height: '100%'}}>
+      <View
+        style={{
+          height: '100%',
+          backgroundColor: 'powderblue',
+        }}>  
         <View style={styles.container}>
+        <View style={styles.text}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>
-            <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}> Chủ đề</Text></View>
+            
+                <Text style={styles.title}> Chủ đề</Text></View>
 
                 {isLoading ? (
                     <ActivityIndicator />
@@ -73,8 +79,8 @@ const CategoryWord = ({route , navigation }) => {
 
             </View>
             </View>
-        </ImageBackground>
-
+            </View>
+ 
     );
 };
 
@@ -86,33 +92,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'start',
         gap: 10,
+        backgroundColor: "powderblue",
     },
   
-    container1:{
-        height:550,
-        width:'90%',
-        backgroundColor:'#fff',
-        borderRadius:20,
-        gap:10,
-        alignItems:'center',
-        marginTop:10
-    },
     
     back: {
         width: 40,
         height: 40,
-        marginRight: "85%",
-        marginTop: 10,
+        marginTop: 20,
     },
     text: {
         paddingVertical: 10,
         paddingHorizontal: 65,
-        backgroundColor: "#0280BD",
         borderRadius: 20,
-        marginTop: -25,
-        borderWidth: 1,
+        marginTop: 0,
         borderColor: "#000",
         alignItems: "center",
+        flexDirection:'row',
+        display: 'flex',
     //     paddingHorizontal: 100,
     // paddingVertical: 10,
     // backgroundColor: "#62C7F3",
@@ -126,15 +123,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
 
     },
-    list: {
-        width: 350,
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 10,
-        justifyContent: "flex-start",
-    },
-
+    
     score: {
         paddingHorizontal: 20,
         width: 350,
@@ -142,14 +131,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         marginTop: 10,
         borderRadius: 12,
-        backgroundColor: "#AECCF2",
+        backgroundColor: "#fff",
         flexDirection:'row',
         justifyContent:'space-between',
-     
+       borderWidth: 1,
+    borderColor: "#000",
     },
     
     name: {
-        color: "#fff",
+        color: "#1E1E1E",
         fontSize: 24,
         fontWeight: "bold",
     },

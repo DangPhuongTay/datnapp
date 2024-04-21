@@ -64,7 +64,7 @@ const LessonScreen = ({ navigation }) => {
                 <View style={styles.score}>
                   <Image
                     style={styles.icon}
-                    source={require("../../assets/images/image12/iconbaihoc.png")}
+                    source={require("../../assets/images/image12/iconbh.png")}
                   ></Image>
                   <Text style={styles.name}>{item.name}</Text>
                   <Text style={styles.nameGame}>{item.description}</Text>
