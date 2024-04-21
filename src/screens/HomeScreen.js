@@ -294,6 +294,8 @@ const styles = StyleSheet.create({
     },
     content: {
         gap: 5,
+        width: 120,
+        height: 30
 
     },
     item_img: {

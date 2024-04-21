@@ -1,14 +1,14 @@
-import React, {useEffect, useContext, useState } from "react";
-import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, ImageBackground, TextInput, ScrollView } from "react-native";
+import React, { useEffect, useContext, useState } from "react";
+import { Text, View, ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, ImageBackground, TextInput, ScrollView } from "react-native";
 import { AuthContext } from '../../context/AuthContext';
 import Checkbox from 'expo-checkbox';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SelectList } from 'react-native-dropdown-select-list';
 import axios from 'axios';
-import {BASE_URL} from '../../config';
+import { BASE_URL } from '../../config';
 
-const DetailScreen = ({route, navigation }) => {
-    const {userInfo} = useContext(AuthContext);
+const DetailScreen = ({ route, navigation }) => {
+    const { userInfo } = useContext(AuthContext);
     const id_user = userInfo.id;
 
     const [questions, setQuestions] = useState();
@@ -19,10 +19,10 @@ const DetailScreen = ({route, navigation }) => {
     const [answer_c, setAnswer_c] = useState('');
     const [answer_d, setAnswer_d] = useState('');
     const data = [
-        {key:'1', value: answer_a, title:'a'},
-        {key:'2', value: answer_b, title:'b'},
-        {key:'3', value: answer_c, title:'c'},
-        {key:'4', value: answer_d, title:'d'},
+        { key: '1', value: answer_a, title: 'a' },
+        { key: '2', value: answer_b, title: 'b' },
+        { key: '3', value: answer_c, title: 'c' },
+        { key: '4', value: answer_d, title: 'd' },
     ]
     const [answer, setAnswer] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +30,7 @@ const DetailScreen = ({route, navigation }) => {
         testId1,
         testName,
         testDes,
-      } = route.params;
+    } = route.params;
     const id_test = testId1;
 
     const getQuestions = async () => {
@@ -59,183 +59,209 @@ const DetailScreen = ({route, navigation }) => {
         }
     };
 
-    const createQuestion = (question_text,answer_a,answer_b,answer_c,answer_d,answer) => {
+    const createQuestion = (question_text, answer_a, answer_b, answer_c, answer_d, answer) => {
         setIsLoading(true);
         axios
-        .post(`${BASE_URL}/questiontest/create`,{
-            id_test,
-            question_text,
-            answer_a,
-            answer_b,
-            answer_c,
-            answer_d,
-            answer,
-        }).then(res => {
-            
-            // console.log(res.data);
-            setIsLoading(false);
-            navigation.navigate('Create', {
-                testUser: id_user,
-            });
-        }).catch(e => {
-           console.log(`create question error: ${e}`);
-           setIsLoading(false);
-        });
-     };
+            .post(`${BASE_URL}/questiontest/create`, {
+                id_test,
+                question_text,
+                answer_a,
+                answer_b,
+                answer_c,
+                answer_d,
+                answer,
+            }).then(res => {
 
-     useEffect(() => {
+                // console.log(res.data);
+                setIsLoading(false);
+                navigation.navigate('Create', {
+                    testUser: id_user,
+                });
+            }).catch(e => {
+                console.log(`create question error: ${e}`);
+                setIsLoading(false);
+            });
+    };
+
+    useEffect(() => {
         getQuestions();
         getTest();
     }, []);
 
     return (
-        <ImageBackground source={require('../../../assets/images/bgcreate.jpg')} resizeMode="cover" style={styles.img}>
-            <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}>
-                <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
-            </TouchableOpacity>
+        <View style={styles.page}>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => navigation.navigate('ListTestTeacher')}>
+                    <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>Tạo câu hỏi</Text>
+            </View>
+
             {isLoading == false ? (
-                    <ActivityIndicator />
-                ) : (
-            <SafeAreaView style={styles.container}>
-                <ScrollView style={styles.scrollView}>
-                    <View style={styles.question}>
-                        <View style={styles.number}>
-                            <Text style={styles.numberText}>{questions?.length} Question </Text>
+                <ActivityIndicator />
+            ) : (
+                <SafeAreaView style={styles.container}>
+                    <Image style={styles.itemCreate} source={require('../../../assets/images/item3_home_list.png')}>
+
+                    </Image>
+                    <ScrollView style={styles.scrollView}>
+
+                        <View style={styles.question}>
+                            <View style={styles.number}>
+                                <Text style={styles.numberText}>{questions?.length} Question </Text>
+                            </View>
+
+                            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Create')}>
+                                <Image style={styles.addIcon} source={require('../../../assets/images/icon/add.png')}></Image>
+                                <Text style={styles.addQuestion}>Add Question</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                        <View style={styles.change}>
+                            <View style={styles.changeTop}>
+                                <TouchableOpacity style={styles.btnEdit} onPress={() => navigation.navigate('Home')}>
+
+                                    <Text style={styles.edit}>Edit</Text>
+                                </TouchableOpacity>
+                                <View style={styles.titleQuestion}>
+                                    <Text style={styles.numberQuestion}>{test?.name}</Text>
+                                    <Text style={styles.title}>{test?.description}</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.btnChange}>
+                                <TouchableOpacity style={styles.btnDelete} onPress={() => navigation.navigate('Home')}>
+                                    <Image style={styles.recycleIcon} source={require('../../../assets/images/icon/recycle.png')}></Image>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btnCopy} onPress={() => navigation.navigate('Home')}>
+                                    <Image style={styles.copyIcon} source={require('../../../assets/images/icon/copy.png')}></Image>
+                                </TouchableOpacity>
+                            </View>
+
                         </View>
 
-                        <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Create')}>
-                            <Image style={styles.addIcon} source={require('../../../assets/images/icon/add.png')}></Image>
-                            <Text style={styles.addQuestion}>Add Question</Text>
-                        </TouchableOpacity>
 
-                    </View>
-                    <View style={styles.change}>
-                        <View style={styles.changeTop}>
-                            <TouchableOpacity style={styles.btnEdit} onPress={() => navigation.navigate('Home')}>
 
-                                <Text style={styles.edit}>Edit</Text>
-                            </TouchableOpacity>
-                            <View style={styles.titleQuestion}>
-                                <Text style={styles.numberQuestion}>{test?.name}</Text>
-                                <Text style={styles.title}>{test?.description}</Text>
+                        <View style={styles.form}>
+                            <View style={styles.formQuestion}>
+                                <TextInput
+                                    style={styles.inputQuestion}
+                                    onChangeText={text => setQuestion_text(text)}
+                                    value={question_text}
+                                    placeholder="Nhập câu hỏi"
+
+                                />
+                            </View>
+                            <View style={styles.formAnswer}>
+                                <View>
+                                    <View style={styles.checkAnswer}>
+
+                                        <TextInput
+                                            style={styles.inputAnswer}
+                                            onChangeText={text => setAnswer_a(text)}
+                                            value={answer_a}
+                                            placeholder="Nhập câu trả lời"
+
+                                        />
+
+                                    </View>
+                                    <View style={styles.checkAnswer}>
+
+                                        <TextInput
+                                            style={styles.inputAnswer}
+                                            onChangeText={text => setAnswer_b(text)}
+                                            value={answer_b}
+                                            placeholder="Nhập câu trả lời"
+
+                                        />
+
+                                    </View>
+                                </View>
+                                <View>
+                                    <View style={styles.checkAnswer}>
+
+                                        <TextInput
+                                            style={styles.inputAnswer}
+                                            onChangeText={text => setAnswer_c(text)}
+                                            value={answer_c}
+                                            placeholder="Nhập câu trả lời"
+
+                                        />
+
+                                    </View>
+                                    <View style={styles.checkAnswer}>
+
+                                        <TextInput
+                                            style={styles.inputAnswer}
+                                            onChangeText={text => setAnswer_d(text)}
+                                            value={answer_d}
+                                            placeholder="Nhập câu trả lời"
+
+                                        />
+
+                                    </View>
+
+                                </View>
+
                             </View>
                         </View>
 
-                        <View style={styles.btnChange}>
-                            <TouchableOpacity style={styles.btnDelete} onPress={() => navigation.navigate('Home')}>
-                                <Image style={styles.recycleIcon} source={require('../../../assets/images/icon/recycle.png')}></Image>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnCopy} onPress={() => navigation.navigate('Home')}>
-                                <Image style={styles.copyIcon} source={require('../../../assets/images/icon/copy.png')}></Image>
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-
-
-
-                    <View style={styles.form}>
-                        <View style={styles.formQuestion}>
-                            <TextInput
-                                style={styles.inputQuestion}
-                                onChangeText={text => setQuestion_text(text)}
-                                value={question_text}
-                                placeholder="Nhập câu hỏi"
-
+                        <View style={styles.select}>
+                            <SelectList
+                                placeholder="Chọn đáp án đúng"
+                                setSelected={text => setAnswer(text)}
+                                data={data}
+                                search={false}
+                                maxHeight={300}
+                                save="value"
                             />
                         </View>
-                        <View style={styles.formAnswer}>
-                            <View>
-                                <View style={styles.checkAnswer}>
 
-                                    <TextInput
-                                        style={styles.inputAnswer}
-                                        onChangeText={text => setAnswer_a(text)}
-                                        value={answer_a}
-                                        placeholder="Nhập câu trả lời"
 
-                                    />
-
-                                </View>
-                                <View style={styles.checkAnswer}>
-
-                                    <TextInput
-                                        style={styles.inputAnswer}
-                                        onChangeText={text => setAnswer_b(text)}
-                                        value={answer_b}
-                                        placeholder="Nhập câu trả lời"
-
-                                    />
-
-                                </View>
-                            </View>
-                            <View>
-                                <View style={styles.checkAnswer}>
-
-                                    <TextInput
-                                        style={styles.inputAnswer}
-                                        onChangeText={text => setAnswer_c(text)}
-                                        value={answer_c}
-                                        placeholder="Nhập câu trả lời"
-
-                                    />
-
-                                </View>
-                                <View style={styles.checkAnswer}>
-
-                                    <TextInput
-                                        style={styles.inputAnswer}
-                                        onChangeText={text => setAnswer_d(text)}
-                                        value={answer_d}
-                                        placeholder="Nhập câu trả lời"
-
-                                    />
-
-                                </View>
-
-                            </View>
-  
-                        </View>
-                    </View>
-
-                    <View style={styles.select}>
-                                <SelectList
-                                    placeholder="Chọn đáp án đúng"
-                                    setSelected={text => setAnswer(text)}
-                                    data={data}
-                                    search={false}
-                                    maxHeight={300}
-                                    save="value"
-                                />
-                                 </View>
-
-                    <TouchableOpacity onPress={() => {createQuestion(question_text,answer_a,answer_b,answer_c,answer_d,answer)}}
+                    </ScrollView>
+                    <TouchableOpacity onPress={() => { createQuestion(question_text, answer_a, answer_b, answer_c, answer_d, answer) }}
                         style={styles.button}>
                         <Text style={styles.btn}>Tạo</Text>
+                        <Image style={styles.imgCreate} source={require('../../../assets/images/item6_home_list.png')}>
+
+                        </Image>
                     </TouchableOpacity>
-                </ScrollView>
-            </SafeAreaView>
-               )}
-        </ImageBackground >
+                </SafeAreaView>
+            )}
+        </View >
     );
 };
 const styles = StyleSheet.create({
-    img: {
-        width: '100%',
-        height: 880,
+    page: {
+        backgroundColor: '#fff',
         display: 'flex',
-        gap: 10,
-        marginTop: 20,
+        alignItems: 'center',
+        height: '100%'
+    },
+    header: {
         display: 'flex',
+
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
+        flexDirection: 'row',
+        top: 30
+
+    },
+    headerTitle: {
+        fontSize: 22,
+        fontWeight: '600',
+        top: 5,
+        left: -10
+
+
     },
     back: {
         width: 40,
         height: 40,
-        marginRight: '85%',
-        marginTop: '-53%',
-        marginLeft: 4
+        left: -120
+
+
 
     },
     select: {
@@ -245,13 +271,24 @@ const styles = StyleSheet.create({
     },
     container: {
         width: 350,
-        height: 400,
-        backgroundColor: '#fff',
+        height: 550,
+        backgroundColor: '#C0EDFC',
         borderRadius: 20,
-        padding: 20
+        padding: 20,
+        top: 70,
+
     },
     scrollView: {
+        top: -50,
 
+        height: 500
+
+    },
+    itemCreate: {
+        width: 100,
+        height: 100,
+        top: -80,
+        left: -40
     },
     question: {
         display: 'flex',
@@ -410,15 +447,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '71%',
-        marginTop: 50
+
 
     },
     btn: {
         fontSize: 20,
         fontWeight: '600',
+        top: 25
 
 
     },
+    imgCreate: {
+        width: 50,
+        height: 50,
+        right: -45,
+        top: -10
+    }
 
 
 
