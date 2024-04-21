@@ -3,8 +3,8 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Image, Ima
 import { AuthContext } from '../context/AuthContext';
 
 const LevelScreen = ({ navigation }) => {
-    const { isLoading, userInfo, logout } = useContext(AuthContext);
-    const [text, onChangeText] = React.useState('');
+    const {  userInfo } = useContext(AuthContext);  
+    let level =Math.floor(userInfo.score/10);
     return (
         <ImageBackground source={require('../../assets/images/bglevel.jpg')} resizeMode="cover" style={styles.img}>
             <View style={styles.header}>
@@ -14,7 +14,7 @@ const LevelScreen = ({ navigation }) => {
                 <View style={styles.formscore}>
                     <View style={styles.btnscore}>
                         <Image style={styles.score} source={require('../../assets/images/image12/tree.png')}></Image>
-                        <Text style={styles.scoreNumber}>0</Text>
+                        <Text style={styles.scoreNumber}>{userInfo.score}</Text>
                     </View>
 
                 </View>
@@ -25,7 +25,7 @@ const LevelScreen = ({ navigation }) => {
                 <Image style={styles.main} source={require('../../assets/images/image12/main.png')}></Image>
                 <View style={styles.bglevel}>
                     <ImageBackground style={styles.levelnumber} source={require('../../assets/images/image12/numberlevell.png')}>
-                        <Text style={styles.leveltext}>Level 1/12</Text>
+                        <Text style={styles.leveltext}>Level {level}</Text>
                     </ImageBackground>
 
 

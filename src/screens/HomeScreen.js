@@ -8,6 +8,7 @@ const HomeSreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const {userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
+    
     const getLessons = async () => {
         try {
             const response = await fetch(`${BASE_URL}/lession/all`);
@@ -22,7 +23,6 @@ const HomeSreen = ({ navigation }) => {
 
 
     _handleSubmit = async (e) => {
-
         navigation.navigate('Quiz', {
             itemId: e,
         });

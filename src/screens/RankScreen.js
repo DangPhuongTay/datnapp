@@ -10,7 +10,7 @@ const RankScreen = ({navigation}) =>{
     const imgs = [medal1, medal2, medal3];
     const [data, setData] = useState([]);
     let rank = 0;
-    let nubicon = -1;
+    let nubicon = 0;
     const getMovies = async () => {
         try {
           const response = await fetch(`${BASE_URL}/rank`);
@@ -53,7 +53,7 @@ const RankScreen = ({navigation}) =>{
               <Text style={styles.point}>
                  {item.rank}
               </Text>
-              <Image style={styles.img} source={imgs[nubicon = nubicon+1]} />
+              <Image style={styles.img} source={imgs[nubicon++]} />
               </View>
               </View>
             )}
