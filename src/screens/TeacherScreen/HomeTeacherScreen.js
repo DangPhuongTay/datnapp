@@ -1,14 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View,ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
+import { Text, View, ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../../context/AuthContext';
 import { BASE_URL } from "../../config";
-
+import medal1 from '../../../assets/images/item2_home_list.png';
+import medal2 from '../../../assets/images/item7_home_list.png';
+import medal3 from '../../../assets/images/item4_home_list.png';
+import medal4 from '../../../assets/images/item9_home_list.png';
+import medal5 from '../../../assets/images/item6_home_list.png';
+import medal6 from '../../../assets/images/item5_home_list.png';
 const HomeTeacherScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
-    const {userInfo, logout } = useContext(AuthContext);
+    const { userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
     const id_user = userInfo.id;
+    const imgs = [medal1, medal2, medal3, medal4, medal5, medal6];
+    let rank = 0;
+    let nubicon = 0;
     const getLessons = async () => {
         try {
             const response = await fetch(`${BASE_URL}/test-by-user/${id_user}`);
@@ -42,76 +50,85 @@ const HomeTeacherScreen = ({ navigation }) => {
                     <Image style={styles.menu} source={require('../../../assets/images/info.png')} />
                 </TouchableOpacity>
             </View>
+            <Text style={styles.infoUser}> Chào {userInfo.name},</Text>
+            <Text style={styles.desUser}>Có bài học mới cho bạn nè!</Text>
             <View style={styles.banner}>
-                <Image style={styles.imgbanner} source={require('../../../assets/images/login_img.png')} />
+                <Image style={styles.imgbanner} source={require('../../../assets/images/item_home_banner.png')} />
+                <View style={styles.introBanner}>
+                    <Text style={styles.desBanner}>We may be out of sight… But never out of mind…</Text>
+                    <TouchableOpacity style={styles.btnBanner} onPress={() => navigation.navigate('Lesson')}>
+                        <Text style={styles.textBanner}>Xem thêm</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
             <View style={styles.context}>
                 <View style={styles.listbtn}>
                     <View style={styles.itembtn}>
-                        <Text style={styles.itemtext}>Bộ đề</Text>
+                        <Text style={styles.itemtext} >Bộ đề</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('HistoryTeacher')}>
+                        <TouchableOpacity style={styles.itembtn1} onPress={() => navigation.navigate('HistoryTeacher')}>
                             <Text style={styles.itemtext} >Lịch sử</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.itembtn} onPress={() => navigation.navigate('Create')}>
+                        <TouchableOpacity style={styles.itembtn2} onPress={() => navigation.navigate('Create')}>
                             <Text style={styles.itemtext} >Tạo đề</Text>
                         </TouchableOpacity>
                     </View>
-                
+
                 </View>
 
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (
 
-                <View style={styles.listlesstion}>
-                    <FlatList
-                        data={data}
-                        keyExtractor={({ id }) => id}
-                        renderItem={({ item }) => (
-                            <View style={styles.itemlesson}>
-                                <View style={styles.content}>
-                                    <Text style={styles.name}>📋 {item.name}</Text>
-                                    <Text style={styles.description}>{item.description}</Text>
+                    <View style={styles.listlesstion}>
+                        <FlatList contentContainerStyle={styles.list}
+                            data={data}
+                            keyExtractor={({ id }) => id}
+                            renderItem={({ item }) => (
+                                <View style={styles.itemlesson}>
+                                    <View style={styles.content}>
+                                        <Text style={styles.name}>📋 {item.name}</Text>
+                                        <Text style={styles.description}>{item.description}</Text>
+                                    </View>
+                                    <View style={styles.btn_bottom}>
+                                        <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
+                                            <Text style={styles.textbtn}>Chọn</Text>
+                                        </TouchableOpacity>
+                                        <Image style={styles.item_img} source={imgs[nubicon++]}></Image>
+                                    </View>
+
                                 </View>
-                                <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
-                                    <Text style={styles.textbtn}>✏️</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-                    />
-                    
-                </View>
-            )}
-           </View>
+                            )}
+                        />
+
+                    </View>
+                )}
+            </View>
         </View>
-)};
+    )
+};
 
 const styles = StyleSheet.create({
-    textbtn:{
-        fontSize: 20,
+    btn: {
+        backgroundColor: 'white',
+        width: 70,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 12,
+        marginTop: 25,
+        marginRight: -5
     },
-    btn:{
-      backgroundColor:'white',
-      width: 40,
-      height: 40,
-      alignItems: 'center',
-      justifyContent:'center',
-      borderRadius: 12,
-      marginTop: -4,
-      marginRight: -5
-    },
-    name:{
-        color:"#fff",
-        fontWeight:"bold",
+    name: {
+        color: "#fff",
+        fontWeight: "bold",
         fontSize: 18
     },
-    description:{
-        width: 220,
-        height: 94,
+    description: {
         fontSize: 16,
         color: 'white'
     },
@@ -124,7 +141,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        marginTop:10,
+        marginTop: 10,
         paddingLeft: 20,
         paddingRight: 20,
         width: '100%',
@@ -134,12 +151,49 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    infoUser: {
+        fontSize: 28,
+        fontWeight: '800',
+        marginRight: '50%'
+    },
+    desUser: {
+        fontSize: 20,
+        fontWeight: '400',
+        marginRight: '22%'
+    },
     banner: {
-        width: '100%',
-        height: '40%',
+        width: '75%',
+        height: '15%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+
+        backgroundColor: '#C0EDFC',
+        borderRadius: 12,
+        marginTop: 40,
+        flexDirection: 'row',
+        marginBottom: 20
+    },
+    introBanner: {
+        marginRight: '40%',
+
+    },
+    desBanner: {
+        fontSize: 16,
+
+    },
+
+    btnBanner: {
+        display: 'flex',
+        marginTop: 20,
+        marginLeft: 100,
+        width: 80,
+        height: 30,
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+
     },
     context: {
         width: '100%',
@@ -155,13 +209,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+
     imgbanner: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         objectFit: 'contain',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        marginLeft: '-10%',
+        marginBottom: 30
+
+    },
+    list: {
+        width: 320,
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 10,
+        justifyContent: 'space-between',
+
+
     },
     listbtn:
     {
@@ -171,38 +237,110 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 20
     },
     itembtn:
     {
-        width: 115,
-        height: 90,
-        backgroundColor: 'white',
+        width: 100,
+        height: 40,
+        backgroundColor: '#62C7F3',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 8
     },
-    itemtext:{
+    itembtn1: {
+        width: 100,
+        height: 40,
+        backgroundColor: '#B8E1FF',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8
+    },
+    itembtn2: {
+        width: 100,
+        height: 40,
+        backgroundColor: '#CED1E6',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8
+    },
+    itemtext: {
         fontSize: 18,
+
     },
     listlesstion:
     {
-        width: 320,
-        height: 300,
+        paddingHorizontal: 20,
+        width: 360,
+        paddingVertical: 15,
+        backgroundColor: "#fff",
+
+        borderRadius: 15,
+        height: 250,
+        justifyContent: 'space-between',
+
+
+
     },
     itemlesson:
     {
-        flexDirection: 'row',
-        borderRadius: 20,
-        height:150,
-        width: '100%',
-        justifyContent: 'space-between',
-        marginTop: 10,
-        backgroundColor: '#62C7F3',
-        padding: 15,
+
+        borderRadius: 16,
+        height: 120,
+        width: 140,
+
+        marginBottom: 20,
+        backgroundColor: '#fff',
+        padding: 20,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#62C7F3',
+        marginRight: 10
+
     },
-    content:{
-        gap:5,
+    content: {
+        gap: 5,
+        width: 120,
+        height: 30
+
+    },
+    item_img: {
+        width: 50,
+        height: 50,
+        marginLeft: -10,
+        marginTop: 50
+
+    },
+    name: {
+        color: '#000',
+        fontWeight: '600',
+        marginTop: -10
+    },
+    description: {
+        color: '#000'
+    },
+    btn_bottom: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: -30
+
+
+    },
+    btn: {
+        width: 60,
+        height: 25,
+        backgroundColor: '#62C7F3',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        marginTop: 60,
+        marginRight: 20
     }
+
 })
 export default HomeTeacherScreen;
