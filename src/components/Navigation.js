@@ -148,21 +148,13 @@ const Navigation = () => {
               component={HistoryTeacherScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="HistoryListUser"
-              component={HistoryListUserScreen}
-              options={{ headerShown: false }}
-            />
+
             <Stack.Screen
               name="SystemTeacher"
               component={SystemTeacher}
               options={{ headerShown: false }}
             />
-                <Stack.Screen
-                  name="HistoryTeacher"
-                  component={HistoryTeacherScreen}
-                  options={{ headerShown: false }}
-                />
+
                 <Stack.Screen
                   name="HistoryListUser"
                   component={HistoryListUserScreen}

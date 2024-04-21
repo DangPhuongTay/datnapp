@@ -10,6 +10,7 @@ const ProfileScreen = ({navigation}) =>{
     }else{
         role = "Home";
     }
+    let level =Math.floor(userInfo.score/10);
     return (
         <View style={styles.container}>
            <TouchableOpacity onPress={() => navigation.navigate(`${role}`)}>
@@ -23,18 +24,18 @@ const ProfileScreen = ({navigation}) =>{
                     <View style={styles.decription}>
                         <Image style={styles.img_dsc} source={require('../../assets/images/profile_img3.png')}></Image>
                         <Text style={styles.title}>Điểm</Text>
-                        <Text style={styles.number}>112</Text>
+                        <Text style={styles.number}>{userInfo.rank}</Text>
                     </View>
 
                     <View style={styles.decription}>
                     <Image style={styles.img_dsc} source={require('../../assets/images/profile_img1.png')}></Image>
                         <Text style={styles.title}>Xếp hạng</Text>
-                        <Text style={styles.number}>#5</Text>
+                        <Text style={styles.number}>{userInfo.rank}</Text>
                     </View>
                     <View style={styles.decription}>
                     <Image style={styles.img_dsc} source={require('../../assets/images/profile_img2.png')}></Image>
                         <Text style={styles.title}>Cấp độ</Text>
-                        <Text style={styles.number}>#3</Text>
+                        <Text style={styles.number}>{level}</Text>
                     </View>
                 </View>
                 <View style={styles.container3}>

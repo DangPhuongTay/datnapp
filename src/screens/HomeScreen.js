@@ -90,7 +90,7 @@ const HomeSreen = ({ navigation }) => {
                                 <View style={styles.itemlesson}>
                                     <View style={styles.content}>
                                         <Text style={styles.name}>📋 {item.name}</Text>
-                                        <Text style={styles.description}>{item.description}</Text>
+                                        {/* <Text style={styles.description}>{item.description}</Text> */}
                                     </View>
                                     <View style={styles.btn_bottom}>
                                         <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
@@ -121,11 +121,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginRight: -5
     },
-    name: {
-        color: "#fff",
-        fontWeight: "bold",
-        fontSize: 18
-    },
+
     description: {
         fontSize: 16,
         color: 'white'
@@ -223,8 +219,6 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         gap: 10,
         justifyContent: 'space-between',
-
-
     },
     listbtn:
     {
@@ -275,14 +269,13 @@ const styles = StyleSheet.create({
         width: 360,
         paddingVertical: 15,
         backgroundColor: "#fff",
-
         borderRadius: 15,
         height: 250,
         justifyContent: 'space-between',
-
-
+     
 
     },
+
     itemlesson:
     {
 
@@ -313,17 +306,19 @@ const styles = StyleSheet.create({
     name: {
         color: '#000',
         fontWeight: '600',
-        marginTop: -10
+        marginTop: -10,
+        height: 65
+      
     },
     description: {
-        color: '#000'
+        color: '#000',
+        backgroundColor:'red',
+        height:40
     },
     btn_bottom: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: -30
-
-
+        marginTop: -52
     },
     btn: {
         width: 60,

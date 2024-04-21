@@ -99,8 +99,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -30,
     top: -15,
-    width: 35,
-    height: 35
+    width: 45,
+    height: 45,
+    objectFit: 'contain'
   },
   bg: {
     width: '100%',

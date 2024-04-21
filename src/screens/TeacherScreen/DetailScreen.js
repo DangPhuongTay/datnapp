@@ -229,9 +229,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
-
-
-
     },
     back: {
         width: 40,
@@ -354,7 +351,7 @@ const styles = StyleSheet.create({
     },
     copyIcon: {
         width: 18,
-        height: 18
+        height: 18,
     },
     form: {
         width: 310,
