@@ -30,7 +30,7 @@ import HistoryListUserScreen from "../screens/TeacherScreen/HistoryListUserScree
 import MenuTeacherScreen from "../screens/TeacherScreen/MenuTeacherScreen";
 import HomeTeacherScreen from "../screens/TeacherScreen/HomeTeacherScreen";
 import SystemTeacher from "../screens/TeacherScreen/SystemTeacher";
-
+import Test from "../screens/TestScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -108,6 +108,11 @@ const Navigation = () => {
                 <Stack.Screen
                   name="History"
                   component={HistoryScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Test"
+                  component={Test}
                   options={{ headerShown: false }}
                 />
               </>

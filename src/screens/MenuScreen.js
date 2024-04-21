@@ -59,7 +59,12 @@ const MenuSreen = ({ navigation }) => {
                             <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
                         </TouchableOpacity>
                     </View>
-
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('ListTest')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Bài kiểm tra </Text>
+                        </TouchableOpacity>
+                    </View>
 
 
   

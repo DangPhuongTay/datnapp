@@ -28,9 +28,9 @@ const ListTestScreen = ({ navigation }) => {
     };
     _handleSubmit = async (e) => 
     {   
-        navigation.navigate('Quiz', {
+        navigation.navigate('Test', {
             itemId: e,
-          }); 
+          });
     };
     
     useEffect(() => {
