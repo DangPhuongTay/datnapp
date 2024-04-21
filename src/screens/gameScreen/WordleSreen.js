@@ -164,7 +164,7 @@ ${description}`
       <TouchableOpacity onPress={() => navigation.navigate('Word', {
             WordleId: WordleId,
             })}>
-                <Image source={require('../../../assets/images/back.png')}></Image>
+                <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
       <Text style={styles.title}>{vietnamese}</Text>
 
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 7,
   },
-
+  
   map: {
     alignSelf: "stretch",
     marginVertical: 20,
@@ -238,4 +238,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 28,
   },
+  back: {
+    width: 40,
+    height: 40,
+    marginRight: '85%',
+    marginTop: 30,
+    marginLeft: 3
+
+},
 });

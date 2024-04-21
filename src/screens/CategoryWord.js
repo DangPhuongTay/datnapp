@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 
     score: {
         paddingHorizontal: 20,
-        width: 300,
+        width: 350,
         paddingVertical: 10,
         backgroundColor: "#fff",
         marginTop: 10,

@@ -75,12 +75,13 @@ const WordScreen = ({route, navigation }) => {
         <ImageBackground style={styles.bg} source={require('../../assets/images/bgcate.png')}>
             
         <View style={styles.container}>
+        <View style={styles.text}>
             <TouchableOpacity onPress={() => navigation.navigate('Category')}>
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>
-            <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}>{category.name}</Text></View>
-
+                <View><Text style={styles.title}>{category.name}</Text></View>
+                
+        </View>
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (
@@ -101,7 +102,6 @@ const WordScreen = ({route, navigation }) => {
                     />
                 )}
 
-            </View>
             </View>
         </ImageBackground>
 
@@ -131,15 +131,16 @@ const styles = StyleSheet.create({
     back: {
         width: 40,
         height: 40,
-        marginRight: "85%",
+        marginRight: "125%",
         marginTop: 10,
+
     },
     text: {
         paddingVertical: 10,
         paddingHorizontal: 65,
-        backgroundColor: "#0280BD",
-        borderRadius: 20,
-        marginTop: -25,
+        backgroundColor: "#fff",
+        //borderRadius: 20,
+        marginTop: -10,
         borderWidth: 1,
         borderColor: "#000",
         alignItems: "center",
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        color: "#fff",
+        color: "#1E1E1E",
         fontWeight: "bold",
 
     },
@@ -160,6 +161,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
     },
 
+    
     score: {
         paddingHorizontal: 20,
         width: 300,
@@ -167,14 +169,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         marginTop: 10,
         borderRadius: 12,
-        backgroundColor: "#AECCF2",
+        backgroundColor: "#ffff",
         flexDirection:'row',
         justifyContent:'space-between',
      
     },
     
     name: {
-        color: "#fff",
+        color: "#1E1E1E",
         fontSize: 24,
         fontWeight: "bold",
     },
