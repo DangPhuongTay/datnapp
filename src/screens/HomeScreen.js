@@ -147,9 +147,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     infoUser: {
-        fontSize: 28,
+        fontSize: 24,
+        width: 400,
         fontWeight: '800',
-        marginRight: '50%'
+        left: 25
     },
     desUser: {
         fontSize: 20,
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         backgroundColor: "#fff",
         borderRadius: 15,
-        height: 250,
+        height: 300,
         justifyContent: 'space-between',
 
 
