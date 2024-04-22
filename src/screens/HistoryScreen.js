@@ -16,8 +16,7 @@ import { formatTime } from "../components/constants";
 const HistoryScreen = ({ navigation }) => {
     const { userInfo } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-    const [lesson, setLesson] = useState([]);
-    const [data, setData] = useState([]);
+    let [data, setData] = useState([]);
     const id_user = userInfo.id;
     const getHistories = async () => {
         try {
@@ -30,12 +29,22 @@ const HistoryScreen = ({ navigation }) => {
             setLoading(false);
         }
     };
+    const getHistoriesTest = async () => {
+      try {
+          const response = await fetch(`${BASE_URL}/history/test-history-user/${id_user}`);
+          const json = await response.json();
+          setData(json.data);
+      } catch (error) {
+          console.error(error);
+      } finally {
+          setLoading(false);
+      }
+  };
 
+  useEffect(() => {
+    getHistories();
+}, []);
 
-    
-    useEffect(() => {
-        getHistories();
-    }, []);
 
 
     return (
@@ -45,8 +54,14 @@ const HistoryScreen = ({ navigation }) => {
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>    
         <View style={styles.container}>
-           
-                <View style={styles.text}><Text style={styles.title}>📝 Lịch sử làm bài </Text></View>
+          <View style={styles.text}>
+            <TouchableOpacity onPress={() => getHistories()}>
+                <Text style={styles.title}>📝 Lịch sử làm bài</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => getHistoriesTest()}>
+              <Text style={styles.title}>📝 Lịch sử làm kiểm tra </Text>
+            </TouchableOpacity>   
+        </View>
 
                 {isLoading ? (
                     <ActivityIndicator />
@@ -57,7 +72,6 @@ const HistoryScreen = ({ navigation }) => {
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => (
                            <View style={styles.score2}>
-
                                 <Text style={styles.title1}> {item.id_lesson_test}</Text>
                               <View style={styles.itemright}>
                                   <Text style={styles.name}>điểm số: {item.score}</Text>
@@ -109,16 +123,15 @@ const HistoryScreen = ({ navigation }) => {
     
       },
       title:{
-        paddingHorizontal:100,
-        paddingVertical:10,
-        backgroundColor:'#fff',
-        marginTop:170,
+        width: 190,
+        color : 'white',
+        backgroundColor:"#62C7F3",
+        justifyContent: 'center',
         alignItems:'center',
-        borderRadius:12,
-        fontSize: 24,
-        color: "#62C7F3",
-        fontWeight: "bold",
-        
+        fontSize: 18,
+        height: 60,
+        borderRadius: 16,
+        padding: 10
       },
       title1:{
         paddingHorizontal:10,
@@ -129,7 +142,7 @@ const HistoryScreen = ({ navigation }) => {
         fontSize: 18,
         color: "#fff",
         fontWeight: "bold",
-        width: 120,
+ 
       },
       rank:{
         fontSize:24,
@@ -171,6 +184,11 @@ const HistoryScreen = ({ navigation }) => {
         fontWeight:'bold',
         
     },
+    text:{
+      flexDirection: 'row',
+      width: 370,
+      gap: 5
+       },
 });
       
 export default HistoryScreen;

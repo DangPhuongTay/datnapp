@@ -16,7 +16,7 @@ const Test = ({ route, navigation }) => {
     const [score, setScore] = useState(0);
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
-    const { itemId } = route.params;
+    const { itemId,id_user } = route.params;
     console.log(itemId)
     let itemIdNet = itemId + 1;
     const [datas, setData] = useState([]);
@@ -33,7 +33,7 @@ const Test = ({ route, navigation }) => {
             },
             body: JSON.stringify({
                 id_user: userInfo.id,
-                id_create: '0',
+                id_create: id_user,
                 type: 'test_type',
                 id_lesson_test: itemId,
                 score: score,

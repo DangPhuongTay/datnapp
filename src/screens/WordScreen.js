@@ -19,6 +19,7 @@ const WordScreen = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [category, setCategory] = useState({});
   const { WordleId } = route.params;
+  let rank = 1;
   const getWords = async () => {
     try {
       const response = await fetch(`${BASE_URL}/wordl-by-wordle/${WordleId}`);
@@ -105,7 +106,7 @@ const WordScreen = ({ route, navigation }) => {
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
             <View style={styles.score}>
-              <Text style={styles.name}>{item.vietnamese}</Text>
+              <Text style={styles.name}>{rank++}  {item.vietnamese}</Text>
 
               <TouchableOpacity
                 onPress={() => _handleSubmits(item.id)}
@@ -144,7 +145,6 @@ const styles = StyleSheet.create({
   },
   header: {
     width: 400,
-
     display: 'flex',
     flexDirection: 'row',
     marginTop: 10,
@@ -152,20 +152,14 @@ const styles = StyleSheet.create({
 
   },
   text: {
-  //   paddingHorizontal: 10,
-  //   //marginRight: "1%",
-  //   marginTop: 10,
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   borderColor: "#000",
-  //   justifyContent: "space-between",
+    marginTop: 10,
   },
   title: {
     width: 400,
         height: 50,
         marginLeft: 50,
-        marginTop: 5,
-        fontSize: 32,
+        marginTop: 20,
+        fontSize: 20,
         color: "#1E1E1E",
         fontWeight: "bold",
   },
@@ -174,23 +168,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     backgroundColor: "#fff",
     borderRadius: 10,
-    marginTop: 10,
     borderWidth: 1,
     borderColor: "#000",
     wight: 300,
+    gap: 10,
     //alignItems: "center",
     display: "flex",
     flexDirection: "row",
   },
   title1: {
-    fontSize: 24,
+    fontSize: 22,
+    marginStart: -5,
     color: "#1E1E1E",
-    fontWeight: "bold",
   },
   title2: {
     fontSize: 15,
     color: "#1E1E1E",
-    fontWeight: "bold",
   },
   icon: {
     width: 50,
@@ -213,9 +206,9 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    color: "#1E1E1E",
-    fontSize: 24,
-    fontWeight: "bold",
+    color: "#4b4b4b",
+    width: 200,
+    fontSize: 20,
   },
   button: {
     paddingVertical: 6,
@@ -227,7 +220,6 @@ const styles = StyleSheet.create({
   btn: {
     color: "#fff",
     fontSize: 14,
-    fontWeight: "bold",
   },
 });
 export default WordScreen;

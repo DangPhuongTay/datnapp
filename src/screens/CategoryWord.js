@@ -72,7 +72,7 @@ const CategoryWord = ({route , navigation }) => {
                                 <View>
                                 <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
                                         style={styles.button}>            
-                                    <Text style={styles.btn}> Chọn </Text>
+                                    <Text style={styles.btn}> Chơi </Text>
                                 </TouchableOpacity>
                             </View>
                             </View>
@@ -96,9 +96,6 @@ const styles = StyleSheet.create({
         gap: 10,
         backgroundColor: '#C0EDFC',
       },
-    
-  
-    
     back: {
         width: 40,
         height: 40,
@@ -134,9 +131,8 @@ const styles = StyleSheet.create({
             height: 50,
             marginLeft: 100,
             marginTop: 5,
-            fontSize: 32,
+            fontSize: 30,
             color: "#1E1E1E",
-            fontWeight: "bold",
             marginTop: 10,
       },
     
@@ -156,9 +152,9 @@ const styles = StyleSheet.create({
     
     name: {
         color: "#1E1E1E",
-        fontSize: 24,
-        fontWeight: "bold",
+        fontSize: 18,
         right: 10,
+        width: 200,
     },
     button:{
         paddingVertical: 6,
@@ -191,7 +187,6 @@ const styles = StyleSheet.create({
     },
     desBanner: {
         fontSize: 20,
-        fontWeight:'bold',
     },
     imgbanner: {
         width: 150,

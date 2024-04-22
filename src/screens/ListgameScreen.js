@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     width: 150,
     resizeMode: 'contain',
     width: 140,
-    lineHeight: 22
+    lineHeight: 22,
+    
   },
   name: {
     color: "#4B4B4B",

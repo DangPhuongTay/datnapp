@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
     margin: 3,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor:"whites"
   },
   cellText: {
     color: colors.while,

@@ -26,10 +26,11 @@ const ListTestScreen = ({ navigation }) => {
             setLoading(false);
         }
     };
-    _handleSubmit = async (e) => 
+    _handleSubmit = async (e,n) => 
     {   
         navigation.navigate('Test', {
             itemId: e,
+            id_user:n,
           });
     };
     
@@ -39,134 +40,150 @@ const ListTestScreen = ({ navigation }) => {
 
 
     return (
-        
-        <ImageBackground style={styles.bg} source={require('../../assets/images/bgcate.png')}>
-            
+        <ImageBackground
+        style={styles.bg}
+        source={require("../../assets/images/bgcate.png")}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Image
+            style={styles.back}
+            source={require("../../assets/images/back.png")}
+          ></Image>
+        </TouchableOpacity>
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
-            </TouchableOpacity>
-            <View style={styles.container1}>
-                <View style={styles.text}><Text style={styles.title}> Thi thử </Text></View>
-
-                {isLoading ? (
-                    <ActivityIndicator/>
-                ) : (
-                    <FlatList
-                        
-                        data={data}
-                        keyExtractor={({ id }) => id}
-                        renderItem={({ item }) => (
-            
-            <View style={styles.score}>
-                                <Text style={styles.name}>{item.name}</Text>
-                                
-                                <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
-                                        style={styles.button}>            
-                                    <Text style={styles.btn}> Chọn </Text>
-                                </TouchableOpacity>
-                            </View>
-          
-                        )}
-                    />
+          <View style={styles.container1}>
+            <View style={styles.text}>
+              <Text style={styles.title}>Bài kiểm tra</Text>
+            </View>
+  
+            {isLoading ? (
+              <ActivityIndicator />
+            ) : (
+              <FlatList
+                contentContainerStyle={styles.list}
+                data={data}
+                keyExtractor={({ id }) => id}
+                renderItem={({ item }) => (
+                  <View style={styles.score}>
+                    <Image
+                      style={styles.icon}
+                      source={require("../../assets/images/image12/iconbh.png")}
+                    ></Image>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text style={styles.nameGame}>{item.description}</Text>
+                    
+                    <TouchableOpacity
+                      onPress={() => this._handleSubmit(item.id, item.id_user)}
+                      style={styles.button}
+                    >
+                      <Text style={styles.btn}> Làm bài </Text>
+                    </TouchableOpacity>
+                  </View>
                 )}
-
-            </View>
-            </View>
-        </ImageBackground>
-
+              />
+            )}
+          </View>
+        </View>
+      </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
+    bg: {
+        width: "100%",
+        height: 932,
+      },
+      // container: {
+      //     display: "flex",
+      //     justifyContent: "center",
+      //     alignItems: "center"
     
-    container: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'start',
+      // },
+      container: {
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "start",
         gap: 10,
-    },
-  
-    container1:{
-        height:550,
-        width:'90%',
-        backgroundColor:'#fff',
-        borderRadius:20,
-        gap:10,
-        alignItems:'center',
-        marginTop:10
-    },
+      },
     
-    back: {
+      container1: {
+        height: 550,
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 20,
+        gap: 10,
+        alignItems: "center",
+        marginTop: 10,
+      },
+      back: {
         width: 40,
         height: 40,
         marginRight: "85%",
         marginTop: 20,
-    },
-    text: {
+      },
+      icon: {
+        width: 50,
+        height: 50,
+        marginRight: "85%",
+        marginTop: 10,
+      },
+      text: {
         paddingVertical: 10,
-        paddingHorizontal: 65,
-        backgroundColor: "#0280BD",
+        paddingHorizontal: 50,
+        backgroundColor: "#62C7F3",
         borderRadius: 20,
-        marginTop: -25,
+        marginTop: 50,
         borderWidth: 1,
         borderColor: "#000",
-        alignItems: "center",
-    // paddingHorizontal: 100,
-    // paddingVertical: 10,
-    // backgroundColor: "#62C7F3",
-    // marginTop: 4,
-    // alignItems: "center",
-    // borderRadius: 12,
-    },
-    title: {
+      },
+      title: {
         fontSize: 32,
         color: "#fff",
         fontWeight: "bold",
-
-    },
-    list: {
+      },
+      list: {
         width: 350,
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         gap: 10,
         justifyContent: "flex-start",
-    },
-
-    score: {
+      },
+    
+      score: {
         paddingHorizontal: 20,
-        width: 300,
+        width: 170,
         paddingVertical: 10,
         backgroundColor: "#fff",
         marginTop: 10,
         borderRadius: 12,
         backgroundColor: "#AECCF2",
-        flexDirection:'row',
-        justifyContent:'space-between',
-     
-    },
+      },
     
-    name: {
+      nameGame: {
+        fontSize: 15,
+        color: "#4B4B4B",
+        fontWeight: "bold",
+      },
+      name: {
         color: "#fff",
         fontSize: 24,
         fontWeight: "bold",
-    },
-    button:{
+      },
+      button: {
         paddingVertical: 6,
-        width: 100,
-        height: 35  ,
-        backgroundColor:'#62C7F3', 
-        alignItems: 'center',
-        borderRadius:15,          
-    },
-    btn:{
-        color:'#fff',
-        fontSize:14,
-        fontWeight:'bold',
-        
-    },
+        width: 80,
+        height: 35,
+        backgroundColor: "#62C7F3",
+        alignItems: "center",
+        borderRadius: 15,
+      },
+      btn: {
+        color: "#fff",
+        fontSize: 14,
+        fontWeight: "bold",
+      },
 
 }
 );
