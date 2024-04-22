@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
 
   },
-  // text: {
+  text: {
   //   paddingHorizontal: 10,
   //   //marginRight: "1%",
   //   marginTop: 10,
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   //   flexDirection: "row",
   //   borderColor: "#000",
   //   justifyContent: "space-between",
-  // },
+  },
   title: {
     width: 400,
         height: 50,

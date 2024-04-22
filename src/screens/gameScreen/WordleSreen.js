@@ -178,7 +178,7 @@ ${description}`
                   styles.cell,
                   {
                     borderColor: isCellActive(i, j)
-                      ? colors.grey
+                      ? colors.while
                       : colors.darkgrey,
                     backgroundColor: getCellBGColor(i, j),
                   },
@@ -204,7 +204,7 @@ export default WordleScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.black,
+    backgroundColor: colors.blue,
     alignItems: "center",
   },
   title: {
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   cell: {
     borderWidth: 3,
-    borderColor: colors.darkgrey,
+    borderColor: colors.while,
     flex: 1,
     maxWidth: 70,
     aspectRatio: 1,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cellText: {
-    color: colors.lightgrey,
+    color: colors.while,
     fontWeight: "bold",
     fontSize: 28,
   },

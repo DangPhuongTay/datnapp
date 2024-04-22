@@ -41,22 +41,24 @@ const CategoryWord = ({route , navigation }) => {
 
 
     return (
+        <View style={styles.bg} >
+        <View style={styles.header}>
         
         
-         <View style={{height: '100%'}}>
-      <View
-        style={{
-          height: '100%',
-          backgroundColor: 'powderblue',
-        }}>  
-        <View style={styles.container}>
-        <View style={styles.text}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image style={styles.back} source={require('../../assets/images/back.png')}></Image>
             </TouchableOpacity>
             
-                <Text style={styles.title}> Chủ đề</Text></View>
-
+            <View style={styles.text}><Text style={styles.title}> Chủ đề</Text></View>
+            </View>
+            <View style={styles.banner}>
+                <Image style={styles.imgbanner} source={require('../../assets/images/item_home_banner.png')} />
+                <View style={styles.introBanner}>
+                    <Text style={styles.desBanner}>What happens here, stay here</Text>
+                    
+                </View>
+                </View>
+        <View style={styles.container}>
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (
@@ -67,17 +69,17 @@ const CategoryWord = ({route , navigation }) => {
                         renderItem={({ item }) => (
                             <View style={styles.score}>
                                 <Text style={styles.name}>{item.name}</Text>
-                                
+                                <View>
                                 <TouchableOpacity onPress={() => this._handleSubmit(item.id)} 
                                         style={styles.button}>            
                                     <Text style={styles.btn}> Chọn </Text>
                                 </TouchableOpacity>
                             </View>
+                            </View>
                         )}
                     />
                 )}
 
-            </View>
             </View>
             </View>
  
@@ -87,42 +89,56 @@ const CategoryWord = ({route , navigation }) => {
 const styles = StyleSheet.create({
     
     container: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'start',
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "start",
         gap: 10,
-        backgroundColor: "powderblue",
-    },
+        backgroundColor: '#C0EDFC',
+      },
+    
   
     
     back: {
         width: 40,
         height: 40,
-        marginTop: 20,
+        marginTop: 10,
     },
-    text: {
-        paddingVertical: 10,
-        paddingHorizontal: 65,
-        borderRadius: 20,
-        marginTop: 0,
-        borderColor: "#000",
-        alignItems: "center",
-        flexDirection:'row',
+    bg: {
+        width: '100%',
         display: 'flex',
-    //     paddingHorizontal: 100,
-    // paddingVertical: 10,
-    // backgroundColor: "#62C7F3",
-    // marginTop: 4,
-    // alignItems: "center",
-    // borderRadius: 12,
-    },
+        gap: 10,
+        backgroundColor: '#C0EDFC'
+      },
+      header: {
+        width: 400,
+    
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 10,
+        marginLeft: 10
+    
+      },
+    // text: {
+    //     paddingVertical: 10,
+    //     paddingHorizontal: 65,
+    //     borderRadius: 20,
+    //     marginTop: 0,
+    //     borderColor: "#000",
+    //     alignItems: "center",
+    //     flexDirection:'row',
+    //     display: 'flex',
+    // },
     title: {
-        fontSize: 32,
-        color: "#fff",
-        fontWeight: "bold",
-
-    },
+        width: 400,
+            height: 50,
+            marginLeft: 100,
+            marginTop: 5,
+            fontSize: 32,
+            color: "#1E1E1E",
+            fontWeight: "bold",
+            marginTop: 10,
+      },
     
     score: {
         paddingHorizontal: 20,
@@ -142,6 +158,7 @@ const styles = StyleSheet.create({
         color: "#1E1E1E",
         fontSize: 24,
         fontWeight: "bold",
+        right: 10,
     },
     button:{
         paddingVertical: 6,
@@ -155,6 +172,36 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontWeight:'bold',
         
+    },
+    banner: {
+        width: '75%',
+        height: '15%',
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        marginTop: 30,
+        marginLeft:60,
+        flexDirection: 'row',
+        marginBottom: 20
+    },
+    introBanner: {
+        marginRight: '40%',
+
+    },
+    desBanner: {
+        fontSize: 20,
+        fontWeight:'bold',
+    },
+    imgbanner: {
+        width: 150,
+        height: 150,
+        objectFit: 'contain',
+        display: 'flex',
+        marginLeft: '-10%',
+        marginTop: -20,
+        marginBottom: 30
+
     },
 
 }
