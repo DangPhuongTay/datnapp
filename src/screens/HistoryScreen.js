@@ -18,6 +18,7 @@ const HistoryScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     let [data, setData] = useState([]);
     const id_user = userInfo.id;
+    
     const getHistories = async () => {
         try {
             const response = await fetch(`${BASE_URL}/history/lesson-history-user/${id_user}`);

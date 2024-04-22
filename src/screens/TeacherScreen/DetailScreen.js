@@ -27,11 +27,11 @@ const DetailScreen = ({ route, navigation }) => {
     const [answer, setAnswer] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const {
-        testId1,
+        testId,
         testName,
         testDes,
     } = route.params;
-    const id_test = testId1;
+    const id_test = testId;
 
     const getQuestions = async () => {
         try {
@@ -74,7 +74,7 @@ const DetailScreen = ({ route, navigation }) => {
 
                 // console.log(res.data);
                 setIsLoading(false);
-                navigation.navigate('Create', {
+                navigation.navigate('ListTestTeacher', {
                     testUser: id_user,
                 });
             }).catch(e => {
@@ -108,12 +108,12 @@ const DetailScreen = ({ route, navigation }) => {
 
                         <View style={styles.question}>
                             <View style={styles.number}>
-                                <Text style={styles.numberText}>{questions?.length} Question </Text>
+                                <Text style={styles.numberText}>{questions?.length} Câu hỏi </Text>
                             </View>
 
-                            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Create')}>
-                                <Image style={styles.addIcon} source={require('../../../assets/images/icon/add.png')}></Image>
-                                <Text style={styles.addQuestion}>Add Question</Text>
+                            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('ListTestTeacher')}>
+                            
+                                <Text style={styles.addQuestion}>Danh sách bộ đề</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     select: {
         marginTop: 10,
         width: 210,
-        height: 140,
+        height: 220,
     },
     container: {
         width: 350,
@@ -447,8 +447,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '71%',
-
-
     },
     btn: {
         fontSize: 20,
