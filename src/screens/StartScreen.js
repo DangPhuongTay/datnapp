@@ -9,9 +9,16 @@ const StartScreen = ({ navigation }) => {
             <Image style={styles.img} source={require('../../assets/images/item_start.png')} >
 
             </Image>
+            <Text style={styles.title}> Chào mừng bạn đến với English App!
+
+            </Text>
+            <Text style={styles.title}> Hãy thử xem chúng ta có gì nhé
+
+            </Text>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}
                     style={styles.button}>
+
                     <Text style={styles.btn}>Bắt đầu</Text>
                 </TouchableOpacity>
             </View>
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
     button: {
         paddingVertical: 10,
         width: 220,
-        marginTop: '-70%',
+        marginTop: '-40%',
         backgroundColor: '#62C7F3',
         display: 'flex',
         alignItems: 'center',
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width: '100%',
-        height: '100%',
+        height: '60%',
         objectFit: 'contain',
         marginBottom: 200
 
@@ -69,5 +76,11 @@ const styles = StyleSheet.create({
     link: {
         color: 'blue',
     },
+    title: {
+        fontSize: 18,
+
+        color: '#4CA6C2',
+        bottom: 200
+    }
 });
 export default StartScreen;
