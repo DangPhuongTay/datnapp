@@ -67,8 +67,9 @@ const WordScreen = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.text}>
+    
+      <View style={styles.bg} >
+      <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.navigate("Category")}>
       
         <Image
@@ -77,10 +78,11 @@ const WordScreen = ({ route, navigation }) => {
         ></Image>
       </TouchableOpacity>
        
-        
+        <View style={styles.text}>
           <Text style={styles.title}>{category.name}</Text>
         </View> 
-     
+     </View>
+     <View style={styles.container}>
       <View style={styles.text1}>
         <Image
           style={styles.icon}
@@ -89,7 +91,7 @@ const WordScreen = ({ route, navigation }) => {
         <View>
         <Text style={styles.title1}> Cách chơi: </Text>
         <Text style={styles.title2}>
-          Khi bạn bước vào trò chơi, bạn sẽ được cung cấp cho bạn các ô trống,
+           Khi bạn bước vào trò chơi, bạn sẽ được cung cấp cho bạn các ô trống,
           nhiệm vụ của bạn chỉ việc đọc các từ được gợi ý, đoán ra từ vựng được
           ẩn dấu và điền chúng vào chỗ trống.{" "}
         </Text>
@@ -115,7 +117,7 @@ const WordScreen = ({ route, navigation }) => {
           )}
         />
       )}
-    </View>
+    </View></View>
   );
 };
 
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "start",
     gap: 10,
-    backgroundColor: "powderblue",
+    backgroundColor: '#C0EDFC',
   },
 
   back: {
@@ -134,19 +136,38 @@ const styles = StyleSheet.create({
     height: 40,
     marginRight: 1,
   },
-  text: {
-    paddingHorizontal: 10,
-    //marginRight: "1%",
-    marginTop: 10,
-    display: "flex",
-    flexDirection: "row",
-    borderColor: "#000",
-    justifyContent: "space-between",
+  bg: {
+    width: '100%',
+    display: 'flex',
+    gap: 10,
+    backgroundColor: '#C0EDFC'
   },
+  header: {
+    width: 400,
+
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 10,
+    marginLeft: 10
+
+  },
+  // text: {
+  //   paddingHorizontal: 10,
+  //   //marginRight: "1%",
+  //   marginTop: 10,
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   borderColor: "#000",
+  //   justifyContent: "space-between",
+  // },
   title: {
-    fontSize: 25,
-    color: "#1E1E1E",
-    fontWeight: "bold",
+    width: 400,
+        height: 50,
+        marginLeft: 50,
+        marginTop: 5,
+        fontSize: 32,
+        color: "#1E1E1E",
+        fontWeight: "bold",
   },
   text1: {
     paddingVertical: 10,
