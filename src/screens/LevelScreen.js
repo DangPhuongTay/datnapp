@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, Text, TextInput,Animated, View, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { StyleSheet, Text, TextInput, Animated, View, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { AuthContext } from '../context/AuthContext';
 
 const LevelScreen = ({ navigation }) => {
     const { userInfo } = useContext(AuthContext);
     let level = Math.floor(userInfo.score / 10);
-    let width= 0;
-    if(userInfo.score % 10 == 0){
+    let width = 0;
+    if (userInfo.score % 10 == 0) {
         width = 10;
-    }else{
+    } else {
         width = userInfo.score % 10;
     }
-    
+
     console.log(width);
     return (
         <ImageBackground source={require('../../assets/images/school.jpg')} resizeMode="cover" style={styles.img}>
@@ -31,15 +31,15 @@ const LevelScreen = ({ navigation }) => {
             <View style={styles.container}>
                 <View style={styles.bar}>
                     <View style={styles.progressBar}>
-                    <Animated.View style={[{
-                    height: 18,
-                    borderRadius: 20,
-                    backgroundColor: '#3498db'
-                }
-                    , {
-                    width: width * 30
-                }]}>
-                </Animated.View>
+                        <Animated.View style={[{
+                            height: 14,
+                            borderRadius: 6,
+                            backgroundColor: '#3498db'
+                        }
+                            , {
+                            width: width * 30
+                        }]}>
+                        </Animated.View>
                     </View>
                     <View style={styles.imgBar}>
                         <Image style={styles.imgLevel} source={require('../../assets/images/young.png')}></Image>
