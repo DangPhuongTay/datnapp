@@ -15,7 +15,7 @@ const CreateScreen = ({ navigation }) => {
     const [type, setType] = useState('Text');
     const id_user = userInfo.id;
     const data = [
-        { key: '1', value: 'Test' },
+        { key: '1', value: 'Text' },
         { key: '2', value: 'Listen' },
         { key: '3', value: 'Image' },
 
