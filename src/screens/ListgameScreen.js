@@ -46,45 +46,48 @@ const ListgameScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.banner}>
-        <Image
+        <ImageBackground
           style={styles.imgbanner}
           source={require("../../assets/images/image12/bannerlistgame.jpg")}
-        />
-        <View style={styles.introBanner}>
-          <Text style={styles.desBanner}>What happens here, stay here</Text>
-        </View>
+        >
+          <View style={styles.introBanner}>
+            <Text style={styles.desBanner}>Just do it.</Text>
+          </View>
+        </ImageBackground>
       </View>
-    <View style={styles.container}>
-      
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          contentContainerStyle={styles.list}
-          data={data}
-          keyExtractor={({ id }) => id}
-          renderItem={({ item }) => (
-            <View style={styles.score}>
-            
-              <View>
-                <Text style={styles.name}>{item.name}</Text>
-
-                <Text style={styles.description}>{item.description}</Text>
+      <View style={styles.container}>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            contentContainerStyle={styles.list}
+            data={data}
+            keyExtractor={({ id }) => id}
+            renderItem={({ item }) => (
+              <View style={styles.score}>
+                <Image
+                  style={styles.img}
+                  source={require("../../assets/images/image12/crossword.png")}
+                ></Image>
+                <View style={styles.score1}>
+                  <Text style={styles.name}>{item.name}</Text>
+                  <Text style={styles.description}>{item.description}</Text>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Category")}
+                    style={styles.button}
+                  >
+                    <Text style={styles.btn}> Chơi ngay </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Category")}
-                  style={styles.button}
-                >
-                  <Text style={styles.btn}> Chơi ngay </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            // </View>
-          )}
-        />
-      )}
-    </View></View>
+              // </View>
+            )}
+          />
+        )}
+      </View>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -153,7 +156,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 15,
     height: 250,
-    justifyContent: "space-between",
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+  },
+  score1: {
+    alignItems: "center",
+    
+    
   },
   description: {
     marginTop: 5,
@@ -162,13 +172,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     width: 150,
     resizeMode: "contain",
-    width: 140,
-    lineHeight: 22,
+    height:30,
+    left:50
+    
+    
   },
   name: {
     color: "#4B4B4B",
     fontSize: 20,
     fontWeight: "bold",
+    alignItems: "center",
   },
   button: {
     paddingVertical: 6,
@@ -176,6 +189,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#62C7F3",
     alignItems: "center",
     borderRadius: 15,
+    bottom: -10,
   },
   btn: {
     color: "#fff",
@@ -187,27 +201,35 @@ const styles = StyleSheet.create({
     height: "15%",
     display: "flex",
     alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 12,
+    //backgroundColor: "#fff",
+    //borderRadius: 12,
     marginTop: 30,
     marginLeft: 60,
     flexDirection: "row",
     marginBottom: 20,
   },
   introBanner: {
-    marginRight: "40%",
+    left: -20,
+    top: 55,
+    alignItems: "flex-end",
   },
   desBanner: {
-    fontSize: 20,
+    fontSize: 25,
+    display: "flex",
+    alignItems: "flex-end",
   },
   imgbanner: {
     width: 300,
     height: 150,
     objectFit: "center",
-    //display: "flex",
-    
-    
+    display: "flex",
+    borderRadius: 12,
     marginBottom: 30,
+  },
+  img: {
+    width: 100,
+    height: 100,
+    marginTop: 10,
   },
 });
 export default ListgameScreen;
