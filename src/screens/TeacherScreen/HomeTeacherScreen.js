@@ -51,11 +51,11 @@ const HomeTeacherScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <Text style={styles.infoUser}> Chào {userInfo.name},</Text>
-            <Text style={styles.desUser}>Có bài học mới cho bạn nè!</Text>
+            <Text style={styles.desUser}>Hãy tạo bài học thật thú vị nhé!</Text>
             <View style={styles.banner}>
                 <Image style={styles.imgbanner} source={require('../../../assets/images/item_home_banner.png')} />
                 <View style={styles.introBanner}>
-                    <Text style={styles.desBanner}>We may be out of sight… But never out of mind…</Text>
+                    <Text style={styles.desBanner}>Học...Học nữa...Học mãi...</Text>
                     <TouchableOpacity style={styles.btnBanner} onPress={() => navigation.navigate('Lesson')}>
                         <Text style={styles.textBanner}>Xem thêm</Text>
                     </TouchableOpacity>
@@ -91,14 +91,15 @@ const HomeTeacherScreen = ({ navigation }) => {
                             renderItem={({ item }) => (
                                 <View style={styles.itemlesson}>
                                     <View style={styles.content}>
-                                        <Text style={styles.name}>📋 {item.name}</Text>
-                                        <Text style={styles.description}>{item.description}</Text>
+                                        <Image style={styles.item_img} source={imgs[nubicon++]}></Image>
+                                        <Text style={styles.name}>{item.name}</Text>
+                                        {/* <Text style={styles.description}>{item.description}</Text> */}
                                     </View>
                                     <View style={styles.btn_bottom}>
                                         <TouchableOpacity style={styles.btn} onPress={() => this._handleSubmit(item.id)} >
                                             <Text style={styles.textbtn}>Chọn</Text>
                                         </TouchableOpacity>
-                                        <Image style={styles.item_img} source={imgs[nubicon++]}></Image>
+
                                     </View>
 
                                 </View>
@@ -129,8 +130,11 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     description: {
-        fontSize: 16,
-        color: 'white'
+        fontSize: 10,
+        color: 'white',
+        width: 250,
+        height: 100,
+
     },
     container: {
         flex: 1,
@@ -152,14 +156,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     infoUser: {
-        fontSize: 28,
+        fontSize: 20,
         fontWeight: '800',
-        marginRight: '50%'
+        right: 60
     },
     desUser: {
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '400',
-        marginRight: '22%'
+        marginRight: '28%'
     },
     banner: {
         width: '75%',
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
 
     },
     desBanner: {
-        fontSize: 16,
+        fontSize: 14,
 
     },
 
@@ -269,7 +273,7 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     itemtext: {
-        fontSize: 18,
+        fontSize: 16,
 
     },
     listlesstion:
@@ -305,20 +309,23 @@ const styles = StyleSheet.create({
     content: {
         gap: 5,
         width: 120,
-        height: 30
+        height: 30,
+        display: 'flex',
+        flexDirection: 'row'
 
     },
     item_img: {
-        width: 50,
-        height: 50,
-        marginLeft: -10,
-        marginTop: 50
+        width: 30,
+        height: 30,
+        marginLeft: -20,
+        top: -15
 
     },
     name: {
         color: '#000',
         fontWeight: '600',
-        marginTop: -10
+        marginTop: -10,
+        left: -5
     },
     description: {
         color: '#000'
@@ -338,8 +345,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,
-        marginTop: 60,
-        marginRight: 20
+        marginTop: 65,
+        marginLeft: 50
     }
 
 })
