@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
@@ -37,65 +38,81 @@ const LessonScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ImageBackground
+    <View
       style={styles.bg}
-      source={require("../../assets/images/bgcate.png")}
+
     >
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-        <Image
-          style={styles.back}
-          source={require("../../assets/images/back.png")}
-        ></Image>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Image
+            style={styles.back}
+            source={require("../../assets/images/back.png")}
+          ></Image>
+
+        </TouchableOpacity>
+        <Text style={styles.title}>Bài học</Text>
+      </View>
       <View style={styles.container}>
+        <View style={styles.banner}>
+          <Image style={styles.imgBannerLeft}
+            source={require("../../assets/images/item9_home_list.png")}></Image>
+          <Text style={styles.desBanner}>Đừng xấu hổ khi không biết, chỉ xấu hổ khi không học</Text>
+          <Image style={styles.imgBanner}
+            source={require("../../assets/images/adult.png")}></Image>
+
+        </View>
         <View style={styles.container1}>
-          <View style={styles.text}>
-            <Text style={styles.title}>Bài học</Text>
-          </View>
+
 
           {isLoading ? (
             <ActivityIndicator />
           ) : (
-            <FlatList
-              contentContainerStyle={styles.list}
-              data={data}
-              keyExtractor={({ id }) => id}
-              renderItem={({ item }) => (
-                <View style={styles.score}>
-                  <Image
-                    style={styles.icon}
-                    source={require("../../assets/images/image12/iconbh.png")}
-                  ></Image>
-                  <Text style={styles.name}>{item.name}</Text>
-                  <Text style={styles.nameGame}>{item.description}</Text>
-                  
-                  <TouchableOpacity
-                    onPress={() => this._handleSubmit(item.id)}
-                    style={styles.button}
-                  >
-                    <Text style={styles.btn}> Chọn </Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            />
+            <ScrollView style={styles.lessonList}>
+              <FlatList
+                contentContainerStyle={styles.list}
+                data={data}
+                keyExtractor={({ id }) => id}
+                renderItem={({ item }) => (
+                  <View style={styles.score}>
+
+                    <Image
+                      style={styles.icon}
+                      source={require("../../assets/images/item3_home_list.png")}
+                    ></Image>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text style={styles.nameGame}>{item.description}</Text>
+                    <View style={styles.btnItem}>
+                      <TouchableOpacity
+                        onPress={() => this._handleSubmit(item.id)}
+                        style={styles.button}
+                      >
+                        <Text style={styles.btn}> Chọn </Text>
+
+                      </TouchableOpacity>
+
+                    </View>
+
+                  </View>
+                )}
+              />
+            </ScrollView>
           )}
         </View>
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   bg: {
     width: "100%",
-    height: 932,
+    backgroundColor: '#fff'
   },
-  // container: {
-  //     display: "flex",
-  //     justifyContent: "center",
-  //     alignItems: "center"
-
-  // },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    top: 10
+  },
   container: {
     height: "100%",
     display: "flex",
@@ -111,33 +128,55 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     gap: 10,
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 40,
   },
   back: {
     width: 40,
     height: 40,
-    marginRight: "85%",
+    marginRight: "80%",
     marginTop: 20,
+    left: 20
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
     marginRight: "85%",
     marginTop: 10,
   },
-  text: {
-    paddingVertical: 10,
-    paddingHorizontal: 100,
-    backgroundColor: "#62C7F3",
-    borderRadius: 20,
-    marginTop: 50,
-    borderWidth: 1,
-    borderColor: "#000",
+  banner: {
+    width: 350,
+    height: 100,
+    backgroundColor: '#62C7F3',
+    borderRadius: 12,
+    top: 30,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  imgBanner: {
+    width: 100,
+    height: 100,
+
+  },
+  imgBannerLeft: {
+    width: 50,
+    height: 50,
+    top: 30,
+    left: 5
+  },
+  desBanner: {
+    fontSize: 16,
+
+    width: '60%',
+    height: 50
   },
   title: {
-    fontSize: 32,
-    color: "#fff",
+    fontSize: 20,
+    color: "#000",
     fontWeight: "bold",
+    top: 27,
+    left: -200
   },
   list: {
     width: 350,
@@ -146,40 +185,60 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 10,
     justifyContent: "flex-start",
+    height: 600,
+    top: 30
   },
 
   score: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     width: 170,
-    paddingVertical: 10,
-    backgroundColor: "#fff",
+    paddingVertical: 5,
+    borderColor: "#62C7F3",
     marginTop: 10,
     borderRadius: 12,
-    backgroundColor: "#AECCF2",
+    borderWidth: 1,
+    borderStyle: 'solid',
+    height: 230
+
   },
 
   nameGame: {
-    fontSize: 15,
+    fontSize: 12,
     color: "#4B4B4B",
-    fontWeight: "bold",
+    height: 70,
+    top: 5,
+
+
+  },
+  lessonList: {
+    width: '95%',
+    height: 500,
+
   },
   name: {
-    color: "#fff",
-    fontSize: 24,
+    color: "#000",
+    fontSize: 16,
     fontWeight: "bold",
+    height: 50
+  },
+  btnItem: {
+    top: 10,
+    alignItems: 'flex-end'
   },
   button: {
-    paddingVertical: 6,
-    width: 80,
-    height: 35,
+    display: 'flex',
+    width: 60,
+    height: 30,
     backgroundColor: "#62C7F3",
     alignItems: "center",
-    borderRadius: 15,
+    borderRadius: 8,
+    justifyContent: 'center',
+    top: 10
   },
   btn: {
     color: "#fff",
     fontSize: 14,
-    fontWeight: "bold",
+
   },
 });
 export default LessonScreen;

@@ -16,7 +16,7 @@ import Keyboard from "../../components/Keyboard";
 import * as Clipboard from "expo-clipboard";
 import { BASE_URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
-const NUMBER_OF_TRIES = 3;
+const NUMBER_OF_TRIES = 4;
 
 const copyArray = (arr) => {
   return [...arr.map((rows) => [...rows])];
@@ -33,7 +33,6 @@ const WordleScreen = ({route, navigation }) => {
       description,
     } = route.params;
 
-  console.log(english,vietnamese,type,pronounce,description)
 
   const word = english;
   const letters = word.split(""); // ['h', 'e', 'l', 'l', 'o']
@@ -69,7 +68,7 @@ const WordleScreen = ({route, navigation }) => {
 
   const checkGameState = () => {
     if (checkIfWon() && gameState !== "won") {
-      Alert.alert("Bạn đoán đúng rồi bạn được cộng 1 điểm", 
+      Alert.alert("Đúng rồi! Bạn được cộng 1 điểm", 
 `${english}: ${vietnamese}
 ${type}
 ${pronounce}
@@ -166,6 +165,7 @@ ${description}`
             })}>
                 <Image style={styles.back} source={require('../../../assets/images/back.png')}></Image>
             </TouchableOpacity>
+      <Text style={styles.score}>{userInfo.rank}</Text>
       <Text style={styles.title}>{vietnamese}</Text>
 
       <ScrollView style={styles.map}>
@@ -202,6 +202,19 @@ ${description}`
 }
 export default WordleScreen;
 const styles = StyleSheet.create({
+  score:{
+    marginRight: -320,
+    marginTop: -40,
+    width: 40,
+    height: 40,
+    paddingTop: 10,
+    textAlign:'center',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    color:'#62C7F3',
+    fontWeight: '900',
+    fontSize:16
+  },
   container: {
     flex: 1,
     backgroundColor: colors.blue,
