@@ -31,6 +31,8 @@ import MenuTeacherScreen from "../screens/TeacherScreen/MenuTeacherScreen";
 import HomeTeacherScreen from "../screens/TeacherScreen/HomeTeacherScreen";
 import SystemTeacher from "../screens/TeacherScreen/SystemTeacher";
 import Test from "../screens/TestScreen";
+import BagScreen from "../screens/BagScreen";
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -111,10 +113,16 @@ const Navigation = () => {
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
+                  name="Bag"
+                  component={BagScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
                   name="Test"
                   component={Test}
                   options={{ headerShown: false }}
                 />
+
               </>
             ) : (
               <>
