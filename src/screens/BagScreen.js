@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
     productList: {
         width: '100%',
         height: 'auto',
-        top: 40
+        top: 40,
+
     },
     productItem: {
         width: '45%',
