@@ -65,67 +65,79 @@ const MenuSreen = ({ navigation }) => {
                             <Text style={styles.btn}> Bài kiểm tra </Text>
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('Shop')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Cửa hàng </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('Bag')}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Giỏ hàng </Text>
+                        </TouchableOpacity>
+                    </View>
 
 
-  
-            <View>
-            <TouchableOpacity onPress={logout}
-                style={styles.button}> 
-                <Text style={styles.btn}> Đăng xuất </Text>
-            </TouchableOpacity>
+
+                    <View>
+                        <TouchableOpacity onPress={logout}
+                            style={styles.button}>
+                            <Text style={styles.btn}> Đăng xuất </Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
 
             </View>
-            </View>
-
-        </View>
 
         </ImageBackground>
     );
 };
 const styles = StyleSheet.create({
 
-        container: {
-            //height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'start',
-            gap: 10,
-        },
-        back:{
-            width:40,
-            height:40,
-            marginRight:'85%',
-            marginTop:10,
-            marginLeft: 4
-           
-        },
-        color: {
-            color: '#62C7F3',
-            fontWeight: 'bold',
-            fontSize: 50,
-        },
-        button:{
-            paddingVertical: 15,
-            width: 300,
-            marginBottom: 10,
-            backgroundColor:'#62C7F3',
-            display:'flex',
-            alignItems: 'center',
-            borderRadius:15,            
-        
-        },
+    container: {
+        //height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'start',
+        gap: 10,
+    },
+    back: {
+        width: 40,
+        height: 40,
+        marginRight: '85%',
+        marginTop: 10,
+        marginLeft: 4
 
-        btn:{
-            color:'#fff',
-            fontSize:20,
-            fontWeight:'bold',
-        },
+    },
+    color: {
+        color: '#62C7F3',
+        fontWeight: 'bold',
+        fontSize: 50,
+    },
+    button: {
+        paddingVertical: 15,
+        width: 300,
+        marginBottom: 10,
+        backgroundColor: '#62C7F3',
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: 15,
 
-        img:{
-            flex:1,
-            objectFit:'cover',
-            marginBottom:15
-        },
+    },
+
+    btn: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+
+    img: {
+        flex: 1,
+        objectFit: 'cover',
+        marginBottom: 15
+    },
 
     container: {
         height: '100%',
