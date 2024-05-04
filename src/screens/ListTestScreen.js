@@ -12,9 +12,28 @@ import {
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
+import img1 from '../../assets/images/category-1.png';
+import img2 from '../../assets/images/category-2.png';
+import img3 from '../../assets/images/category-3.png';
+import img4 from '../../assets/images/category-4.png';
+import img5 from '../../assets/images/category-5.png';
+import img6 from '../../assets/images/category-6.png';
+import img7 from '../../assets/images/category-7.png';
+import imgback from '../../assets/images/img-back.png';
+import imgnof from '../../assets/images/img-nof.png';
+import imgnotitem from '../../assets/images/img-not-item-1.gif';
+import imgnotitembg from '../../assets/images/img-not-item-bg.png';
+const color_text_black = "#221E1B";
+const color_text_yellow = "#F3AE29";
+const color_background = "#f3f4df";
+const color_background_white = "#FFFFFF";
+const color_background_blue_1 = "#81D9FF";
+const color_background_blue_2 = "#D0EFFF";
 const ListTestScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const imgs = [img1, img2, img3, img4, img5, img6, img7];
+    let nubimg = 1;
     const getMovies = async () => {
         try {
             const response = await fetch(`${BASE_URL}/test/all`);
@@ -40,151 +59,188 @@ const ListTestScreen = ({ navigation }) => {
 
 
     return (
-        <ImageBackground
-        style={styles.bg}
-        source={require("../../assets/images/bgcate.png")}
-      >
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Image
-            style={styles.back}
-            source={require("../../assets/images/back.png")}
-          ></Image>
-        </TouchableOpacity>
-        <View style={styles.container}>
-          <View style={styles.container1}>
-            <View style={styles.text}>
-              <Text style={styles.title}>Bài kiểm tra</Text>
-            </View>
-  
-            {isLoading ? (
-              <ActivityIndicator />
-            ) : (
-              <FlatList
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
+            <Image style={styles.header_left_img} source={imgback} />
+          </TouchableOpacity>
+          <View style={styles.header_center}>
+            <Text style={styles.header_center_text}>
+              Bộ Bài Kiểm Tra
+            </Text>
+          </View>
+          <View style={styles.header_right}>
+            <Image style={styles.header_left_img} source={imgnof} />
+          </View>
+        </View>
+        {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+          data.length > 0 ? (
+        <View style={styles.content}>
+        <FlatList
                 contentContainerStyle={styles.list}
                 data={data}
                 keyExtractor={({ id }) => id}
                 renderItem={({ item }) => (
-                  <View style={styles.score}>
-                    <Image
-                      style={styles.icon}
-                      source={require("../../assets/images/image12/iconbh.png")}
-                    ></Image>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Text style={styles.nameGame}>{item.description}</Text>
-                    
-                    <TouchableOpacity
-                      onPress={() => this._handleSubmit(item.id, item.id_user)}
-                      style={styles.button}
-                    >
-                      <Text style={styles.btn}> Làm bài </Text>
-                    </TouchableOpacity>
-                  </View>
+                  <TouchableOpacity style={styles.item} onPress={() => this._handleSubmit(item.id)}>
+                    <View style={styles.item_left}>
+                      <Image style={styles.item_left_img} source={imgs[nubimg++]} />
+                      <View style={styles.item_left_text}>
+                        <Text style={styles.item_left_text_top}>
+                          {item.name}
+                        </Text>
+                        <Text style={styles.item_left_text_bottom}>
+                          {item.name}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.item_right}>
+                        <Text style={styles.item_right_text}>
+                          {item.type}
+                        </Text>
+                    </View>
+                  </TouchableOpacity>
                 )}
               />
-            )}
-          </View>
         </View>
-      </ImageBackground>
+        ) : ( 
+          <View style={styles.not_item}>
+            <ImageBackground source={imgnotitembg} style={styles.not_item_img_bg} >
+                <Image style={styles.not_item_img} source={imgnotitem} />
+            </ImageBackground>
+            <Text style={styles.not_item_text}>
+                  chưa có bài kiểm tra nào!
+                </Text>
+          </View>
+        ))}
+      </View>
+      
     );
 };
 
 const styles = StyleSheet.create({
-    bg: {
-        width: "100%",
-        height: 932,
-      },
-      // container: {
-      //     display: "flex",
-      //     justifyContent: "center",
-      //     alignItems: "center"
-    
-      // },
-      container: {
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "start",
-        gap: 10,
-      },
-    
-      container1: {
-        height: 550,
-        width: "90%",
-        backgroundColor: "#fff",
-        borderRadius: 20,
-        gap: 10,
-        alignItems: "center",
-        marginTop: 10,
-      },
-      back: {
-        width: 40,
-        height: 40,
-        marginRight: "85%",
-        marginTop: 20,
-      },
-      icon: {
-        width: 50,
-        height: 50,
-        marginRight: "85%",
-        marginTop: 10,
-      },
-      text: {
-        paddingVertical: 10,
-        paddingHorizontal: 50,
-        backgroundColor: "#62C7F3",
-        borderRadius: 20,
-        marginTop: 50,
-        borderWidth: 1,
-        borderColor: "#000",
-      },
-      title: {
-        fontSize: 32,
-        color: "#fff",
-        fontWeight: "bold",
-      },
-      list: {
-        width: 350,
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 10,
-        justifyContent: "flex-start",
-      },
-    
-      score: {
-        paddingHorizontal: 20,
-        width: 170,
-        paddingVertical: 10,
-        backgroundColor: "#fff",
-        marginTop: 10,
-        borderRadius: 12,
-        backgroundColor: "#AECCF2",
-      },
-    
-      nameGame: {
-        fontSize: 15,
-        color: "#4B4B4B",
-        fontWeight: "bold",
-      },
-      name: {
-        color: "#fff",
-        fontSize: 24,
-        fontWeight: "bold",
-      },
-      button: {
-        paddingVertical: 6,
-        width: 80,
-        height: 35,
-        backgroundColor: "#62C7F3",
-        alignItems: "center",
-        borderRadius: 15,
-      },
-      btn: {
-        color: "#fff",
-        fontSize: 14,
-        fontWeight: "bold",
-      },
+  container: {
+    flex:1,
+    height: '100vh',
+    paddingHorizontal:20,
+    backgroundColor:color_background_blue_2,
+  },
+  header: {
+    width: '100%',
+    paddingVertical: 25,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+  },
+  header_left: {
 
-}
-);
+  },
+  header_left_img: {
+    height: 24,
+    width: 24,
+  },
+  header_center: {
+ 
+  },
+  header_center_text:{
+    color:color_text_black,
+    fontSize:16,
+    textTransform:'uppercase',
+    fontWeight:'400',
+    backgroundColor:color_background_white,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 18,
+    borderTopLeftRadius: 2,
+    borderBottomRightRadius:2
+  },
+  header_right: {
+
+  },
+  content: {
+
+  },
+  list: {
+    marginTop:10,
+    gap: 12,
+    height:'93%',
+  },
+  item: {
+    padding: 16,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    backgroundColor:color_background_white,
+    borderTopEndRadius:24,
+    borderBottomRightRadius:24,
+    borderTopStartRadius: 2,
+    borderBottomLeftRadius: 24,
+  },
+  item_left: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    gap: 10
+  },
+  item_left_text:{
+    justifyContent:'space-between'
+  },
+  item_left_img: {
+    width:40,
+    height:40,
+    objectFit:'contain'
+  },
+  item_left_text_top:{
+    color:color_text_black,
+    fontWeight: '500',
+    fontSize:14,
+  },
+  item_left_text_bottom:{
+    color:color_text_black,
+    fontSize:12,
+  },
+  item_right: {
+    width: 42,
+    height: 42,
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:color_background_blue_1,
+    borderWidth: 2,
+    borderRadius: 999
+  },
+  item_right_text:{
+    color: color_background_blue_1,
+    fontWeight: '600',
+    fontSize: 12,
+    textTransform:'uppercase',
+  },
+  not_item:{
+    width:'100%',
+    height: '85%',
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor: color_background_white,
+    borderRadius: 24,
+    borderTopLeftRadius: 2
+  },
+  not_item_img:{
+    width: 160,
+    height: 160,
+    objectFit: 'contain',
+    marginBottom: -10
+  },
+  not_item_img_bg:{
+    width: 160,
+    height: 160,
+    objectFit: 'contain',
+    justifyContent: 'flex-end',
+    alignItems:'center'
+  },
+  not_item_text:{
+    marginTop: 10,
+    textTransform:'uppercase',
+    color: color_text_black,
+    fontWeight:'500',
+    fontSize: 12
+  }
+});
 export default ListTestScreen;
