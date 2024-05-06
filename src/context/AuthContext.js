@@ -3,11 +3,11 @@ import React, { createContext, useState } from 'react';
 import {BASE_URL} from '../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const AuthContext = createContext();
+export let AuthContext = createContext();
 
 export const AuthProvider =  ({children}) => {
-   const [userInfo, setUserInfo] = useState({});
-   const [isLoading, setIsLoading] = useState(false);
+   let [userInfo, setUserInfo] = useState({});
+   let [isLoading, setIsLoading] = useState(false);
 
    const register = (name, email, password) => {
       setIsLoading(true);

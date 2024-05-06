@@ -12,10 +12,30 @@ import {
   ScrollView,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
+import img1 from '../../assets/images/category-1.png';
+import img2 from '../../assets/images/category-2.png';
+import img3 from '../../assets/images/category-3.png';
+import img4 from '../../assets/images/category-4.png';
+import img5 from '../../assets/images/category-5.png';
+import img6 from '../../assets/images/category-6.png';
+import img7 from '../../assets/images/category-7.png';
+import imgback from '../../assets/images/img-back.png';
+import imgnof from '../../assets/images/img-nof.png';
+import imgnotitem from '../../assets/images/img-not-item-1.gif';
+import imgnotitembg from '../../assets/images/img-not-item-bg-1.png';
+import imgsandwich from '../../assets/images/sandwich.png';
+const color_text_black = "#221E1B";
+const color_text_yellow = "#F3AE29";
+const color_background = "#f3f4df";
+const color_background_white = "#FFFFFF";
+const color_background_blue_1 = "#81D9FF";
+const color_background_blue_2 = "#D0EFFF";
 import { BASE_URL } from "../config";
 const LessonScreen = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const imgs = [img1, img2, img3, img4, img5, img6, img7];
+  let nubimg = 1;
   const getMovies = async () => {
     try {
       const response = await fetch(`${BASE_URL}/lession/all`);
@@ -38,207 +58,187 @@ const LessonScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View
-      style={styles.bg}
-
-    >
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Image
-            style={styles.back}
-            source={require("../../assets/images/back.png")}
-          ></Image>
-
+        <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
+          <Image style={styles.header_left_img} source={imgback} />
         </TouchableOpacity>
-        <Text style={styles.title}>Bài học</Text>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.banner}>
-          <Image style={styles.imgBannerLeft}
-            source={require("../../assets/images/item9_home_list.png")}></Image>
-          <Text style={styles.desBanner}>Đừng xấu hổ khi không biết, chỉ xấu hổ khi không học</Text>
-          <Image style={styles.imgBanner}
-            source={require("../../assets/images/adult.png")}></Image>
-
+        <View style={styles.header_center}>
+          <Text style={styles.header_center_text}>
+            cùng học thôi nào !
+          </Text>
         </View>
-        <View style={styles.container1}>
-
-
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
-            <ScrollView style={styles.lessonList}>
-              <FlatList
-                contentContainerStyle={styles.list}
-                data={data}
-                keyExtractor={({ id }) => id}
-                renderItem={({ item }) => (
-                  <View style={styles.score}>
-
-                    <Image
-                      style={styles.icon}
-                      source={require("../../assets/images/item3_home_list.png")}
-                    ></Image>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Text style={styles.nameGame}>{item.description}</Text>
-                    <View style={styles.btnItem}>
-                      <TouchableOpacity
-                        onPress={() => this._handleSubmit(item.id)}
-                        style={styles.button}
-                      >
-                        <Text style={styles.btn}> Chọn </Text>
-
-                      </TouchableOpacity>
-
+        <View style={styles.header_right}>
+          <Image style={styles.header_left_img} source={imgnof} />
+        </View>
+      </View>
+      {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+        data.length > 0 ? (
+      <View style={styles.content}>
+      <FlatList
+              contentContainerStyle={styles.list}
+              data={data}
+              keyExtractor={({ id }) => id}
+              renderItem={({ item }) => (
+                <TouchableOpacity style={styles.item} onPress={() => this._handleSubmit(item.id)}>
+                  <View style={styles.item_left}>
+                    <Image style={styles.item_left_img} source={imgs[nubimg++]} />
+                    <View style={styles.item_left_text}>
+                      <Text style={styles.item_left_text_top}>
+                        {item.name}
+                      </Text>
+                      <Text style={styles.item_left_text_bottom}>
+                        {item.name}
+                      </Text>
                     </View>
-
                   </View>
-                )}
-              />
-            </ScrollView>
-          )}
-        </View>
+                  <View style={styles.item_right}>
+                      <Text style={styles.item_right_text}>
+                        {item.type}
+                      </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
       </View>
+      ) : ( 
+        <View style={styles.not_item}>
+          <ImageBackground source={imgnotitembg} style={styles.not_item_img_bg} >
+              <Image style={styles.not_item_img} source={imgnotitem} />
+          </ImageBackground>
+          <Text style={styles.not_item_text}>
+                chưa có bài học nào!
+              </Text>
+        </View>
+      ))}
     </View>
+    
   );
 };
-
 const styles = StyleSheet.create({
-  bg: {
-    width: "100%",
-    backgroundColor: '#fff'
+  container: {
+    flex:1,
+    height: '100vh',
+    paddingHorizontal:20,
+    backgroundColor:color_background,
   },
   header: {
-    display: 'flex',
-    flexDirection: 'row',
-    top: 10
+    width: '100%',
+    paddingVertical: 25,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
   },
-  container: {
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "start",
-    gap: 10,
-  },
-
-  container1: {
-    height: 550,
-    width: "90%",
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    gap: 10,
-    alignItems: "center",
-    marginTop: 40,
-  },
-  back: {
-    width: 40,
-    height: 40,
-    marginRight: "80%",
-    marginTop: 20,
-    left: 20
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    marginRight: "85%",
-    marginTop: 10,
-  },
-  banner: {
-    width: 350,
-    height: 100,
-    backgroundColor: '#62C7F3',
-    borderRadius: 12,
-    top: 30,
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  imgBanner: {
-    width: 100,
-    height: 100,
+  header_left: {
 
   },
-  imgBannerLeft: {
-    width: 50,
-    height: 50,
-    top: 30,
-    left: 5
+  header_left_img: {
+    height: 24,
+    width: 24,
   },
-  desBanner: {
-    fontSize: 16,
+  header_center: {
+ 
+  },
+  header_center_text:{
+    color:color_text_black,
+    fontSize:16,
+    textTransform:'uppercase',
+    fontWeight:'400',
+    backgroundColor:color_background_white,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 18,
+    borderTopLeftRadius: 2,
+    borderBottomRightRadius:2
+  },
+  header_right: {
 
-    width: '60%',
-    height: 50
   },
-  title: {
-    fontSize: 20,
-    color: "#000",
-    fontWeight: "bold",
-    top: 27,
-    left: -200
+  content: {
+
   },
   list: {
-    width: 350,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-    justifyContent: "flex-start",
-    height: 600,
-    top: 30
+    marginTop:10,
+    gap: 12,
+    height:'93%',
   },
-
-  score: {
-    paddingHorizontal: 15,
-    width: 170,
-    paddingVertical: 5,
-    borderColor: "#62C7F3",
-    marginTop: 10,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    height: 230
-
+  item: {
+    padding: 16,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    backgroundColor:color_background_white,
+    borderTopEndRadius:24,
+    borderBottomRightRadius:24,
+    borderTopStartRadius: 2,
+    borderBottomLeftRadius: 24,
   },
-
-  nameGame: {
+  item_left: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    gap: 10
+  },
+  item_left_text:{
+    justifyContent:'space-between'
+  },
+  item_left_img: {
+    width:40,
+    height:40,
+    objectFit:'contain'
+  },
+  item_left_text_top:{
+    color:color_text_black,
+    fontWeight: '500',
+    fontSize:14,
+  },
+  item_left_text_bottom:{
+    color:color_text_black,
+    fontSize:12,
+  },
+  item_right: {
+    width: 42,
+    height: 42,
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:color_text_yellow,
+    borderWidth: 2,
+    borderRadius: 999
+  },
+  item_right_text:{
+    color: color_text_yellow,
+    fontWeight: '600',
     fontSize: 12,
-    color: "#4B4B4B",
-    height: 70,
-    top: 5,
-
-
+    textTransform:'uppercase',
   },
-  lessonList: {
-    width: '95%',
-    height: 500,
-
+  not_item:{
+    width:'100%',
+    height: '85%',
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor: color_background_white,
+    borderRadius: 24,
+    borderTopLeftRadius: 2
   },
-  name: {
-    color: "#000",
-    fontSize: 16,
-    fontWeight: "bold",
-    height: 50
+  not_item_img:{
+    width: 160,
+    height: 160,
+    objectFit: 'contain',
+    marginBottom: -10
   },
-  btnItem: {
-    top: 10,
-    alignItems: 'flex-end'
+  not_item_img_bg:{
+    width: 160,
+    height: 160,
+    objectFit: 'contain',
+    justifyContent: 'flex-end',
+    alignItems:'center'
   },
-  button: {
-    display: 'flex',
-    width: 60,
-    height: 30,
-    backgroundColor: "#62C7F3",
-    alignItems: "center",
-    borderRadius: 8,
-    justifyContent: 'center',
-    top: 10
-  },
-  btn: {
-    color: "#fff",
-    fontSize: 14,
-
-  },
+  not_item_text:{
+    marginTop: 10,
+    textTransform:'uppercase',
+    color: color_text_black,
+    fontWeight:'500',
+    fontSize: 12
+  }
 });
 export default LessonScreen;
