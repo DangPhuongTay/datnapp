@@ -25,6 +25,7 @@ import imgclose from '../../assets/images/img-close.png';
 import imghome from '../../assets/images/img_home.png';
 import imgmenu from '../../assets/images/img_menu.png';
 import imgcart from '../../assets/images/img_cart.png';
+import imgavtcart from '../../assets/images/img-cat-white.png';
 const color_text_black = "#221E1B";
 const color_text_yellow = "#F3AE29";
 const color_background = "#f3f4df";
@@ -46,7 +47,7 @@ import { BASE_URL } from "../config";
 import { Image } from 'expo-image';
 const blurhash ='|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
-const LevelScreen = ({ navigation }) => {
+const ShopScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const tiers = [null,tier1, tier2, tier3, tier4, tier5];
     let { userInfo } = useContext(AuthContext);
@@ -59,21 +60,8 @@ const LevelScreen = ({ navigation }) => {
     let [itemValue, setItemValue] = useState();
     let [itemPrice, setItemPrice] = useState();
     let [itemImage, setItemImage] = useState();
-    let scoretemp = userInfo.score;
-    let cointemp = userInfo.coin;
-    let level;
-    if(user){
-      scoretemp = user.score;
-      cointemp = user.coin
-      level = Math.floor(userInfo / 10);
-    }
-    level = Math.floor(scoretemp / 10);
-    let width = 0;
-    if (scoretemp % 10 == 0) {
-        width = 10;
-    } else {
-        width = scoretemp % 10;
-    }
+ 
+
     let getUser = async () => {
       try {
         let response = await fetch(`${BASE_URL}/user/${userInfo.id}`);
@@ -135,43 +123,12 @@ const LevelScreen = ({ navigation }) => {
 
     useEffect(() => {
         getItems();
-        getUser();
       }, []);
 
     return (
-        <View style={styles.container}>
-          {/* POPUP */}
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                        setModalVisible(!modalVisible);
-                    }}>
-                      <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                          <View style={styles.header_model}>
-                            <Text style={styles.header_model_text}>{itemName}</Text>
-                            <Pressable
-                              style={[styles.button, styles.buttonClose]}
-                              onPress={() => setModalVisible(!modalVisible)}>
-                              <Image style={styles.header_model_img} source={imgclose}></Image>
-                            </Pressable>
-                          </View>
-                          <View style={styles.item_model}>
-                            <Image placeholder={blurhash} transition={10} style={styles.item_model_img} source={itemImage} ></Image>
-                            <Text style={styles.item_model_text}> +{itemValue} EXP</Text>
-                          </View>
-                          <TouchableOpacity onPress={() => this._deleteItem(itemId,itemValue,itemPrice)} style={styles.model_btn} >
-                            <Text style={styles.model_btn_text}>sử dụng</Text>
-                        </TouchableOpacity>
-                        </View>
-                      </View>
-                    </Modal>
-             {/* POPUP */}
-            <View style={styles.header}>
-            <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
                 <Image style={styles.header_left_img} source={imgback} />
             </TouchableOpacity>
             <View style={styles.header_right_box}>
@@ -182,321 +139,155 @@ const LevelScreen = ({ navigation }) => {
                   <Image style={styles.header_left_img} source={imghome} />
               </TouchableOpacity>
             </View>
-            </View>
-            <View style={styles.banner}>
-                <ImageBackground resizeMode="contain" style={styles.banner_img_bg} source={imgbg} >
-                    <Image style={styles.banner_img} source={imgcatwhite} ></Image>
-                </ImageBackground>
-            </View>
-            <View style={styles.content}>
-                <View style={styles.content_top}>
-                    <ImageBackground resizeMode="contain" style={styles.content_top_img_bg} source={imgRectangle2} >
-                        <ImageBackground resizeMode="contain" style={styles.content_top_img} source={imgRectangle5}>
-                            <Animated.View style={{
-                                width: width * 24.8,
-                                backgroundColor: color_background_blue_1,
-                                height: 24.5,
-                                top: -2,
-                                borderRadius: 4,
-                                }}>
-                            </Animated.View>
-                            <View style={styles.content_top_text}>
-                                <Text style={styles.content_top_text_1}>
-                                    {scoretemp}
-                                </Text>
-                                <Image style={styles.content_top_text_img} source={imgvectorcat} ></Image>
-                            </View>
-                        </ImageBackground>
-                    </ImageBackground>
-                </View>
-                <View style={styles.content_center}>
-                    <Text style={styles.content_center_text_1}>
-                        {userInfo.name}
-                    </Text>
-                    <View style={styles.content_center_text_2}>
-                        <Text style={styles.content_center_text_s}>{cointemp}</Text>
-                        <Image style={styles.content_center_text_img} source={imgcoin} ></Image>
-                    </View>
-                    <Text style={styles.content_center_text_3}>
-                        Level {level}
-                    </Text>
-                </View>
-                <View style={styles.content_bottom}>
-                    <View style={styles.content_bottom_header}>
-                        <Text style={styles.content_bottom_header_text_1}>Túi của bạn</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("Bag")}>
-                            <Text style={styles.content_bottom_header_text_2}>Xem cả</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {isLoading ? (
-                        <ActivityIndicator />
-                        ) : (
-                        <View style={styles.content_bottom_list_view}>
-                        <FlatList
-                            contentContainerStyle={styles.content_bottom_list}
-                            data={data}
-                            keyExtractor={({ id }) => id}
-                            renderItem={({ item }) => (<>
-                            <TouchableOpacity
-                            onPress={() =>_userItem(item.id,item.name,item.description,item.value,item.price,item.image)}
-                            style={{
-                                width: 100,
-                                height: 100,
-                                padding: 10,
-                                margin: 3,
-                                borderRadius: 24,
-                                alignItems:'center',
-                                backgroundColor: tiers[item.value]   
-                            }}>
-                               <Image placeholder={blurhash} transition={10} style={styles.content_bottom_item_img} source={item.image} ></Image>
-                               <Text style={styles.content_bottom_item_text}> {item.name}</Text>
-                            </TouchableOpacity>
-                            </>)}
-                        />
-                        </View>
-                        )}  
-                </View>
-            </View>
         </View>
+        <View style={styles.banner}>
+          <View style={styles.banner_top}>
+            <Image style={styles.banner_top_img} source={imgavtcart} />
+          </View>
+          <View style={styles.banner_bottom}>
+            <Text style={styles.banner_bottom_text_1}>
+              Dang Phuong Tay
+            </Text>
+            <Text style={styles.banner_bottom_text_2}>
+              20 coin
+            </Text>
+            <Text style={styles.banner_bottom_text_3}>
+              3 Vật phẩm
+            </Text>
+          </View>
+        </View>
+        <View style={styles.body}>
+          {isLoading ? (
+            <ActivityIndicator />
+              ) : (
+              <View style={styles.content_bottom_list_view}>
+                <FlatList
+                  contentContainerStyle={styles.content_bottom_list}
+                  data={data}
+                  keyExtractor={({ id }) => id}
+                  renderItem={({ item }) => (<>
+                    <TouchableOpacity
+                      onPress={() =>_userItem(item.id,item.name,item.description,item.value,item.price,item.image)}
+                      style={{
+                         width: 372,
+                         height: 80,
+                         padding: 10,
+                         borderRadius: 22,
+                         alignItems:'flex-start',
+                         flexDirection:'row',
+                         backgroundColor: tiers[item.value],
+                         borderTopLeftRadius: 2,
+                      }}>
+                      <Image placeholder={blurhash} transition={10} style={styles.content_bottom_item_img} source={item.image} ></Image>
+                      <View>
+                        <View>
+                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
+                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
+                        </View>
+                        <View>
+                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
+                        </View>
+                      </View>
+                     </TouchableOpacity>
+                    </>)}
+                  />
+              </View>
+            )}      
+        </View>
+      </View>
     );
 };
 const styles = StyleSheet.create({
-    centeredView:{
-      flex: 1,
-      backgroundColor: color_background_gray,
-      justifyContent:'center',
-      alignItems:'center'
-    },
-    modalView:{
-      backgroundColor:color_background_white,
-      width: 250,
-      padding: 20,
-      borderRadius: 24
-    },
-    header_model:{
-      flexDirection:'row',
-      justifyContent:'space-between',
-      alignItems:'center',
-      marginBottom: 14
-    },
-    header_model_text:{
-      fontSize: 19,
-      fontWeight:'400',
-      color:color_text_black
-    },
-    header_model_img:{
-      width: 28,
-      height: 28,
-      objectFit: 'contain',
-      backgroundColor:color_background_gray_1,
-      borderRadius: 999
-    },
-    item_model:{
-      alignItems:'center'
-    },
-    item_model_text:{
-      color:color_background_green_2,
-      fontSize: 16
-    },
-    item_model_img:{
-      width: 70,
-      height: 70,
-      objectFit: 'contain'
-    },
-    model_btn:{
-      marginTop: 20,
-      backgroundColor: color_background_blue_3,
-      borderRadius: 999,
-      alignItems:'center',
-      justifyContent:'center'
-    },
-    model_btn_text:{
-      color:color_background_white,
-      fontSize: 17,
-      paddingVertical:12,
-      fontWeight:'500',
-      textTransform:'uppercase'
-    },
-    container: {
-        flex:1,
-        height: '100vh',
-        paddingHorizontal:20,
-        backgroundColor:color_background_green_1,
-        alignItems: 'center'
-      },
-      header: {
-        width: '100%',
-        marginTop: 27,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-      },
-      header_left: {
-        height: 24,
-        width: 24,
-        zIndex: 10
-      },
-      header_left_img: {
-        marginTop: 5,
-        height: 33,
-        width: 33,
-      },
-      header_right_box:{
-        flexDirection:'row',
-        justifyContent:'center',
-        gap: 7,
-        alignItems:'center',
-      },
-      header_right:{
-        width: 35,
-        height: 35,
-        marginBottom: 2
-      },
-      banner:{
-        justifyContent: 'center',
-        alignItems:'center',
-        height: 260
-      },
-      banner_img_bg:{
-        justifyContent: 'center',
-        alignItems:'center',
-        width: 230,
-        height: 230,
-        marginBottom: 10,
-      },
-      banner_img:{
-        width: 320,
-        height: 320,
-        marginBottom: 20,
-        marginLeft: '-30%',
-      },
-      content:{
-        backgroundColor:color_background_white,
-        width: 412,
-        height: 500,
-        borderRadius: 50
-      },
-      content_top:{
-        height: 100,
-        alignItems:'center',
-        justifyContent:'center'
-      },
-      content_top_img_bg:{
-        width: 600,
-        height: 52,
-        alignItems:'center',
-        justifyContent:'center'
-      },
-      content_top_img:{
-        width: 250,
-        height: 30,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'flex-start',
-        position:'relative'
-      },
-      content_top_text:{
-        position:'absolute',
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap: 5,
-        top: 2,
-        left: 110,
-      },
-      content_top_text_1:{
-        fontSize: 16,
-        fontWeight: '700',
-        color: color_background_blue_3
-      },
-      content_top_text_img:{
-        width: 15,
-        height: 15,
-        objectFit: 'contain',
-      },
-
-      content_center:{
-        backgroundColor: color_background_blue_3,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius: 30,
-        marginHorizontal: 35
-      },
-      content_center_text_1:{
-        color:color_background_white,
-        textTransform:'uppercase',
-        fontWeight:'600',
-        fontSize: 14
-      },
-      content_center_text_2:{
-        justifyContent:'center',
-        flexDirection:'row',
-        alignItems:'center',
-        gap: 3
-      },
-      content_center_text_s:{
-        color:color_background_white,
-        textTransform:'uppercase',
-        fontWeight:'700',
-        fontSize: 17,
-      },
-      content_center_text_3:{
-        color:color_background_white,
-        textTransform:'uppercase',
-        fontWeight:'700',
-        fontSize: 14
-      },
-      content_center_text_img:{
-        objectFit:'contain',
-        width: 20,
-        height: 20,
-      },
-      content_bottom:{
-        padding: 30,
-        paddingVertical: 20,
-        height: 200
-      },
-      content_bottom_header:{
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingBottom: 5,
-      },
-      content_bottom_header_text_1:{
-        color: color_text_black,
-        textTransform:'uppercase',
-        fontSize: 13,
-        fontWeight: '500'
-      },
-      content_bottom_header_text_2:{
-        color: color_background_blue_3
-      },
-      content_bottom_list_view:{
-        flexDirection:'row',
-        height: 175,
-        width: 360,
-        overflow:'scroll'
-      },
-      content_bottom_list:{
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        gap: 20,
-        flexWrap: 'wrap'
-      },
-      content_bottom_item_img:{
-        width: 60,
-        height: 60,
-        objectFit:'contain'
-      },
-
-      content_bottom_item_text:{
-        color:color_background_white,
-        fontWeight:'400'
-      }
-      
+  container: {
+    flex:1,
+    height: '100vh',
+    paddingHorizontal:20,
+    backgroundColor: color_background_white,
+    alignItems: 'center'
+  },
+  header: {
+    width: '100%',
+    marginTop: 27,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+  },
+  header_left: {
+    height: 24,
+    width: 24,
+    zIndex: 10
+  },
+  header_left_img: {
+    marginTop: 5,
+    height: 33,
+    width: 33,
+  },
+  header_right_box:{
+    flexDirection:'row',
+    justifyContent:'center',
+    gap: 7,
+    alignItems:'center',
+  },
+  header_right:{
+    width: 35,
+    height: 35,
+    marginBottom: 2
+  },
+  banner:{
+    marginTop:15,
+    width: '100%',
+    padding: 20,
+    borderRadius: 24,
+    backgroundColor:color_background_green_1,
+    flexDirection:'row',
+    gap: 10,
+    borderTopRightRadius: 2,
+    borderBottomLeftRadius: 2,
+  },
+  banner_top_img:{
+    width: 95,
+    height: 79,
+    objectFit: 'contain',
+  },
+  banner_bottom:{
+    gap: 5
+  },
+  banner_bottom_text_1:{
+    color:color_text_black,
+    fontSize: 16,
+    fontWeight: '500'
+  },
+  banner_bottom_text_2:{
+    color:color_text_black,
+    fontSize: 14,
+    fontWeight: '400'
+  },
+  banner_bottom_text_3:{
+    color:color_text_black,
+    fontSize: 14,
+    fontWeight: '400'
+  },
+  body:{
+    marginTop: 10,
+    width: '100%',
+    height: 475
+  },
+  content_bottom_list_view:{
+    height: 475,
+    flexDirection:'row',
+  },
+  content_bottom_list:{
+    backgroundColor:'red',
+    justifyContent:'space-between',
+    height: 475,
+    flexDirection:'row',
+    flexWrap:'wrap',
+    gap: 10
+  },
+  content_bottom_item_img:{
+    width: 60,
+    height: 60,
+    objectFit:'contain'
+  },
 });
-export default LevelScreen;
+export default ShopScreen;

@@ -492,7 +492,6 @@ const styles = StyleSheet.create({
         height: 60,
         objectFit:'contain'
       },
-
       content_bottom_item_text:{
         color:color_background_white,
         fontWeight:'400'
