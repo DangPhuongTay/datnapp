@@ -175,7 +175,7 @@ const LevelScreen = ({ navigation }) => {
                 <Image style={styles.header_left_img} source={imgback} />
             </TouchableOpacity>
             <View style={styles.header_right_box}>
-              <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Shop")}>
+              <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Bag")}>
                   <Image style={styles.header_left_img} source={imgcart} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => this._reload()}>
@@ -224,7 +224,7 @@ const LevelScreen = ({ navigation }) => {
                 <View style={styles.content_bottom}>
                     <View style={styles.content_bottom_header}>
                         <Text style={styles.content_bottom_header_text_1}>Túi của bạn</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("Bag")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Shop")}>
                             <Text style={styles.content_bottom_header_text_2}>Xem cả</Text>
                         </TouchableOpacity>
                     </View>

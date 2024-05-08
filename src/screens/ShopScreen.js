@@ -60,7 +60,10 @@ const ShopScreen = ({ navigation }) => {
     let [itemValue, setItemValue] = useState();
     let [itemPrice, setItemPrice] = useState();
     let [itemImage, setItemImage] = useState();
- 
+    let cointemp = userInfo.coin;
+    if(user){
+      cointemp = user.coin
+    }
 
     let getUser = async () => {
       try {
@@ -127,12 +130,42 @@ const ShopScreen = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
+           {/* POPUP */}
+                  <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                      <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                          <View style={styles.header_model}>
+                            <Text style={styles.header_model_text}>{itemName}</Text>
+                            <Pressable
+                              style={[styles.button, styles.buttonClose]}
+                              onPress={() => setModalVisible(!modalVisible)}>
+                              <Image style={styles.header_model_img} source={imgclose}></Image>
+                            </Pressable>
+                          </View>
+                          <View style={styles.item_model}>
+                            <Image placeholder={blurhash} transition={10} style={styles.item_model_img} source={itemImage} ></Image>
+                            <Text style={styles.item_model_text}> +{itemValue} EXP</Text>
+                          </View>
+                          <TouchableOpacity onPress={() => this._deleteItem(itemId,itemValue,itemPrice)} style={styles.model_btn} >
+                            <Text style={styles.model_btn_text}>sử dụng</Text>
+                        </TouchableOpacity>
+                        </View>
+                      </View>
+                    </Modal>
+             {/* POPUP */}
         <View style={styles.header}>
           <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
                 <Image style={styles.header_left_img} source={imgback} />
             </TouchableOpacity>
             <View style={styles.header_right_box}>
-              <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Shop")}>
+              <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Bag")}>
                   <Image style={styles.header_left_img} source={imgcart} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => this._reload()}>
@@ -148,11 +181,12 @@ const ShopScreen = ({ navigation }) => {
             <Text style={styles.banner_bottom_text_1}>
               Dang Phuong Tay
             </Text>
-            <Text style={styles.banner_bottom_text_2}>
-              20 coin
-            </Text>
+            <View style={styles.banner_bottom_text_2}>
+              <Text>{cointemp}</Text>
+              <Image style={styles.content_center_text_img} source={imgcoin} ></Image>
+            </View>
             <Text style={styles.banner_bottom_text_3}>
-              3 Vật phẩm
+              {data?.length} Vật phẩm
             </Text>
           </View>
         </View>
@@ -170,22 +204,22 @@ const ShopScreen = ({ navigation }) => {
                       onPress={() =>_userItem(item.id,item.name,item.description,item.value,item.price,item.image)}
                       style={{
                          width: 372,
-                         height: 80,
-                         padding: 10,
+                         height: 78,
+                         padding: 12,
                          borderRadius: 22,
                          alignItems:'flex-start',
                          flexDirection:'row',
-                         backgroundColor: tiers[item.value],
+                         backgroundColor: color_background,
                          borderTopLeftRadius: 2,
                       }}>
                       <Image placeholder={blurhash} transition={10} style={styles.content_bottom_item_img} source={item.image} ></Image>
-                      <View>
-                        <View>
-                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
-                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
+                      <View style={styles.content_bottom_item_text}>
+                        <View style={styles.content_bottom_item_text_left}>
+                          <Text style={styles.content_bottom_item_text_1}> {item.name}</Text>
+                          <Text style={styles.content_bottom_item_text_2}> {item.description}</Text>
                         </View>
-                        <View>
-                          <Text style={styles.content_bottom_item_text}> {item.name}</Text>
+                        <View style={styles.content_bottom_item_text_right}>
+                          <Text style={styles.content_bottom_item_text_3}>+ {item.value} EXP</Text>
                         </View>
                       </View>
                      </TouchableOpacity>
@@ -198,6 +232,62 @@ const ShopScreen = ({ navigation }) => {
     );
 };
 const styles = StyleSheet.create({
+  centeredView:{
+    flex: 1,
+    backgroundColor: color_background_gray,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  modalView:{
+    backgroundColor:color_background_white,
+    width: 250,
+    padding: 20,
+    borderRadius: 24
+  },
+  header_model:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    marginBottom: 14
+  },
+  header_model_text:{
+    fontSize: 19,
+    fontWeight:'400',
+    color:color_text_black
+  },
+  header_model_img:{
+    width: 28,
+    height: 28,
+    objectFit: 'contain',
+    backgroundColor:color_background_gray_1,
+    borderRadius: 999
+  },
+  item_model:{
+    alignItems:'center'
+  },
+  item_model_text:{
+    color:color_background_green_2,
+    fontSize: 16
+  },
+  item_model_img:{
+    width: 70,
+    height: 70,
+    objectFit: 'contain'
+  },
+  model_btn:{
+    marginTop: 20,
+    backgroundColor: color_background_blue_3,
+    borderRadius: 999,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  model_btn_text:{
+    color:color_background_white,
+    fontSize: 17,
+    paddingVertical:12,
+    fontWeight:'500',
+    textTransform:'uppercase'
+  },
   container: {
     flex:1,
     height: '100vh',
@@ -250,7 +340,8 @@ const styles = StyleSheet.create({
     objectFit: 'contain',
   },
   banner_bottom:{
-    gap: 5
+    marginLeft: 7,
+    gap: 6
   },
   banner_bottom_text_1:{
     color:color_text_black,
@@ -259,13 +350,21 @@ const styles = StyleSheet.create({
   },
   banner_bottom_text_2:{
     color:color_text_black,
+    flexDirection:'row',
+    gap: 5,
     fontSize: 14,
     fontWeight: '400'
   },
+  content_center_text_img:{
+    objectFit:'contain',
+    width: 20,
+    height: 20,
+  },
   banner_bottom_text_3:{
     color:color_text_black,
-    fontSize: 14,
-    fontWeight: '400'
+    fontSize: 15,
+    fontWeight: '400',
+    textTransform: 'lowercase'
   },
   body:{
     marginTop: 10,
@@ -277,7 +376,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   content_bottom_list:{
-    backgroundColor:'red',
     justifyContent:'space-between',
     height: 475,
     flexDirection:'row',
@@ -285,9 +383,47 @@ const styles = StyleSheet.create({
     gap: 10
   },
   content_bottom_item_img:{
-    width: 60,
-    height: 60,
-    objectFit:'contain'
+    width: 50,
+    height: 50,
+    objectFit:'contain',
   },
+  content_bottom_item_text:{
+    marginLeft:10,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    width: '81%',
+    alignItems:'center',
+    height: 60
+  },
+  content_bottom_item_text_left:{
+    gap: 6,
+    marginTop: -7
+  },
+  content_bottom_item_text_1:{
+    fontSize: 15,
+    color:color_text_black,
+    fontWeight: '500'
+  },
+  content_bottom_item_text_2:{
+    fontSize: 14,
+    color:color_text_black
+  },
+  content_bottom_item_text_right:{
+    width: 42,
+    height: 42,
+    borderRadius: 999,
+    alignItems:'center',
+    justifyContent:'center',
+    borderColor: color_background_green_1,
+    borderWidth: 2,
+    padding: 2,
+    marginTop:-7
+  },
+  content_bottom_item_text_3:{
+    color:color_background_green_2,
+    fontSize: 10,
+    fontWeight: '600',
+    textAlign:'center'
+  }
 });
 export default ShopScreen;
