@@ -119,7 +119,7 @@ const ShopScreen = ({ navigation }) => {
           setModalVisible(false);
     };
     _reload = async () => {
-      navigation.navigate("Level");
+      navigation.navigate("Home");
       getItems();
       getUser();
     };

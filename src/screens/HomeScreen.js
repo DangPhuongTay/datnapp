@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View, ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
+import {ImageBackground, Text, View, ActivityIndicator, Button, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
@@ -53,6 +53,7 @@ const HomeSreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const { userInfo, logout } = useContext(AuthContext);
     const [data, setData] = useState([]);
+    const [datatest, setDataTest] = useState([]);
     const imgs = [imgaddpet, imgpet1, imgpet2, imgpet3, imgpet4];
     const colors = [color1, color2, color3, color4, color5];
     const items = [img1, img2, img3, img4, img5, img6, img7];
@@ -63,6 +64,17 @@ const HomeSreen = ({ navigation }) => {
             const response = await fetch(`${BASE_URL}/lession/all`);
             const json = await response.json();
             setData(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const getTests = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/test/all`);
+            const json = await response.json();
+            setDataTest(json.data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -126,6 +138,7 @@ const HomeSreen = ({ navigation }) => {
             {isLoading ? (
              <ActivityIndicator />
              ) : (
+        <ScrollView style={styles.body_box}>
             <View style={styles.body}>
                 <View style={styles.banner_header}>
                     <Text style={styles.banner_header_text_1}>
@@ -157,8 +170,52 @@ const HomeSreen = ({ navigation }) => {
                 )}
                 />
             </View>
-        )}  
-        </View>
+            <View style={styles.body}>
+              
+                <View style={styles.banner_header}>
+                    <Text style={styles.banner_header_text_1}>
+                        Kiểm tra
+                    </Text>
+                    <Text style={styles.banner_header_text_2}>
+                        Khám phá
+                    </Text>
+                </View>
+                {datatest.length > 0 ? (
+                <FlatList
+                    contentContainerStyle={styles.body_list}
+                    data={datatest}
+                    keyExtractor={({ id }) => id}
+                    renderItem={({ item }) => (
+                    <TouchableOpacity
+                        onPress={() => this._handleSubmit(item.id,item.name)}
+                        style={{
+                        width: 170,
+                        height: 170,
+                        backgroundColor: colors[nubcolor++],
+                        borderRadius: 20,
+                        justifyContent:'center',
+                        alignItems:'center',
+                        gap: 5
+                    }}>
+                        <Image style={styles.body_item_img} source={items[nubimg++]}></Image>
+                        <Text style={styles.body_item_text}>{item.name}</Text>
+                    </TouchableOpacity>
+                )}
+                />
+            ) : (
+                <View style={styles.not_item}>
+                <ImageBackground source={imgnotitembg} style={styles.not_item_img_bg} >
+                    <Image style={styles.not_item_img} source={imgnotitem} />
+                </ImageBackground>
+                <Text style={styles.not_item_text}>
+                      chưa có bài kiểm tra nào!
+                    </Text>
+              </View>
+            )}
+            </View>
+        </ScrollView>
+        )}
+    </View>
     )
 };
 
@@ -229,9 +286,13 @@ const styles = StyleSheet.create({
         color:color_text_black,
         fontWeight:'500'
     },
-    body:{
-        padding: 15,
+    body_box:{
+        width: '100%',
         marginTop: 15,
+    },
+    body:{
+        marginBottom: 15,
+        padding: 15,
         backgroundColor:color_background_white,
         borderRadius: 22,
     },
@@ -259,6 +320,35 @@ const styles = StyleSheet.create({
     body_item_img:{
         width: 60,
         height: 60
-    }
+    },
+    not_item:{
+        width:'100%',
+        height: 180,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor: color_background_white,
+        borderRadius: 24,
+        borderTopLeftRadius: 2
+      },
+      not_item_img:{
+        width: 120,
+        height: 120,
+        objectFit: 'contain',
+        marginBottom: -10
+      },
+      not_item_img_bg:{
+        width: 100,
+        height: 100,
+        objectFit: 'contain',
+        justifyContent: 'flex-end',
+        alignItems:'center'
+      },
+      not_item_text:{
+        marginTop: 10,
+        textTransform:'uppercase',
+        color: color_text_black,
+        fontWeight:'500',
+        fontSize: 12
+      }
 })
 export default HomeSreen;
