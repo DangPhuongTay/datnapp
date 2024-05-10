@@ -17,7 +17,7 @@ const MenuSreen = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
             style={styles.back}
-            source={require("../../assets/images/back.png")}
+            source={require("../../assets/images/img_back.png")}
           ></Image>
         </TouchableOpacity>
         <View style={styles.header_center}>
@@ -30,10 +30,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[1],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -46,10 +46,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[2],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -61,10 +61,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[3],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -76,10 +76,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[4],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -91,10 +91,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[5],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -105,12 +105,12 @@ const MenuSreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('System')}
                             style={{
-                                backgroundColor:tiers[2],
+                                backgroundColor:tiers[1],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -122,10 +122,10 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[2],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -135,12 +135,12 @@ const MenuSreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Shop')}
                             style={{
-                                backgroundColor:tiers[2],
+                                backgroundColor:tiers[3],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -150,12 +150,12 @@ const MenuSreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Bag')}
                             style={{
-                                backgroundColor:tiers[2],
+                                backgroundColor:tiers[4],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -165,12 +165,12 @@ const MenuSreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={logout}
                             style={{
-                                backgroundColor:tiers[2],
+                                backgroundColor:tiers[5],
                                 padding: 13,
-                                borderTopEndRadius:24,
+                                borderTopEndRadius:20,
                                 borderBottomRightRadius:2,
                                 borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 24,
+                                borderBottomLeftRadius: 20,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     //     flex:1,
     //     height: '100vh',
     //     paddingHorizontal:20,
-    //     //backgroundColor:color_background,
+    //     backgroundColor:color_background,
     // },
     container: {
         height: '100%',
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'start',
         gap: 10,
-        backgroundColor: "#D0EFFF"
+        backgroundColor: "#fff"
     },
     header_center: {
  
@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 20,
     alignItems:'center',
+    marginTop: 10,
       },
     
     button: {
@@ -249,29 +250,10 @@ const styles = StyleSheet.create({
 
     btn: {
         fontSize: 18,
-        fontWeight: 'bold',
     },
 
     img: {
        
-    },
-
-    // container: {
-    //     height: '100%',
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'start',
-    //     gap: 10,
-    // },
-    
-    // color: {
-    //     color: '#62C7F3',
-    //     fontWeight: 'bold',
-    //     fontSize: 50,
-    // },
-    
-    
-
-
+    },   
 });
 export default MenuSreen;
