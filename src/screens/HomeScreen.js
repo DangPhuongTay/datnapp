@@ -3,14 +3,14 @@ import {ImageBackground, Text, View, ActivityIndicator, Button, TouchableOpacity
 import Spinner from "react-native-loading-spinner-overlay";
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
-import img1 from '../../assets/images/category-1.png';
-import img2 from '../../assets/images/category-2.png';
-import img3 from '../../assets/images/category-3.png';
-import img4 from '../../assets/images/category-4.png';
-import img5 from '../../assets/images/category-5.png';
-import img6 from '../../assets/images/category-6.png';
+import img5 from '../../assets/images/category-1.png';
+import img3 from '../../assets/images/category-2.png';
+import img2 from '../../assets/images/category-3.png';
+import img6 from '../../assets/images/category-4.png';
+import img1 from '../../assets/images/category-5.png';
+import img4 from '../../assets/images/category-6.png';
 import img7 from '../../assets/images/category-7.png';
-import imgback from '../../assets/images/img_back.png';
+import imgback from '../../assets/images/img_menu.png';
 import imgnof from '../../assets/images/img-nof.png';
 import imgnotitem from '../../assets/images/img-not-item-1.gif';
 import imgnotitembg from '../../assets/images/img-not-item-bg.png';
@@ -99,7 +99,7 @@ const HomeSreen = ({ navigation }) => {
                 <TouchableOpacity style={styles.header_left} onPress={() => navigation.navigate("Menu")}>
                     <Image style={styles.header_left_img} source={imgback} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Menu")}>
+                <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Bag")}>
                     <Image style={styles.header_right_img} source={imgcart} />
                 </TouchableOpacity>
             </View>
@@ -236,8 +236,8 @@ const styles = StyleSheet.create({
         height: 32
     },
     header_left:{
-        width: 32,
-        height: 32
+        width: 30,
+        height: 30
     },
     header_right_img:{
         width: 32,
