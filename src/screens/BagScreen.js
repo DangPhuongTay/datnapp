@@ -52,7 +52,7 @@ const BagScreen = ({ navigation }) => {
     const tiers = [null,tier1, tier2, tier3, tier4, tier5];
     let { userInfo } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-    let [data, setData] = useState();
+    let [datas, setDatas] = useState();
     let [user, setDataUser] = useState();
     let [itemId, setItemId] = useState();
     let [itemName, setItemName] = useState();
@@ -64,7 +64,6 @@ const BagScreen = ({ navigation }) => {
     if(user){
       cointemp = user.coin
     }
-
     let getUser = async () => {
       try {
         let response = await fetch(`${BASE_URL}/user/${userInfo.id}`);
@@ -76,11 +75,11 @@ const BagScreen = ({ navigation }) => {
         setLoading(false);
       }
     };
-    let getItems = async () => {
+    let getItem = async () => {
       try {
         let response = await fetch(`${BASE_URL}/shop/user`);
         let json = await response.json();
-        setData(json.data);
+        setDatas(json.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -96,36 +95,40 @@ const BagScreen = ({ navigation }) => {
       setItemPrice(price);
       setItemImage(image);
     };
-    _deleteItem = async (id,value) => {
-      fetch(`${BASE_URL}/bag/delete/${id}`, {
-        method: 'DELETE',
+    _deleteItem = async () => {
+      newcoin = userInfo.coin - itemPrice,
+      fetch(`${BASE_URL}/bag/update/coin/${userInfo.id}`, {
+        method: 'PUT',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json',
-        }});
+            'Content-Type': 'application/json',},
+            body: JSON.stringify({
+              newcoin: newcoin,
+            })});
 
-        fetch(`${BASE_URL}/addscore/${userInfo.id}`, {
-          method: 'PUT',
+        fetch(`${BASE_URL}/bag/buy`, {
+          method: 'POST',
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              score: value,
+            id_user: userInfo.id,
+            name: itemName,
+            description: itemDescription,
+            image: itemImage,
+            price: itemPrice,
+            value: itemValue
           })});
-          navigation.navigate("Level");
-          getItems();
           getUser();
           setModalVisible(false);
-    };
-    _reload = async () => {
-      navigation.navigate("Home");
-      getItems();
-      getUser();
+          navigation.navigate("Level");
+
     };
 
+
     useEffect(() => {
-        getItems();
+        getItem();
       }, []);
 
     return (
@@ -151,10 +154,11 @@ const BagScreen = ({ navigation }) => {
                           </View>
                           <View style={styles.item_model}>
                             <Image placeholder={blurhash} transition={10} style={styles.item_model_img} source={itemImage} ></Image>
-                            <Text style={styles.item_model_text}> +{itemValue} EXP</Text>
+                            <Text style={styles.item_model_text}> + {itemValue} EXP</Text>
+                            <Text style={styles.item_model_text}> {itemPrice} Coin  </Text>
                           </View>
                           <TouchableOpacity onPress={() => this._deleteItem(itemId,itemValue,itemPrice)} style={styles.model_btn} >
-                            <Text style={styles.model_btn_text}>sử dụng</Text>
+                            <Text style={styles.model_btn_text}>Mua</Text>
                         </TouchableOpacity>
                         </View>
                       </View>
@@ -165,9 +169,7 @@ const BagScreen = ({ navigation }) => {
                 <Image style={styles.header_left_img} source={imgback} />
             </TouchableOpacity>
             <View style={styles.header_right_box}>
-              <TouchableOpacity style={styles.header_right} onPress={() => navigation.navigate("Bag")}>
-                  <Image style={styles.header_left_img} source={imgcart} />
-              </TouchableOpacity>
+
               <TouchableOpacity onPress={() => this._reload()}>
                   <Image style={styles.header_left_img} source={imghome} />
               </TouchableOpacity>
@@ -181,16 +183,16 @@ const BagScreen = ({ navigation }) => {
               <View style={styles.content_bottom_list_view}>
                 <FlatList
                   contentContainerStyle={styles.content_bottom_list}
-                  data={data}
+                  data={datas}
                   keyExtractor={({ id }) => id}
                   renderItem={({ item }) => (<>
                     <TouchableOpacity
                       onPress={() =>_userItem(item.id,item.name,item.description,item.value,item.price,item.image)}
                       style={{
                          width: 372,
-                         height: 78,
+                         height:80,
                          padding: 12,
-                         borderRadius: 22,
+                         borderRadius: 24,
                          alignItems:'flex-start',
                          flexDirection:'row',
                          backgroundColor: tiers[item.value],
@@ -314,7 +316,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   body:{
-    marginTop: 10,
+    marginTop: 20,
     width: '100%',
     height: 475
   },
@@ -362,20 +364,24 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-between',
     padding: 2,
-    marginTop:-7
+    gap: 5,
+    marginTop:-24
   },
   content_bottom_item_text_3:{
     color:color_background_white,
-    backgroundColor:color_text_black,
+    backgroundColor:color_background_gray,
     padding:7,
     fontSize: 12,
     fontWeight: '600',
-    textAlign:'center'
+    textAlign:'center',
+    borderRadius:6,
   },
   content_bottom_item_text_4:{
     color:color_text_black,
     backgroundColor: color_background_white,
     fontSize: 12,
+    padding:5,
+    borderRadius:6,
     fontWeight: '600',
     textAlign:'center'
   }

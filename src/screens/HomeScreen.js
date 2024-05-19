@@ -106,7 +106,7 @@ const HomeSreen = ({ navigation }) => {
             <View style={styles.banner}>
                 <View style={styles.banner_header}>
                     <Text style={styles.banner_header_text_1}>
-                        Thu cưng
+                        Ghi chú của bạn
                     </Text>
                     <Text style={styles.banner_header_text_2}>
                         Khám phá
@@ -115,23 +115,6 @@ const HomeSreen = ({ navigation }) => {
                 <View style={styles.banner_list}>
                     <TouchableOpacity style={styles.content_bottom_item}>
                         <Image style={styles.content_bottom_item_img} source={imgs[0]} ></Image>
-                        <Text style={styles.content_bottom_item_text}>Thêm</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.content_bottom_item}>
-                        <Image style={styles.content_bottom_item_img} source={imgs[1]} ></Image>
-                        <Text style={styles.content_bottom_item_text}>Gogo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.content_bottom_item}>
-                        <Image style={styles.content_bottom_item_img} source={imgs[2]} ></Image>
-                        <Text style={styles.content_bottom_item_text}>Meoo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.content_bottom_item}>
-                        <Image style={styles.content_bottom_item_img} source={imgs[3]} ></Image>
-                        <Text style={styles.content_bottom_item_text}>Ooo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.content_bottom_item}>
-                        <Image style={styles.content_bottom_item_img} source={imgs[4]} ></Image>
-                        <Text style={styles.content_bottom_item_text}>Chis</Text>
                     </TouchableOpacity>
                 </View>    
             </View>
@@ -144,9 +127,7 @@ const HomeSreen = ({ navigation }) => {
                     <Text style={styles.banner_header_text_1}>
                         Chủ đề
                     </Text>
-                    <Text style={styles.banner_header_text_2}>
-                        Khám phá
-                    </Text>
+
                 </View>
                 <FlatList
                     contentContainerStyle={styles.body_list}
@@ -176,9 +157,7 @@ const HomeSreen = ({ navigation }) => {
                     <Text style={styles.banner_header_text_1}>
                         Kiểm tra
                     </Text>
-                    <Text style={styles.banner_header_text_2}>
-                        Khám phá
-                    </Text>
+
                 </View>
                 {datatest.length > 0 ? (
                 <FlatList

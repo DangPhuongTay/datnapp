@@ -6,6 +6,7 @@ const tier2 = "#b7e4c7";
 const tier3 = "#61a5c2";
 const tier4 = "#edafb8";
 const tier5 = "#f9eae1";
+const color_background = "#f3f4df";
 const MenuSreen = ({ navigation }) => {
     const { isLoading, userInfo, logout } = useContext(AuthContext);
     const tiers = [null,tier1, tier2, tier3, tier4, tier5];
@@ -21,7 +22,7 @@ const MenuSreen = ({ navigation }) => {
           ></Image>
         </TouchableOpacity>
         <View style={styles.header_center}>
-          <Text style={styles.header_center_text}> Danh sách trò chơi </Text>
+          <Text style={styles.header_center_text}> Menu Tùy chọn </Text>
         </View>
                     </View>
 
@@ -30,10 +31,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[1],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -44,42 +43,36 @@ const MenuSreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Level')}
                             style={{
-                                backgroundColor:tiers[2],
+                                backgroundColor:tiers[3],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
                             <Text style={styles.btn}> Cấp độ </Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    {/* <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Rank')}
                             style={{
-                                backgroundColor:tiers[3],
+                                backgroundColor:tiers[2],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
                             <Text style={styles.btn}> Xếp hạng </Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('History')}
                             style={{
                                 backgroundColor:tiers[4],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -91,10 +84,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[5],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -107,10 +98,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[1],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -122,10 +111,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[2],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -137,10 +124,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[3],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -152,10 +137,8 @@ const MenuSreen = ({ navigation }) => {
                             style={{
                                 backgroundColor:tiers[4],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -163,14 +146,25 @@ const MenuSreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('SlidingPuzzle')}
+                            style={{
+                                backgroundColor:tiers[1],
+                                padding: 13,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
+                                width: 300,
+                                alignItems: 'center',
+                            }}>
+                            <Text style={styles.btn}> SlidingPuzzle </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
                         <TouchableOpacity onPress={logout}
                             style={{
                                 backgroundColor:tiers[5],
                                 padding: 13,
-                                borderTopEndRadius:20,
-                                borderBottomRightRadius:2,
-                                borderTopStartRadius: 2,
-                                borderBottomLeftRadius: 20,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
                                 width: 300,
                                 alignItems: 'center',
                             }}>
@@ -183,25 +177,21 @@ const MenuSreen = ({ navigation }) => {
     );
 };
 const styles = StyleSheet.create({
-    // container: {
-    //     flex:1,
-    //     height: '100vh',
-    //     paddingHorizontal:20,
-    //     backgroundColor:color_background,
-    // },
+
     container: {
         height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'start',
         gap: 10,
-        backgroundColor: "#fff"
+        backgroundColor: color_background
     },
     header_center: {
- 
+        width: 280
     },
     header_center_text:{
-      //color:color_text_black,
+      //color:color_text_black,,
+      textAlign: 'center',
       fontSize:20,
       textTransform:'uppercase',
       fontWeight:'400',

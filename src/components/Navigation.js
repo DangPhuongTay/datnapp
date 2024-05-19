@@ -33,6 +33,7 @@ import SystemTeacher from "../screens/TeacherScreen/SystemTeacher";
 import Test from "../screens/TestScreen";
 import BagScreen from "../screens/BagScreen";
 import ShopScreen from "../screens/ShopScreen";
+import SlidingPuzzle from "../screens/gameScreen/SlidingPuzzle"
 
 const Stack = createNativeStackNavigator();
 
@@ -128,7 +129,11 @@ const Navigation = () => {
                   component={Test}
                   options={{ headerShown: false }}
                 />
-
+                <Stack.Screen
+                  name="SlidingPuzzle"
+                  component={SlidingPuzzle}
+                  options={{ headerShown: false }}
+                />
               </>
             ) : (
               <>

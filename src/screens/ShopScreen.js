@@ -96,26 +96,7 @@ const ShopScreen = ({ navigation }) => {
       setItemPrice(price);
       setItemImage(image);
     };
-    _deleteItem = async (id,value) => {
-      fetch(`${BASE_URL}/bag/delete/${id}`, {
-        method: 'DELETE',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        }});
-
-        fetch(`${BASE_URL}/addscore/${userInfo.id}`, {
-          method: 'PUT',
-          headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              score: value,
-          })});
-          navigation.navigate("Level");
-          getItems();
-          getUser();
+    _deleteItem = async () => {
           setModalVisible(false);
     };
     _reload = async () => {
@@ -153,8 +134,8 @@ const ShopScreen = ({ navigation }) => {
                             <Image placeholder={blurhash} transition={10} style={styles.item_model_img} source={itemImage} ></Image>
                             <Text style={styles.item_model_text}> +{itemValue} EXP</Text>
                           </View>
-                          <TouchableOpacity onPress={() => this._deleteItem(itemId,itemValue,itemPrice)} style={styles.model_btn} >
-                            <Text style={styles.model_btn_text}>sử dụng</Text>
+                          <TouchableOpacity onPress={() => this._deleteItem()} style={styles.model_btn} >
+                            <Text style={styles.model_btn_text}>Đóng</Text>
                         </TouchableOpacity>
                         </View>
                       </View>

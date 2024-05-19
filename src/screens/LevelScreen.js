@@ -123,14 +123,10 @@ const LevelScreen = ({ navigation }) => {
               score: value,
           })});
           navigation.navigate("Level");
+          setModalVisible(false);
           getItems();
           getUser();
-          setModalVisible(false);
-    };
-    _reload = async () => {
-      navigation.navigate("Level");
-      getItems();
-      getUser();
+   
     };
 
     useEffect(() => {
