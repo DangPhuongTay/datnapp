@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Image,View,Text,StyleSheet,TouchableOpacity} from "react-native";
-import styled  from "styled-components";
+// import styled  from "styled-components";
 import img0 from '../../assets/images/imgs-game/anh-1.jpg';
 import img1 from '../../assets/images/imgs-game/anh-2.jpg';
 import img2 from '../../assets/images/imgs-game/anh-3.jpg';

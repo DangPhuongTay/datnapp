@@ -32,7 +32,7 @@ const StartScreen = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#C0EDFC',
+        backgroundColor: '#f3f4df',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         width: 220,
         marginTop: '-40%',
-        backgroundColor: '#62C7F3',
+        backgroundColor: '#F1E19C',
         display: 'flex',
         alignItems: 'center',
         borderRadius: 999,
 
     },
     btn: {
-        color: '#fff',
+        color: '#221E1B',
         fontSize: 24,
         fontWeight: 'bold'
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
 
-        color: '#4CA6C2',
+        color: '#221E1B',
         bottom: 200
     }
 });
