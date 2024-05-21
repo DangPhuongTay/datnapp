@@ -1,4 +1,4 @@
-import React from "react";
+import  React from "react";
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
+import { BASE_URL } from "../../config";
 import imgback from '../../../assets/images/img_back.png';
 const color_text_black = "#221E1B";
 const color_text_yellow = "#F3AE29";
@@ -64,21 +65,22 @@ function immutableMove(arr, from, to) {
   }, []);
 }
 let nub = 1;
+let score = 0;
+let arrnub = 0;
 const colorMap = {};
 
-const textv1 = '1Xin chào, tôi là Tây'
-const textv2 = '2Xin chào, tôi là Tây'
-const textv3 = '3Xin chào, tôi là Tây'
-const text1 = ['Tay','I','am','1Hello ,']
-const text2 = ['Tay','I','am','2Hello ,']
-const text3 = ['Tay','I','am','3Hello ,']
+const textv1 = 'Xin chào, tôi là Tây'
+const textv2 = 'Bạn khỏe không?'
+const textv3 = 'Tôi khỏe, còn bạn?'
+const text1 = ['Tay.','I','am','Hello ,']
+const text2 = ['How','are','?','you']
+const text3 = ['you?','I`m','fine.','And']
 const texts = [text1,text2,text3];
 const textvs = [textv1,textv2,textv3];
 export default class App extends React.Component {
   state = {
     dragging: false,
     draggingIdx: -1,
-    score: 0,
     data: Array.from(Array(4), (_, i) => {
       colorMap[i] = getRandomColor();
       return i;
@@ -184,19 +186,56 @@ export default class App extends React.Component {
     this.active = false;
     this.setState({ dragging: false, draggingIdx: -1 });
   };
+  
+   addScore = () => {
+    const {navigation} = this.props;
+    fetch(`${BASE_URL}/addcoin/1`, {
+    method: 'PUT',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        coin: score,
+    }),
+    
+  });navigation.navigate('Menu')};
   _handleSubmit = (e) => 
     {   
-        const arrnew  = [3,1,2,0];
-        if(e[0] === arrnew[0] && e[1] === arrnew[1] && e[3] === arrnew[3] && e[2] === arrnew[2] ){
-            Alert.alert('win');
-            this.setState({ score: +1 });
-            nub++;
+        const arrnew1  = [3,1,2,0];
+        const arrnew2  = [0,1,3,2];
+        const arrnew3  = [1,2,3,0];
+        const arrnews = [arrnew1,arrnew2,arrnew3];
+
+        if(arrnub == arrnews.length-1){
+          nub = 1;
+          arrnub = 0;
+          console.log(arrnub)
+          Alert.alert("Hoàn Thành", 
+          `Số điểm của bạn: ${score} điểm
+Bạn nhận được: ${score} coin`
+                , [
+                  { text: "Quay về", onPress: () => this.addScore()},
+                ]);
         }else{
-            Alert.alert('lose')
-        }
+          if(e[0] === arrnews[arrnub][0] && e[1] === arrnews[arrnub][1] && e[3] === arrnews[arrnub][3] && e[2] === arrnews[arrnub][2] ){
+            Alert.alert('Đúng');
+            this.setState({ data: [2,3,0,1] });
+            score++;
+            arrnub++;
+            nub++;
+          }else{
+            Alert.alert('Sai');
+            this.setState({ data: [2,3,0,1] });
+            console.log(arrnub)
+            arrnub++;
+            nub++;
+          }
+      }
+
     };
   render() {
-    const { data, dragging, draggingIdx, score } = this.state;
+    const { data, dragging, draggingIdx } = this.state;
     const { navigation } = this.props;
     const renderItem = ({ item, index }, noPanResponder = false) => (
       <View  {...(noPanResponder ? {} : this._panResponder.panHandlers)}
@@ -204,6 +243,7 @@ export default class App extends React.Component {
           this.rowWidth = 100;
         }}
         style={{
+          position:'relative',
           padding: 16,
           paddingVertical: 12,
           width: 100,
@@ -213,7 +253,7 @@ export default class App extends React.Component {
           opacity: draggingIdx === index ? 0 : 1
         }}
       >
-        <Text style={{ fontSize: 18, textAlign: "center" }}>
+        <Text style={{ fontSize: 18, textAlign: "center", color: color_background_gray_2 }}>
           {texts[nub-1][item]}
         </Text>
       </View>
@@ -228,8 +268,8 @@ export default class App extends React.Component {
     </View>
 
     <View style={styles.container}>
-      <Text style={{ fontSize: 20,color: color_background_gray_3, marginBottom: 20,  width: '90%', textTransform: 'uppercase',fontWeight: 'bold', lineHeight: 35}}>
-          Xắp xếp các từ để được câu hoàn chỉnh
+      <Text style={{ fontSize: 20,color: color_background_gray_3, marginBottom: 20,  width: '90%', textTransform: 'capitalize',fontWeight: 'bold', lineHeight: 35}}>
+          Sắp xếp các từ để được câu hoàn chỉnh
         </Text>
         <Text style={{ padding:10, fontSize: 18,color: color_background_gray_2, margin: 10,backgroundColor: color_background_gray_1,width: '95%', marginBottom: 25 }}>
           {nub}. {textvs[nub-1]}
@@ -270,7 +310,7 @@ export default class App extends React.Component {
 
                 </View>
                 <TouchableOpacity style={styles.header_left} onPress={() => this._handleSubmit(this.state.data)}>
-                   <Text style={styles.header_left_img}>Tiếp Theo</Text>
+                   <Text style={styles.header_left_img}>Tiếp Theo </Text>
                 </TouchableOpacity>
                 </View>     
     </>
@@ -321,11 +361,15 @@ const styles = StyleSheet.create({
     backgroundColor:color_background_white
   },
   header_text:{
-    width:50,
+    width:42,
+    lineHeight: 42,
     fontSize: 18,
+    marginRight: 10,
     fontWeight: 'bold',
-    color:color_background_green_2,
+    color:color_background_white,
+    borderRadius: 999,
+    backgroundColor: color_background_gray,
     textAlign:'center',
-    marginTop:25
+    marginTop:30
   }
 });
