@@ -93,7 +93,7 @@ const MenuSreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View>
+                    {/* <View>
                         <TouchableOpacity onPress={() => navigation.navigate('System')}
                             style={{
                                 backgroundColor:tiers[1],
@@ -105,7 +105,7 @@ const MenuSreen = ({ navigation }) => {
                             }}>
                             <Text style={styles.btn}> Đăng ký Giáo Viên </Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('ListTest')}
                             style={{
@@ -156,6 +156,19 @@ const MenuSreen = ({ navigation }) => {
                                 alignItems: 'center',
                             }}>
                             <Text style={styles.btn}> SlidingPuzzle </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('WordArrange')}
+                            style={{
+                                backgroundColor:tiers[1],
+                                padding: 13,
+                                borderRadius: 10,
+                                borderBottomEndRadius:24,
+                                width: 300,
+                                alignItems: 'center',
+                            }}>
+                            <Text style={styles.btn}> WordArrange </Text>
                         </TouchableOpacity>
                     </View>
                     <View>

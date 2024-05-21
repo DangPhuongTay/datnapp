@@ -11,9 +11,13 @@ import {
   ImageBackground,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
+import imggame1 from '../../assets/images/1024x1024bb.png';
+import imggame2 from '../../assets/images/3d-view-puzzle-pieces.jpg';
 import { BASE_URL } from "../config";
 const ListgameScreen = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
+  const imgs = [imggame1,imggame2];
+  let n = 0;
   const [data, setData] = useState([]);
   const getMovies = async () => {
     try {
@@ -40,20 +44,9 @@ const ListgameScreen = ({ navigation }) => {
             source={require("../../assets/images/back.png")}
           ></Image>
         </TouchableOpacity>
-
         <View style={styles.text}>
           <Text style={styles.rank}> Danh sách trò chơi </Text>
         </View>
-      </View>
-      <View style={styles.banner}>
-        <ImageBackground
-          style={styles.imgbanner}
-          source={require("../../assets/images/image12/bannerlistgame.jpg")}
-        >
-          <View style={styles.introBanner}>
-            <Text style={styles.desBanner}>Just do it.</Text>
-          </View>
-        </ImageBackground>
       </View>
       <View style={styles.container}>
         {isLoading ? (
@@ -67,19 +60,19 @@ const ListgameScreen = ({ navigation }) => {
               <View style={styles.score}>
                 <Image
                   style={styles.img}
-                  source={require("../../assets/images/image12/crossword.png")}
+                  source={imgs[n++]}
                 ></Image>
-                <View style={styles.score1}>
-                  <Text style={styles.name}>{item.name}</Text>
-                  <Text style={styles.description}>{item.description}</Text>
-                </View>
-                <View>
+                <View style={styles.score0}>
+                  <View style={styles.score1}>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text style={styles.description}>{item.description}</Text>
+                  </View>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("Category")}
-                    style={styles.button}
-                  >
-                    <Text style={styles.btn}> Chơi ngay </Text>
-                  </TouchableOpacity>
+                      onPress={() => navigation.navigate("Category")}
+                      style={styles.button}
+                    >
+                      <Text style={styles.btn}> Chơi ngay </Text>
+                    </TouchableOpacity>
                 </View>
               </View>
               // </View>
@@ -100,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#C0EDFC",
   },
   list: {
-    width: 350,
+    width: 360,
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -112,7 +105,13 @@ const styles = StyleSheet.create({
     height: 40,
     marginTop: 10,
   },
-
+  score0:{
+    marginTop: 5,
+    flexDirection:'row',
+    width: 310,
+    justifyContent:'space-between',
+    alignItems:'center',
+  },
   bg: {
     width: "100%",
     display: "flex",
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
   },
   header: {
     width: 400,
-
     display: "flex",
     flexDirection: "row",
     marginTop: 10,
@@ -138,43 +136,40 @@ const styles = StyleSheet.create({
   },
 
   rank: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "500",
     color: "#1E1E1E",
-    width: 400,
-    height: 50,
-    marginLeft: 50,
-    marginTop: 5,
+    width: 250,
+    textAlign: 'center',
+    padding: 10,
+    marginLeft: 35  ,
+    marginTop: 20,
     color: "#1E1E1E",
-    marginTop: 10,
+    backgroundColor: 'white',
+    borderRadius: 22,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2
   },
   score: {
-    paddingHorizontal: 20,
-    width: 170,
+    paddingHorizontal: 15,
+    width: 360,
     paddingVertical: 15,
     backgroundColor: "#fff",
     marginTop: 10,
     borderRadius: 15,
-    height: 250,
+    height: 270,
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
   },
   score1: {
-    alignItems: "center",
-    
-    
+    alignItems:'flex-start'
   },
   description: {
     marginTop: 5,
     fontSize: 14,
     color: "#4B4B4B",
     fontWeight: "bold",
-    width: 150,
-    resizeMode: "contain",
-    height:30,
-    left:50
-    
     
   },
   name: {
@@ -184,17 +179,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    paddingVertical: 6,
+    paddingVertical: 12,
     width: 100,
     backgroundColor: "#62C7F3",
     alignItems: "center",
-    borderRadius: 15,
-    bottom: -10,
+    borderRadius: 20,
   },
   btn: {
     color: "#fff",
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "bold",
+    textTransform:'uppercase'
   },
   banner: {
     width: "75%",
@@ -227,8 +222,12 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   img: {
-    width: 100,
-    height: 100,
+    width: 310,
+    objectFit:'cover',
+    borderRadius: 5,
+    height: 160,
+    borderWidth: .5,
+    borderColor: '#000',
     marginTop: 10,
   },
 });

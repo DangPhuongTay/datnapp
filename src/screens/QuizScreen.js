@@ -20,14 +20,14 @@ const Quiz = ({ route, navigation }) => {
     let itemIdNet = itemId + 1;
     const [datas, setData] = useState([]);
     const addScore = (score_add) => {
-        fetch(`${BASE_URL}/addscore/${userInfo.id}`, {
+        fetch(`${BASE_URL}/addcoin/${userInfo.id}`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                score: score_add,
+                coin: score_add,
             }),
 
         }); navigation.navigate('Lesson'); restartQuiz()

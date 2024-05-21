@@ -13,6 +13,19 @@ import {
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../config";
 import { formatTime } from "../components/constants";
+const color_text_black = "#221E1B";
+const color_text_yellow = "#F3AE29";
+const color_background = "#f3f4df";
+const color_background_white = "#FFFFFF";
+const color_background_blue_3 = "#398AFF";
+const color_background_blue_1 = "#81D9FF";
+const color_background_blue_2 = "#D0EFFF";
+const color_background_green_1 = "#7DF4A8";
+const color_background_green_2 = "#008000";
+const color_background_gray = "rgba(0, 0, 0, 0.21)";
+const color_background_gray_1 = "#edede9";
+const color_background_red = "#e01e37";
+
 const HistoryScreen = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(true);
@@ -61,10 +74,10 @@ const HistoryScreen = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.text}>
           <TouchableOpacity onPress={() => getHistories()}>
-            <Text style={styles.title}>📝 Lịch sử làm bài</Text>
+            <Text style={styles.title}>Bài học</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => getHistoriesTest()}>
-            <Text style={styles.title}>📝 Lịch sử làm kiểm tra </Text>
+            <Text style={styles.title}>Bài kiểm tra </Text>
           </TouchableOpacity>
         </View>
 
@@ -77,12 +90,12 @@ const HistoryScreen = ({ navigation }) => {
               keyExtractor={({ id }) => id}
               renderItem={({ item }) => (
                 <View style={styles.score2}>
-                  <Text style={styles.title1}> {item.id_lesson_test}</Text>
+                 
                   <View style={styles.itemright}>
-                    <Text style={styles.name}>điểm số: {item.score}</Text>
+                    <Text style={styles.title1}>{item.id_lesson_test}</Text>
                     <Text style={styles.nameGame}>{formatTime(item.created_at)}</Text>
                   </View>
-
+                  <Text style={styles.name}> {item.score} điểm</Text>
                 </View>
               )}
             />
@@ -98,22 +111,19 @@ const HistoryScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   itemright: {
-    alignItems: 'flex-end',
-    height: 80,
-    justifyContent: 'space-between'
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: 5
   },
   container1: {
     width: 380,
-    height: 330,
-    backgroundColor: 'none'
+    height: 540,
   },
   bg: {
+    flex: 1,
     width: '100%',
     display: 'flex',
-    backgroundColor: '#fff',
-
-
-
+    backgroundColor: color_background_blue_1,
   },
   header: {
     width: 430,
@@ -122,10 +132,18 @@ const styles = StyleSheet.create({
 
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: 'bold',
+    width: 310,
+    lineHeight: 50,
+    marginBottom: 10,
+    borderRadius: 10,
+    textAlign: 'center',
     top: 25,
-    left: -230
+    left: -350,
+    color: color_background_blue_3,
+    backgroundColor: color_background_white,
+    textTransform: 'uppercase'
 
   },
   container: {
@@ -144,26 +162,23 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    width: 190,
-    color: 'white',
-    backgroundColor: "#62C7F3",
+    width: 180,
+    color: color_background_white,
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
     fontSize: 18,
-    height: 60,
     borderRadius: 16,
-    padding: 10
+    padding: 10,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
   },
   title1: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    backgroundColor: "#62C7F3",
     alignItems: 'center',
     borderRadius: 12,
     fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-
+    color: color_text_black,
   },
   rank: {
     fontSize: 24,
@@ -173,13 +188,16 @@ const styles = StyleSheet.create({
 
   score2: {
     width: 380,
-    height: 100,
     flexDirection: 'row',
-    borderRadius: 15,
+    borderRadius: 27,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: color_background_white,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
     padding: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    paddingHorizontal: 20
   },
   point: {
     fontSize: 24,
@@ -187,9 +205,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   name: {
-    color: '#1E1E1E',
-    fontSize: 20,
-    fontWeight: 'bold'
+    width: 50,
+    lineHeight: 50,
+    color: color_background_white,
+    fontWeight: 'bold',
+    justifyContent:'center',
+    alignItems:'center',
+    textAlign:'center',
+    textTransform: 'uppercase',
+    backgroundColor: color_background_blue_3,
+    borderRadius: 999,
+    fontSize: 12
+  },
+  nameGame: {
+    color: color_background_blue_3,
+    fontSize: 12,
+ 
   },
   button: {
     paddingVertical: 6,
@@ -207,6 +238,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     width: 370,
     gap: 5
   },

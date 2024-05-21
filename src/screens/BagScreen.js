@@ -1,3 +1,4 @@
+
 import React, { useContext, useState,useEffect } from "react";
 import { StyleSheet, Text,Pressable, ActivityIndicator,Modal ,ScrollView,  TextInput,FlatList, Animated, View, TouchableOpacity, Button, ImageBackground } from "react-native";
 import { AuthContext } from '../context/AuthContext';
@@ -120,9 +121,9 @@ const BagScreen = ({ navigation }) => {
             price: itemPrice,
             value: itemValue
           })});
-          getUser();
-          setModalVisible(false);
+
           navigation.navigate("Level");
+
 
     };
 

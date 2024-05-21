@@ -48,7 +48,7 @@ const SlidingPuzzleBody =()=>{
                 clearInterval(countRef.current)
                 setIsPaused(false)
                 setTimer(0)
-                Alert.alert('UWU')
+                Alert.alert('Cat: con mèo | /kæt/ | một con vật nhỏ có lông, bốn chân, một cái đuôi và móng vuốt, thường được nuôi làm thú cưng hoặc để bắt chuột')
             }
         }
     }
@@ -250,12 +250,13 @@ const styles = StyleSheet.create({
     button:{
         width: 104.5,
         flexDirection:'row',
-        backgroundColor:color_background_green_1,
+        backgroundColor:color_background_gray,
         justifyContent:'center',
-        color: color_background_white,
         borderRadius: 5
     },
     button_text:{
-        paddingVertical: 5
+        paddingVertical: 5,
+        color: color_background_white,
+        textTransform:'uppercase'
     },
 })
