@@ -65,7 +65,7 @@ const MenuSreen = ({ navigation }) => {
                             <Text style={styles.btn}> Cấp độ </Text>
                         </TouchableOpacity>
                     </View>
-                    {/* <View>
+                    <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Rank')}
                             style={{
                                 backgroundColor:tiers[2],
@@ -77,7 +77,7 @@ const MenuSreen = ({ navigation }) => {
                             }}>
                             <Text style={styles.btn}> Xếp hạng </Text>
                         </TouchableOpacity>
-                    </View> */}
+                    </View>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('History')}
                             style={{
